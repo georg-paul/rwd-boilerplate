@@ -6,19 +6,172 @@
 
 		<title>FrontendX</title>
 
-        <link rel="stylesheet" href="frontendx.css">
+        <link rel="stylesheet" href="styles/frontendx.css">
         <link rel="stylesheet" href="rwd-objects/Src/rwd-objects.css">
 
-        <script>
-            document.getElementsByTagName('html')[0].className =
-            document.getElementsByTagName('html')[0].className.replace(/(?:^|\s)javascript-is-disabled(?!\S)/g, 'javascript-is-enabled');
-        </script>
+        <script>document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(/(?:^|\s)javascript-is-disabled(?!\S)/g, 'javascript-is-enabled');</script>
 	</head>
 
 	<body>
-        <!-- Content goes here -->
+        <!-- content goes here -->
+        <div class="frontendx-delimiter">
+            <h1>halign object example</h1>
+            <div class="rwd-object-halign">
+                <div class="left">
+                    <img src="http://placehold.it/400x200" alt="" width="400" height="200" />
+                </div>
+                <div class="right">
+                    <nav class="rwd-object-hnav">
+                        <button class="toggle">Toggle</button>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li>
+                                <a href="#">About Us</a>
+                                <ul>
+                                    <li><a href="#">Page 1</a></li>
+                                    <li><a href="#">Page 2</a></li>
+                                    <li><a href="#">Page 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
-        <!-- FrontendX requirements -->
+            <h1>media object example</h1>
+            <div class="rwd-object-media">
+                <div class="img">
+                    <img src="http://placehold.it/400x200" alt="" width="400" height="150" />
+                </div>
+                <div class="bd">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+                    </p>
+                </div>
+            </div>
+
+            <h1>rwd-object-columns</h1>
+            <h3>2 equal columns</h3>
+            <div class="rwd-object-columns-2" data-breakpoint="400">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>2 columns / 3-9</h3>
+            <div class="rwd-object-columns-2-3-9" data-breakpoint="800">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>2 columns / 4-8</h3>
+            <div class="rwd-object-columns-2-4-8" data-breakpoint="600">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>3 equal columns</h3>
+            <div class="rwd-object-columns-3" data-breakpoint="600">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>3 columns / 3-6-3</h3>
+            <div class="rwd-object-columns-3-3-6-3" data-breakpoint="600">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>3 columns / 8-2-2</h3>
+            <div class="rwd-object-columns-3-8-2-2" data-breakpoint="600">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>4 equal columns</h3>
+            <div class="rwd-object-columns-4" data-breakpoint="600">
+                <div class="column" >
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+                <div class="column">
+                    <div style="background-color: #ccc;">&nbsp;</div>
+                </div>
+            </div>
+
+            <h3>Switching positions of content within columns (when columns are stacked on top of each other)</h3>
+            <div class="rwd-object-columns-3-3-3-6" data-breakpoint="600">
+                <div class="column" >
+                    <div data-move-down="2">
+                        <div class="content-element">
+                            <h3>Content Element 1</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column" >
+                    <div class="content-element">
+                        <h3>Content Element 2</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="column" >
+                    <div data-move-up="2">
+                        <div class="content-element">
+                            <h3>Most import content (would be at the bottom when columns are stacked)</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- frontendx requirements -->
 		<div class="frontendx-loading"><div class="spinner"></div></div>
 		<script src="element-queries/element-queries.min.js"></script>
         <script src="rwd-objects/Src/Zepto/zepto.min.js"></script>
