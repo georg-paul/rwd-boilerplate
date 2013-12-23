@@ -7,7 +7,6 @@
 		<title>FrontendX</title>
 
         <link rel="stylesheet" href="styles/frontendx.css">
-        <link rel="stylesheet" href="rwd-objects/Src/rwd-objects.css">
 
         <script>document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(/(?:^|\s)javascript-is-disabled(?!\S)/g, 'javascript-is-enabled');</script>
 	</head>
@@ -173,11 +172,14 @@
 
         <!-- frontendx requirements -->
 		<div class="frontendx-loading"><div class="spinner"></div></div>
-		<script src="element-queries/element-queries.min.js"></script>
-        <script src="rwd-objects/Src/Zepto/zepto.min.js"></script>
-        <script src="rwd-objects/Src/Zepto/Modules/selector.js"></script>
-        <script src="rwd-objects/Src/Zepto/zepto.custom.js"></script>
-        <script src="rwd-objects/Src/rwd-objects.js"></script>
+
+        <script src="src/contributed/Zepto/zepto.min.js"></script>
+        <script src="src/contributed/Zepto/Modules/selector.js"></script>
+        <script src="src/contributed/Zepto/zepto.custom.js"></script>
+
+        <script src="element-queries/element-queries.min.js"></script>
+        <script src="src/rwd-objects.js"></script>
+
         <script>document.querySelector('html').classList.remove('frontendx-loading');</script>
 	</body>
 </html>

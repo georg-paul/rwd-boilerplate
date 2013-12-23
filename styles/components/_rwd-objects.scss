@@ -1,0 +1,278 @@
+@mixin hnav-small {
+	> ul {
+		display: none;
+		float: left;
+		width: 100%;
+		> li {
+			width: 100%;
+			@include box-sizing(border-box);
+			margin-right: 0;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			border-left: 0 none !important;
+			border-right: 0 none !important;
+			margin-bottom: 1rem;
+			&:hover {
+				ul {
+					position: static;
+				}
+			}
+		}
+	}
+	.toggle {
+		display: inline-block;
+		cursor: pointer;
+	}
+}
+@mixin stacked-columns {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	> .column {
+		width: 100% !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		margin-bottom: 1rem;
+	}
+}
+
+
+// hnav object
+.rwd-object-hnav {
+	@include clear-after;
+	ul {
+		@include clear-after;
+		margin-bottom: 0;
+		margin-top: 0;
+		li {
+			position: relative;
+			&:hover {
+				ul {
+					display: block;
+				}
+			}
+			ul {
+				left: 0;
+				right: 0;
+			}
+			a {
+				display: block;
+				line-height: 1em;
+			}
+		}
+	}
+	> ul {
+		> li {
+			float: left;
+			height: 100%;
+			list-style: none;
+			line-height: 1em;
+			> a {
+
+			}
+			ul {
+				display: none;
+				position: absolute;
+				top: 100%;
+			}
+		}
+	}
+	&.breakpoint-small {
+		@include hnav-small;
+	}
+	.toggle { display: none; }
+}
+
+// hlist object
+.rwd-object-hlist {
+	> ul {
+		@include clear-after;
+		margin-bottom: 0;
+		margin-top: 0;
+		> li {
+			float: left;
+			height: 100%;
+			list-style: none;
+			line-height: 1em;
+		}
+	}
+}
+
+// media object
+//http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+.rwd-object-media {
+	overflow: hidden;
+	_overflow: visible;
+	zoom: 1;
+	.img, .video {
+		float: left;
+		overflow: hidden;
+		img {
+			display: block;
+		}
+		&.right {
+			float: right;
+			margin-right: 0;
+		}
+	}
+	.bd {
+		overflow: hidden;
+		_overflow: visible;
+		zoom: 1;
+		@include rem(min-width, $media-text-min-width);
+		&.in-text {
+			overflow: visible;
+		}
+	}
+	&.no-side-by-side {
+		.img, .video {
+			float: none;
+			display: inline-block;
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+			margin-bottom: 0.75rem;
+		}
+		.bd {
+			min-width: 0 !important;
+		}
+		.video {
+			width: 100%;
+			.rwd-video { min-width: 0; }
+		}
+	}
+}
+
+// halign object
+.rwd-object-halign {
+	text-align: center;
+	position: relative;
+	@include clear-after;
+	> * {
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.center {
+		display: inline-block;
+		text-align: left;
+		float: none;
+		&.text-align-center { text-align: center; }
+	}
+	.left {
+		float: left;
+	}
+	.right {
+		float: right;
+	}
+
+	&.no-side-by-side {
+		&.rwd-object-valign-middle { display: block; }
+		.left, .center, .right {
+			float: none;
+			margin: 0;
+			margin-bottom: 0.75rem;
+			width: auto;
+			max-width: 100%;
+			&:last-child { margin-bottom: 0; }
+		}
+		.left { margin-right: 0; }
+		.right { margin-left: 0; }
+	}
+}
+
+// halign object
+.rwd-object-valign-middle {
+	text-align: left;
+	display: table;
+	width: 100%;
+	.left, .center, .right {
+		float: none;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.right > * { float: right; }
+
+	&.full-width {
+		.left, .center, .right {
+			width: 100%;
+			@include box-sizing(border-box);
+		}
+	}
+
+	&.no-side-by-side {
+		display: block;
+		.left, .center, .right {
+			display: block;
+			width: auto !important;
+			max-width: 100% !important;
+		}
+		.left { margin-right: 0 !important; }
+		.right { margin-left: 0 !important; }
+	}
+}
+
+// grid
+[class*="rwd-object-columns-"] {
+	@include clear-after;
+	@include rem(margin-right, $grid-gutter/2 * -1);
+	@include rem(margin-left, $grid-gutter/2 * -1);
+
+	.column {
+		@include box-sizing(border-box);
+		float: left;
+		display: block;
+		@include rem(padding-right, $grid-gutter/2);
+		@include rem(padding-left, $grid-gutter/2);
+		min-height: 1px;
+	}
+	[class*="rwd-object-columns-"] {
+		margin: 0;
+		.column {
+			&:first-of-type { padding-left: 0; }
+			&:last-of-type { padding-right: 0; }
+		}
+	}
+
+	&.stacked-columns {
+		@include stacked-columns;
+	}
+}
+
+@for $column-count from 2 through $grid-columns {
+	// by default, every column should be equal
+	[class*="rwd-object-columns-#{$column-count}"] {
+		> .column {
+			width: percentage($grid-columns / $column-count / $grid-columns);
+		}
+	}
+
+	// 2-columns
+	@if $column-count == 2 {
+		@for $i from 2 through $grid-columns - 2 {
+			@for $j from 2 through $grid-columns - 2 {
+				@if $i + $j == $grid-columns {
+					[class*="rwd-object-columns-#{$column-count}-#{$i}-#{$j}"] {
+						> .column:nth-child(1) { width: percentage($i / $grid-columns); }
+						> .column:nth-child(2) { width: percentage($j / $grid-columns); }
+					}
+				}
+			}
+		}
+	}
+
+	// 3-columns
+	@if $column-count == 3 {
+		@for $i from 2 through $grid-columns - 4 {
+			@for $j from 2 through $grid-columns - 4 {
+				@for $k from 2 through $grid-columns - 4 {
+					@if $i + $j + $k == $grid-columns {
+						[class*="rwd-object-columns-#{$column-count}-#{$i}-#{$j}-#{$k}"] {
+							> .column:nth-child(1) { width: percentage($i / $grid-columns); }
+							> .column:nth-child(2) { width: percentage($j / $grid-columns); }
+							> .column:nth-child(3) { width: percentage($k / $grid-columns); }
+						}
+					}
+				}
+			}
+		}
+	}
+}

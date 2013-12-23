@@ -3,9 +3,21 @@
 $container-max-width: 960;
 $container-side-space: 30;
 
+
+// RWD OBJECTS (declaration in px)
+// rwd-object-grid
+$grid-columns: 12;
+$grid-gutter: 30;
+$base-font-size: 16;
+
+// rwd-object-media
+$media-text-min-width: 250;
+
+
 // FONT SIZE (declaration in px)
 $base-font-size: 16;
 $base-line-height: 24;
+
 
 // LOADING ANIMATION
 $spinner-bg-color-hex: #fff;
