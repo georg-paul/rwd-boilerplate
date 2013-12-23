@@ -1,6 +1,6 @@
-@import "_default-config.scss";
-@import "_custom-config.scss";
-@import "_mixins.scss";
+@import "config/_default.scss";
+@import "config/_project.scss";
+@import "components/_mixins.scss";
 @import "components/_reset.scss";
 @import "components/_global.scss";
 @import "components/_rwd-objects.scss";
