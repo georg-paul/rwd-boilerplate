@@ -1,6 +1,6 @@
 @mixin rem($property, $value) {
 	#{$property}: $value + 0px;
-	#{$property}: 1 / $base-font-size * $value + 0rem;
+	#{$property}: 1 / 16 * $value + 0rem;
 }
 
 @function em($target, $context: $base-font-size) {

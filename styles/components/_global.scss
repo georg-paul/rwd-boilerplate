@@ -1,7 +1,7 @@
 html {
-	font-size: em($base-font-size, 16);
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%; /* Prevents iOS text size adjust after orientation change */
+	-ms-text-size-adjust: 100%; /* www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom */
 	&.frontendx-loading.javascript-is-enabled {
 		overflow: hidden;
 		.frontendx-loading {
