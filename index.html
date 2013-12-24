@@ -12,6 +12,10 @@
 	</head>
 
 	<body>
+        <div class="frontendx-loading">
+            <div class="spinner"></div>
+        </div>
+
         <!-- content goes here -->
         <div class="frontendx-delimiter">
             <h1>halign object example</h1>
@@ -170,16 +174,18 @@
             </div>
         </div>
 
-        <!-- frontendx requirements -->
-		<div class="frontendx-loading"><div class="spinner"></div></div>
-
+        <!-- Use either zepto js -->
         <script src="src/contributed/Zepto/zepto.min.js"></script>
         <script src="src/contributed/Zepto/Modules/selector.js"></script>
         <script src="src/contributed/Zepto/zepto.custom.js"></script>
 
+        <!-- or use jQuery instead -->
+        <!--script src="src/contributed/jQuery/jquery-2.0.0.min.js"></script-->
+
         <script src="element-queries/element-queries.min.js"></script>
         <script src="src/rwd-objects.js"></script>
 
+        <!-- Hide loading animation -->
         <script>document.querySelector('html').classList.remove('frontendx-loading');</script>
 	</body>
 </html>
