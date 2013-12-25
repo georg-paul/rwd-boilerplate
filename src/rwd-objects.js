@@ -55,6 +55,8 @@ function RwdObjects() {
 						self.vnav($rwdObj);
 					} else if (objType.indexOf('columns-') !== -1) {
 						self.columns($rwdObj);
+					} else if (objType === 'slider') {
+						self.carousel($rwdObj);
 					}
 				}
 			}
@@ -174,6 +176,182 @@ function RwdObjects() {
 
 			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
 		});
+	};
+
+	this.carousel = function ($rwdObj) {
+		var self = this;
+
+		self.$carouselContainer = $rwdObj;
+		self.$slider = $rwdObj.find('.container');
+		self.$sliderItems = self.$slider.find('.item');
+		self.itemCount = self.$sliderItems.length;
+		self.speed = parseInt($rwdObj.attr('data-speed'), 10) || 1000;
+		self.nextBtnClass = 'next-btn';
+		self.prevBtnClass = 'prev-btn';
+		self.controlsMarkup = '<button class="' + this.prevBtnClass + '">Previous</button><button class="' + this.nextBtnClass + '">Next</button>';
+
+		this.init = function () {
+			self.getInfo();
+			self.applyInitialStylesAndTraversing();
+			self.addControls(self.controlsMarkup);
+			self.bindEvents();
+		};
+
+		this.init = function () {
+			self.getInfo();
+			self.applyInitialStylesAndTraversing();
+			self.addControls(self.controlsMarkup);
+			self.bindEvents();
+		};
+
+		this.isCarouselBehaviourPossible = function () {
+			return !!(self.itemCount >= 2);
+		};
+
+		this.hasCarouselTwoItems = function () {
+			return !!(self.itemCount === 2);
+		};
+
+		this.getInfo = function () {
+			self.itemWidth = self.$carouselContainer.width();
+			self.totalItems = self.$sliderItems.length;
+			self.totalWidth = self.totalItems * self.itemWidth;
+		};
+
+		this.applyInitialStylesAndTraversing = function () {
+			if (self.hasCarouselTwoItems()) {
+				self.$slider.css('width', self.totalWidth + self.itemWidth);
+			} else {
+				self.$slider.css('width', self.totalWidth);
+			}
+			self.$sliderItems.css('width', self.itemWidth);
+
+			waitForImagesToLoad(self.$slider, function () {
+				self.$slider.css('height', self.getFirstItemHeight());
+			});
+
+			if (self.isCarouselBehaviourPossible()) {
+				self.$slider.find('.item:first').addClass('active');
+				if (self.hasCarouselTwoItems()) {
+					self.$slider.find('.item:first').before(self.$slider.find('.item:last').clone());
+				} else {
+					self.$slider.find('.item:first').before(self.$slider.find('.item:last'));
+				}
+
+				self.$slider.css('left', self.itemWidth * (-1));
+			}
+		};
+
+		this.addControls = function (html) {
+			if (self.isCarouselBehaviourPossible()) {
+				if (self.$carouselContainer.find('.' + self.nextBtnClass).length === 0) {
+					self.$carouselContainer.prepend(html);
+				}
+			}
+		};
+
+		this.next = function (speed, direction) {
+			var currentXPos = parseInt(self.$slider.css('left'), 10),
+				$activeItem = self.$slider.find('.active'),
+				$nextItem = $activeItem.next();
+
+			self.$carouselContainer.addClass('is-animated');
+			self.switchActiveClass($activeItem, $nextItem);
+
+			self.$slider.animate({
+				left: currentXPos - self.itemWidth,
+				height: self.getNextItemHeight($nextItem)
+			}, speed, function () {
+				self.animationCallback('next');
+			});
+		};
+
+		this.prev = function (speed, direction) {
+			var currentXPos = parseInt(self.$slider.css('left'), 10),
+				$activeItem = self.$slider.find('.active'),
+				$nextItem = $activeItem.prev();
+
+			self.$carouselContainer.addClass('is-animated');
+			self.switchActiveClass($activeItem, $nextItem);
+
+			self.$slider.animate({
+				left: currentXPos + self.itemWidth,
+				height: self.getNextItemHeight($nextItem)
+			}, speed, function () {
+				self.animationCallback('prev');
+			});
+		};
+
+		this.animationCallback = function (direction) {
+			if (self.hasCarouselTwoItems()) {
+				if (direction === 'next') {
+					self.$slider.find('.item:first').remove();
+					self.$slider.find('> .active').prev().clone().appendTo(self.$slider);
+				} else {
+					self.$slider.find('.item:last').remove();
+					self.$slider.find('> .active').next().clone().prependTo(self.$slider);
+				}
+				self.$slider.css('left', self.itemWidth * (-1));
+			} else {
+				if (direction === 'next') {
+					self.$slider.find('.item:last').after(self.$slider.find('.item:first'));
+				} else {
+					self.$slider.find('.item:first').before(self.$slider.find('.item:last'));
+				}
+				self.$slider.css('left', self.itemWidth * (-1));
+			}
+
+			self.$carouselContainer.removeClass('is-animated');
+		};
+
+		this.getNextItemHeight = function ($next) {
+			return $next.height();
+		};
+
+		this.getFirstItemHeight = function () {
+			return self.$sliderItems.first().height();
+		};
+
+		this.switchActiveClass = function ($activeItem, $nextItem) {
+			$activeItem.removeClass('active');
+			$nextItem.addClass('active');
+		};
+
+		this.nextBtnEvent = function () {
+			$('.' + this.nextBtnClass).bind('click', function () {
+				if (!self.isCarouselAnimatedRightNow()) {
+					self.next(self.speed);
+				}
+			});
+		};
+
+		this.prevBtnEvent = function () {
+			$('.' + this.prevBtnClass).bind('click', function () {
+				if (!self.isCarouselAnimatedRightNow()) {
+					self.prev(self.speed);
+				}
+			});
+		};
+
+		this.orientationChange = function () {
+			$(window).bind('orientationchange', function () {
+				self.init();
+			});
+		};
+
+		this.isCarouselAnimatedRightNow = function () {
+			return !!(self.$carouselContainer.hasClass('is-animated'));
+		};
+
+		this.bindEvents = function () {
+			if (self.isCarouselBehaviourPossible()) {
+				self.nextBtnEvent();
+				self.prevBtnEvent();
+			}
+			self.orientationChange();
+		};
+
+		self.init();
 	};
 }
 

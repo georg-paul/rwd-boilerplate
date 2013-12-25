@@ -651,3 +651,18 @@ img {
 
 [class*="rwd-object-columns-12"] > .column {
   width: 8.33333%; }
+
+.rwd-object-slider {
+  overflow: hidden;
+  width: 100%; }
+  .rwd-object-slider .container {
+    position: relative;
+    overflow: hidden; }
+    .rwd-object-slider .container:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden; }
+    .rwd-object-slider .container .item {
+      float: left; }

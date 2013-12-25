@@ -276,3 +276,17 @@
 		}
 	}
 }
+
+
+.rwd-object-slider {
+	overflow: hidden;
+	width: 100%;
+	.container {
+		@include clear-after;
+		position: relative;
+		overflow: hidden;
+		.item {
+			float: left;
+		}
+	}
+}

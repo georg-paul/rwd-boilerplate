@@ -18,7 +18,7 @@
 
         <!-- content goes here -->
         <div class="frontendx-delimiter">
-            <h1>halign object example</h1>
+            <h1>rwd-object-halign</h1>
             <div class="rwd-object-halign">
                 <div class="left">
                     <img src="http://placehold.it/400x200" alt="" width="400" height="200" />
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <h1>media object example</h1>
+            <h1>rwd-object-media</h1>
             <div class="rwd-object-media">
                 <div class="img">
                     <img src="http://placehold.it/400x200" alt="" width="400" height="150" />
@@ -172,16 +172,33 @@
                     </div>
                 </div>
             </div>
+
+            <h1>rwd-object-slider</h1>
+            <div class="rwd-object-slider" data-speed="750">
+                <div class="container">
+                    <div class="item">
+                        <img src="http://placehold.it/960x280" alt="" width="960" height="280" />
+                    </div>
+                    <div class="item">
+                        <img src="http://placehold.it/960x200" alt="" width="960" height="200" />
+                    </div>
+                    <div class="item">
+                        <img src="http://placehold.it/960x400" alt="" width="960" height="400" />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Use either zepto js -->
         <script src="src/contributed/Zepto/zepto.min.js"></script>
         <script src="src/contributed/Zepto/Modules/selector.js"></script>
+        <script src="src/contributed/Zepto/Modules/fx.js"></script>
         <script src="src/contributed/Zepto/zepto.custom.js"></script>
 
         <!-- or use jQuery instead -->
         <!--script src="src/contributed/jQuery/jquery-2.0.0.min.js"></script-->
 
+        <script src="src/utilities.js"></script>
         <script src="element-queries/element-queries.min.js"></script>
         <script src="src/rwd-objects.js"></script>
 
