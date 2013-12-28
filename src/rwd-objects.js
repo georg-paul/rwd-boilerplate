@@ -1,5 +1,5 @@
 /*jslint browser: true, nomen: false, devel: true*/
-/*global $ */
+/*global $, waitForImagesToLoad */
 
 /*
  The MIT License (MIT)
@@ -36,7 +36,7 @@ function RwdObjects() {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),
 				objType = '',
-				i = 0;
+				i;
 
 			for (i = 0; i < classNames.length; i += 1) {
 				objType = classNames[i].split('rwd-object-')[1];
@@ -175,11 +175,12 @@ function RwdObjects() {
 	this.Slider = function ($rwdObj) {
 		var self = this;
 
-		self.$slider = $rwdObj.find('.container');
-		self.$sliderItems = self.$slider.find('.item');
+		self.$slider = $rwdObj.find('> .container');
+		self.$sliderItems = self.$slider.find('> .item');
 		self.itemWidth = $rwdObj.width();
-		self.$nextButton = $rwdObj.find('.next');
-		self.$prevButton = $rwdObj.find('.prev');
+		self.$nextButton = $rwdObj.find('.next-button');
+		self.$prevButton = $rwdObj.find('.prev-button');
+		self.$nextAndPrevButton = $rwdObj.find('.next-button, .prev-button');
 		self.$progressBars = $rwdObj.find('.progress-bar');
 
 		this.init = function () {
@@ -208,7 +209,16 @@ function RwdObjects() {
 			self.$slider.addClass('is-animated');
 			$activeItem.removeClass('active');
 			$nextItem.addClass('active');
+			self.toggleControlsStateClasses(targetItemIndex);
 
+			self.$slider.css({ left: targetXPos, height: $nextItem.height() });
+		};
+
+		this.isCarouselAnimated = function () {
+			return self.$slider.hasClass('is-animated');
+		};
+
+		this.toggleControlsStateClasses = function (targetItemIndex) {
 			if (targetItemIndex === 0) {
 				self.$prevButton.addClass('disabled');
 				self.$nextButton.removeClass('disabled');
@@ -219,37 +229,18 @@ function RwdObjects() {
 				self.$nextButton.removeClass('disabled');
 				self.$prevButton.removeClass('disabled');
 			}
-
-			self.$slider.css({
-				left: targetXPos,
-				height: $nextItem.height()
-			});
 		};
 
-		this.isCarouselAnimated = function () {
-			return self.$slider.hasClass('is-animated');
-		};
-
-		this.eventNextButton = function () {
-			self.$nextButton.bind('click', function (e) {
+		this.eventNextAndPrevButton = function () {
+			self.$nextAndPrevButton.bind('click', function (e) {
 				e.preventDefault();
-				var targetItemIndex = self.$slider.find('.active').next().index();
+				var isNextButton = $(e.target).hasClass('next-button'),
+					targetItemIndex = (isNextButton) ? self.$slider.find('.active').next().index() : self.$slider.find('.active').prev().index(),
+					targetXPos = (isNextButton) ? parseInt(self.$slider.css('left'), 10) - self.itemWidth : parseInt(self.$slider.css('left'), 10) + self.itemWidth;
 
 				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
 					self.updateProgressBars(targetItemIndex);
-					self.next(parseInt(self.$slider.css('left'), 10) - self.itemWidth, targetItemIndex);
-				}
-			});
-		};
-
-		this.eventPrevButton = function () {
-			self.$prevButton.bind('click', function (e) {
-				e.preventDefault();
-				var targetItemIndex = self.$slider.find('.active').prev().index();
-
-				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
-					self.updateProgressBars(targetItemIndex);
-					self.next(parseInt(self.$slider.css('left'), 10) + self.itemWidth, targetItemIndex);
+					self.next(targetXPos, targetItemIndex);
 				}
 			});
 		};
@@ -281,8 +272,7 @@ function RwdObjects() {
 		};
 
 		this.bindEvents = function () {
-			self.eventNextButton();
-			self.eventPrevButton();
+			self.eventNextAndPrevButton();
 			self.eventProgressButton();
 			self.eventTransitionEnd();
 		};
@@ -293,5 +283,6 @@ function RwdObjects() {
 
 
 (function () {
+	"use strict";
 	new RwdObjects().init();
 }());

@@ -673,5 +673,5 @@ img {
       transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1); }
     .rwd-object-slider .container .item {
       float: left; }
-  .javascript-is-disabled .rwd-object-slider .next, .javascript-is-disabled .rwd-object-slider .prev, .javascript-is-disabled .rwd-object-slider .progress {
+  .javascript-is-disabled .rwd-object-slider .next-button, .javascript-is-disabled .rwd-object-slider .prev-button, .javascript-is-disabled .rwd-object-slider .progress {
     display: none; }
