@@ -52,7 +52,7 @@ function RwdObjects() {
 					} else if (objType.indexOf('columns-') !== -1) {
 						self.columns($rwdObj);
 					} else if (objType === 'slider') {
-						self.carousel($rwdObj);
+						var sliderInstance = new self.Slider($rwdObj);
 					}
 				}
 			}
@@ -172,7 +172,7 @@ function RwdObjects() {
 		});
 	};
 
-	this.carousel = function ($rwdObj) {
+	this.Slider = function ($rwdObj) {
 		var self = this;
 
 		self.$slider = $rwdObj.find('.container');
@@ -255,7 +255,7 @@ function RwdObjects() {
 		};
 
 		this.eventProgressButton = function () {
-			$('.progress').bind('click', function (e) {
+			self.$progressBars.find('.progress').bind('click', function (e) {
 				e.preventDefault();
 				var $progressButtonListItem = $(this).closest('li'),
 					targetItemIndex = $progressButtonListItem.index();
