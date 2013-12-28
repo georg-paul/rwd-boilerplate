@@ -32,10 +32,6 @@ function RwdObjects() {
 	var self = this;
 
 	this.init = function () {
-		self.checkForCollision();
-	};
-
-	this.checkForCollision = function () {
 		$('[class*="rwd-object"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),
@@ -97,8 +93,6 @@ function RwdObjects() {
 			mediaObjectIsHidden = false,
 			$bd = $rwdObj.children('.bd'),
 			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
-
-
 
 		if ($media.hasClass('img')) {
 			mediaImage.onload = function () {
@@ -181,174 +175,100 @@ function RwdObjects() {
 	this.carousel = function ($rwdObj) {
 		var self = this;
 
-		self.$carouselContainer = $rwdObj;
 		self.$slider = $rwdObj.find('.container');
 		self.$sliderItems = self.$slider.find('.item');
-		self.itemCount = self.$sliderItems.length;
-		self.speed = parseInt($rwdObj.attr('data-speed'), 10) || 1000;
-		self.nextBtnClass = 'next-btn';
-		self.prevBtnClass = 'prev-btn';
-		self.controlsMarkup = '<button class="' + this.prevBtnClass + '">Previous</button><button class="' + this.nextBtnClass + '">Next</button>';
+		self.itemWidth = $rwdObj.width();
+		self.$nextButton = $rwdObj.find('.next');
+		self.$prevButton = $rwdObj.find('.prev');
 
 		this.init = function () {
-			self.getInfo();
-			self.applyInitialStylesAndTraversing();
-			self.addControls(self.controlsMarkup);
+			self.setStyles();
 			self.bindEvents();
 		};
 
-		this.init = function () {
-			self.getInfo();
-			self.applyInitialStylesAndTraversing();
-			self.addControls(self.controlsMarkup);
-			self.bindEvents();
-		};
-
-		this.isCarouselBehaviourPossible = function () {
-			return !!(self.itemCount >= 2);
-		};
-
-		this.hasCarouselTwoItems = function () {
-			return !!(self.itemCount === 2);
-		};
-
-		this.getInfo = function () {
-			self.itemWidth = self.$carouselContainer.width();
-			self.totalItems = self.$sliderItems.length;
-			self.totalWidth = self.totalItems * self.itemWidth;
-		};
-
-		this.applyInitialStylesAndTraversing = function () {
-			if (self.hasCarouselTwoItems()) {
-				self.$slider.css('width', self.totalWidth + self.itemWidth);
-			} else {
-				self.$slider.css('width', self.totalWidth);
-			}
+		this.setStyles = function () {
+			self.$slider.css('width', self.$sliderItems.length * self.itemWidth);
 			self.$sliderItems.css('width', self.itemWidth);
+			self.$sliderItems.first().addClass('active');
+			self.$prevButton.addClass('disabled');
+			$rwdObj.find('.progress:first').closest('li').addClass('active');
 
 			waitForImagesToLoad(self.$slider, function () {
-				self.$slider.css('height', self.getFirstItemHeight());
-			});
-
-			if (self.isCarouselBehaviourPossible()) {
-				self.$slider.find('.item:first').addClass('active');
-				if (self.hasCarouselTwoItems()) {
-					self.$slider.find('.item:first').before(self.$slider.find('.item:last').clone());
-				} else {
-					self.$slider.find('.item:first').before(self.$slider.find('.item:last'));
-				}
-
-				self.$slider.css('left', self.itemWidth * (-1));
-			}
-		};
-
-		this.addControls = function (html) {
-			if (self.isCarouselBehaviourPossible()) {
-				if (self.$carouselContainer.find('.' + self.nextBtnClass).length === 0) {
-					self.$carouselContainer.prepend(html);
-				}
-			}
-		};
-
-		this.next = function (speed, direction) {
-			var currentXPos = parseInt(self.$slider.css('left'), 10),
-				$activeItem = self.$slider.find('.active'),
-				$nextItem = $activeItem.next();
-
-			self.$carouselContainer.addClass('is-animated');
-			self.switchActiveClass($activeItem, $nextItem);
-
-			self.$slider.animate({
-				left: currentXPos - self.itemWidth,
-				height: self.getNextItemHeight($nextItem)
-			}, speed, function () {
-				self.animationCallback('next');
+				self.$slider.css('height', self.$sliderItems.first().height());
 			});
 		};
 
-		this.prev = function (speed, direction) {
-			var currentXPos = parseInt(self.$slider.css('left'), 10),
-				$activeItem = self.$slider.find('.active'),
-				$nextItem = $activeItem.prev();
+		this.next = function (targetXPos, targetItemIndex) {
+			var $activeItem = self.$slider.find('.active'),
+				$nextItem = self.$slider.find('.item:nth-child(' + (targetItemIndex + 1) + ')');
 
-			self.$carouselContainer.addClass('is-animated');
-			self.switchActiveClass($activeItem, $nextItem);
-
-			self.$slider.animate({
-				left: currentXPos + self.itemWidth,
-				height: self.getNextItemHeight($nextItem)
-			}, speed, function () {
-				self.animationCallback('prev');
-			});
-		};
-
-		this.animationCallback = function (direction) {
-			if (self.hasCarouselTwoItems()) {
-				if (direction === 'next') {
-					self.$slider.find('.item:first').remove();
-					self.$slider.find('> .active').prev().clone().appendTo(self.$slider);
-				} else {
-					self.$slider.find('.item:last').remove();
-					self.$slider.find('> .active').next().clone().prependTo(self.$slider);
-				}
-				self.$slider.css('left', self.itemWidth * (-1));
-			} else {
-				if (direction === 'next') {
-					self.$slider.find('.item:last').after(self.$slider.find('.item:first'));
-				} else {
-					self.$slider.find('.item:first').before(self.$slider.find('.item:last'));
-				}
-				self.$slider.css('left', self.itemWidth * (-1));
-			}
-
-			self.$carouselContainer.removeClass('is-animated');
-		};
-
-		this.getNextItemHeight = function ($next) {
-			return $next.height();
-		};
-
-		this.getFirstItemHeight = function () {
-			return self.$sliderItems.first().height();
-		};
-
-		this.switchActiveClass = function ($activeItem, $nextItem) {
+			self.$slider.addClass('is-animated');
 			$activeItem.removeClass('active');
 			$nextItem.addClass('active');
+
+			if (targetItemIndex === 0) {
+				self.$prevButton.addClass('disabled');
+				self.$nextButton.removeClass('disabled');
+			} else if (targetItemIndex === self.$slider.find('.item:last-child').index()) {
+				self.$nextButton.addClass('disabled');
+				self.$prevButton.removeClass('disabled');
+			} else {
+				self.$nextButton.removeClass('disabled');
+				self.$prevButton.removeClass('disabled');
+			}
+
+			self.$slider.css({
+				left: targetXPos,
+				height: $nextItem.height()
+			});
 		};
 
-		this.nextBtnEvent = function () {
-			$('.' + this.nextBtnClass).bind('click', function () {
-				if (!self.isCarouselAnimatedRightNow()) {
-					self.next(self.speed);
+		this.isCarouselAnimated = function () {
+			return self.$slider.hasClass('is-animated');
+		};
+
+		this.eventNextButton = function () {
+			self.$nextButton.bind('click', function (e) {
+				e.preventDefault();
+				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
+					self.next(parseInt(self.$slider.css('left'), 10) - self.itemWidth, self.$slider.find('.active').next().index());
 				}
 			});
 		};
 
-		this.prevBtnEvent = function () {
-			$('.' + this.prevBtnClass).bind('click', function () {
-				if (!self.isCarouselAnimatedRightNow()) {
-					self.prev(self.speed);
+		this.eventPrevButton = function () {
+			self.$prevButton.bind('click', function (e) {
+				e.preventDefault();
+				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
+					self.next(parseInt(self.$slider.css('left'), 10) + self.itemWidth, self.$slider.find('.active').prev().index());
 				}
 			});
 		};
 
-		this.orientationChange = function () {
-			$(window).bind('orientationchange', function () {
-				self.init();
+		this.eventProgressButton = function () {
+			$('.progress').bind('click', function (e) {
+				var $progressButtonListItem = $(this).closest('li'),
+					targetItemIndex = $progressButtonListItem.index();
+
+				if (!self.isCarouselAnimated() && self.$slider.find('.active').index() !== targetItemIndex) {
+					$progressButtonListItem.siblings().removeClass('active');
+					$progressButtonListItem.addClass('active');
+					self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
+				}
 			});
 		};
 
-		this.isCarouselAnimatedRightNow = function () {
-			return !!(self.$carouselContainer.hasClass('is-animated'));
+		this.eventTransitionEnd = function () {
+			self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd', function () {
+				self.$slider.removeClass('is-animated');
+			});
 		};
 
 		this.bindEvents = function () {
-			if (self.isCarouselBehaviourPossible()) {
-				self.nextBtnEvent();
-				self.prevBtnEvent();
-			}
-			self.orientationChange();
+			self.eventNextButton();
+			self.eventPrevButton();
+			self.eventProgressButton();
+			self.eventTransitionEnd();
 		};
 
 		self.init();

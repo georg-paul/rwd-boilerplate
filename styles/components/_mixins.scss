@@ -23,3 +23,9 @@
 	-webkit-box-sizing: $type;
 	-ms-box-sizing: $type;
 }
+@mixin transition($value) {
+	-moz-transition: $value;
+	-webkit-transition: $value;
+	-o-transition: $value;
+	transition: $value;
+}

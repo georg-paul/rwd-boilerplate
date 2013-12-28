@@ -175,15 +175,28 @@
 
             <h1>rwd-object-slider</h1>
             <div class="rwd-object-slider" data-speed="750">
+                <div class="rwd-object-halign">
+                    <div class="left">
+                        <button class="prev">Previous</button>
+                        <button class="next">Next</button>
+                    </div>
+                    <div class="right rwd-object-hlist">
+                        <ul>
+                            <li><button class="progress">1</button></li>
+                            <li><button class="progress">2</button></li>
+                            <li><button class="progress">3</button></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="container">
                     <div class="item">
-                        <img src="http://placehold.it/960x280" alt="" width="960" height="280" />
+                        <img src="http://placehold.it/960x400" alt="" width="960" height="400" />
+                    </div>
+                    <div class="item">
+                        <img src="http://placehold.it/960x300" alt="" width="960" height="300" />
                     </div>
                     <div class="item">
                         <img src="http://placehold.it/960x200" alt="" width="960" height="200" />
-                    </div>
-                    <div class="item">
-                        <img src="http://placehold.it/960x400" alt="" width="960" height="400" />
                     </div>
                 </div>
             </div>
@@ -192,7 +205,6 @@
         <!-- Use either zepto js -->
         <script src="src/contributed/Zepto/zepto.min.js"></script>
         <script src="src/contributed/Zepto/Modules/selector.js"></script>
-        <script src="src/contributed/Zepto/Modules/fx.js"></script>
         <script src="src/contributed/Zepto/zepto.custom.js"></script>
 
         <!-- or use jQuery instead -->

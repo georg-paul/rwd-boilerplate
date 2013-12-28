@@ -654,15 +654,24 @@ img {
 
 .rwd-object-slider {
   overflow: hidden;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
   .rwd-object-slider .container {
     position: relative;
-    overflow: hidden; }
+    overflow: hidden;
+    left: 0; }
     .rwd-object-slider .container:after {
       content: ".";
       display: block;
       height: 0;
       clear: both;
       visibility: hidden; }
+    .rwd-object-slider .container.is-animated {
+      -moz-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
+      -webkit-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
+      -o-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
+      transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1); }
     .rwd-object-slider .container .item {
       float: left; }
+  .javascript-is-disabled .rwd-object-slider .next, .javascript-is-disabled .rwd-object-slider .prev, .javascript-is-disabled .rwd-object-slider .progress {
+    display: none; }

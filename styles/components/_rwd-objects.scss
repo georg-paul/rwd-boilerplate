@@ -281,12 +281,21 @@
 .rwd-object-slider {
 	overflow: hidden;
 	width: 100%;
+	position: relative;
 	.container {
 		@include clear-after;
 		position: relative;
 		overflow: hidden;
+		left: 0;
+		&.is-animated {
+			@include transition(all 1.5s cubic-bezier(.54,0,.52,1));
+		}
 		.item {
 			float: left;
 		}
+	}
+
+	.javascript-is-disabled & {
+		.next, .prev, .progress { display: none; }
 	}
 }
