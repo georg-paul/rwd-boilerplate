@@ -180,6 +180,7 @@ function RwdObjects() {
 		self.itemWidth = $rwdObj.width();
 		self.$nextButton = $rwdObj.find('.next');
 		self.$prevButton = $rwdObj.find('.prev');
+		self.$progressBars = $rwdObj.find('.progress-bar');
 
 		this.init = function () {
 			self.setStyles();
@@ -191,7 +192,9 @@ function RwdObjects() {
 			self.$sliderItems.css('width', self.itemWidth);
 			self.$sliderItems.first().addClass('active');
 			self.$prevButton.addClass('disabled');
-			$rwdObj.find('.progress:first').closest('li').addClass('active');
+			self.$progressBars.each(function () {
+				$(this).find('li:first-child').addClass('active');
+			});
 
 			waitForImagesToLoad(self.$slider, function () {
 				self.$slider.css('height', self.$sliderItems.first().height());
@@ -230,8 +233,11 @@ function RwdObjects() {
 		this.eventNextButton = function () {
 			self.$nextButton.bind('click', function (e) {
 				e.preventDefault();
+				var targetItemIndex = self.$slider.find('.active').next().index();
+
 				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
-					self.next(parseInt(self.$slider.css('left'), 10) - self.itemWidth, self.$slider.find('.active').next().index());
+					self.updateProgressBars(targetItemIndex);
+					self.next(parseInt(self.$slider.css('left'), 10) - self.itemWidth, targetItemIndex);
 				}
 			});
 		};
@@ -239,22 +245,32 @@ function RwdObjects() {
 		this.eventPrevButton = function () {
 			self.$prevButton.bind('click', function (e) {
 				e.preventDefault();
+				var targetItemIndex = self.$slider.find('.active').prev().index();
+
 				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
-					self.next(parseInt(self.$slider.css('left'), 10) + self.itemWidth, self.$slider.find('.active').prev().index());
+					self.updateProgressBars(targetItemIndex);
+					self.next(parseInt(self.$slider.css('left'), 10) + self.itemWidth, targetItemIndex);
 				}
 			});
 		};
 
 		this.eventProgressButton = function () {
 			$('.progress').bind('click', function (e) {
+				e.preventDefault();
 				var $progressButtonListItem = $(this).closest('li'),
 					targetItemIndex = $progressButtonListItem.index();
 
 				if (!self.isCarouselAnimated() && self.$slider.find('.active').index() !== targetItemIndex) {
-					$progressButtonListItem.siblings().removeClass('active');
-					$progressButtonListItem.addClass('active');
+					self.updateProgressBars(targetItemIndex);
 					self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
 				}
+			});
+		};
+
+		this.updateProgressBars = function (targetItemIndex) {
+			self.$progressBars.each(function () {
+				$(this).find('li').removeClass('active');
+				$(this).find('li:nth-child(' + (targetItemIndex + 1) + ')').addClass('active');
 			});
 		};
 
