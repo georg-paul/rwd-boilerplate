@@ -294,8 +294,25 @@
 			float: left;
 		}
 	}
-
+	&.fade {
+		.container .item {
+			float: none;
+			position: absolute;
+			opacity: 0;
+			@include transition(all 1.5s cubic-bezier(.54,0,.52,1));
+			&.active {
+				z-index: 1;
+				opacity: 1;
+			}
+		}
+	}
 	.javascript-is-disabled & {
+		&.fade {
+			.container .item {
+				position: static;
+				opacity: 1;
+			}
+		}
 		.next-button, .prev-button, .progress { display: none; }
 	}
 }

@@ -182,6 +182,7 @@ function RwdObjects() {
 		self.$prevButton = $rwdObj.find('.prev-button');
 		self.$nextAndPrevButton = $rwdObj.find('.next-button, .prev-button');
 		self.$progressBars = $rwdObj.find('.progress-bar');
+		self.fadeEffect = !!($rwdObj.hasClass('fade'));
 
 		this.init = function () {
 			self.setStyles();
@@ -189,8 +190,11 @@ function RwdObjects() {
 		};
 
 		this.setStyles = function () {
-			self.$slider.css('width', self.$sliderItems.length * self.itemWidth);
-			self.$sliderItems.css('width', self.itemWidth);
+			if (!self.fadeEffect) {
+				self.$slider.css('width', self.$sliderItems.length * self.itemWidth);
+				self.$sliderItems.css('width', self.itemWidth);
+			}
+
 			self.$sliderItems.first().addClass('active');
 			self.$prevButton.addClass('disabled');
 			self.$progressBars.each(function () {
@@ -211,7 +215,11 @@ function RwdObjects() {
 			$nextItem.addClass('active');
 			self.toggleControlsStateClasses(targetItemIndex);
 
-			self.$slider.css({ left: targetXPos, height: $nextItem.height() });
+			if (self.fadeEffect) {
+				self.$slider.css({ height: $nextItem.height() });
+			} else {
+				self.$slider.css({ left: targetXPos, height: $nextItem.height() });
+			}
 		};
 
 		this.isCarouselAnimated = function () {
