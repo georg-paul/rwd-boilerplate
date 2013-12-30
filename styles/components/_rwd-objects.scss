@@ -298,6 +298,7 @@
 		.container .item {
 			float: none;
 			position: absolute;
+			max-width: 100%;
 			opacity: 0;
 			@include transition(all 1.5s cubic-bezier(.54,0,.52,1));
 			&.active {
