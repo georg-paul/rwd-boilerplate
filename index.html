@@ -19,7 +19,6 @@
         <!-- content goes here -->
         <div class="frontendx-delimiter">
             <nav class="rwd-object-hnav">
-                <button class="toggle">Menu</button>
                 <ul>
                     <li>
                         <a href="#rwd-objects">RWD Objects</a>
@@ -32,8 +31,12 @@
 
             <hr/>
 
-            <div id="rwd-objects">
-                <h1>rwd-object-halign</h1>
+            <section id="rwd-objects">
+                <h1>RWD Objects</h1>
+
+                <hr/>
+
+                <h2>rwd-object-halign</h2>
                 <div class="rwd-object-halign">
                     <div class="left">
                         <img src="http://placehold.it/350x100" alt="" width="350" height="100" />
@@ -61,7 +64,7 @@
 
                 <hr/>
 
-                <h1>rwd-object-hnav</h1>
+                <h2>rwd-object-hnav</h2>
                 <nav class="rwd-object-hnav">
                     <button class="toggle">Toggle</button>
                     <ul>
@@ -82,7 +85,7 @@
 
                 <hr/>
 
-                <h1>rwd-object-media (image left beside text)</h1>
+                <h2>rwd-object-media (image left beside text)</h2>
                 <div class="rwd-object-media">
                     <div class="img">
                         <img src="http://placehold.it/220x120" alt="" width="220" height="120" />
@@ -107,7 +110,7 @@
 
                 <hr/>
 
-                <h1>rwd-object-media (image right in-text)</h1>
+                <h2>rwd-object-media (image right in-text)</h2>
                 <div class="rwd-object-media">
                     <div class="img right">
                         <img src="http://placehold.it/220x90" alt="" width="220" height="90" />
@@ -132,7 +135,7 @@
                 <hr/>
 
 
-                <h1>rwd-object-columns</h1>
+                <h2>rwd-object-columns</h2>
                 <h3>2 equal columns</h3>
                 <div class="rwd-object-columns-2" data-breakpoint="400">
                     <div class="column" >
@@ -218,9 +221,28 @@
                     </div>
                 </div>
 
+                <h3>5 equal columns</h3>
+                <div class="rwd-object-columns-5" data-breakpoint="800">
+                    <div class="column" >
+                        <div style="background-color: #ccc;">&nbsp;</div>
+                    </div>
+                    <div class="column">
+                        <div style="background-color: #ccc;">&nbsp;</div>
+                    </div>
+                    <div class="column">
+                        <div style="background-color: #ccc;">&nbsp;</div>
+                    </div>
+                    <div class="column">
+                        <div style="background-color: #ccc;">&nbsp;</div>
+                    </div>
+                    <div class="column">
+                        <div style="background-color: #ccc;">&nbsp;</div>
+                    </div>
+                </div>
+
                 <hr/>
 
-                <h3>Switching positions of content within columns (when columns are stacked on top of each other)</h3>
+                <h2>rwd-object-columns (switching positions of content within columns when columns are stacked on top of each other)</h2>
                 <div class="rwd-object-columns-3-3-3-6" data-breakpoint="600">
                     <div class="column" >
                         <div data-move-down="2">
@@ -248,7 +270,7 @@
 
                 <hr/>
 
-                <h1>rwd-object-slider (default slide effect)</h1>
+                <h2>rwd-object-slider (default slide effect)</h2>
                 <div class="rwd-object-slider">
                     <div class="rwd-object-halign">
                         <div class="left">
@@ -265,13 +287,13 @@
                     </div>
                     <div class="container">
                         <div id="slider-1-item-1" class="item">
-                            <img src="http://lorempixel.com/q/960/400/sports" alt="" width="960" height="400" />
+                            <img src="http://lorempixel.com/q/960/400/sports/5" alt="" width="960" height="400" />
                         </div>
                         <div id="slider-1-item-2" class="item">
-                            <img src="http://lorempixel.com/q/960/300/sports" alt="" width="960" height="300" />
+                            <img src="http://lorempixel.com/q/960/350/sports/9" alt="" width="960" height="350" />
                         </div>
                         <div id="slider-1-item-3" class="item">
-                            <img src="http://lorempixel.com/q/960/200/sports" alt="" width="960" height="200" />
+                            <img src="http://lorempixel.com/q/960/300/sports/2" alt="" width="960" height="300" />
                         </div>
                     </div>
                     <div class="rwd-object-hlist rwd-object-halign">
@@ -285,20 +307,20 @@
 
                 <hr/>
 
-                <h1>rwd-object-slider (fade effect)</h1>
+                <h2>rwd-object-slider (fade effect)</h2>
                 <div class="rwd-object-slider fade">
                     <div class="container">
                         <div class="item">
-                            <h2>Item 1</h2>
-                            <img src="http://lorempixel.com/q/960/350/animals" alt="" width="960" height="350" />
+                            <h3>Item 1</h3>
+                            <img src="http://lorempixel.com/q/960/400/animals/9" alt="" width="960" height="400" />
                         </div>
                         <div class="item">
-                            <h2>Item 2</h2>
-                            <img src="http://lorempixel.com/q/960/350/city" alt="" width="960" height="350" />
+                            <h3>Item 2</h3>
+                            <img src="http://lorempixel.com/q/960/400/city/9" alt="" width="960" height="400" />
                         </div>
                         <div class="item">
-                            <h2>Item 3</h2>
-                            <img src="http://lorempixel.com/q/960/350/nature" alt="" width="960" height="350" />
+                            <h3>Item 3</h3>
+                            <img src="http://lorempixel.com/q/960/400/nature/5" alt="" width="960" height="400" />
                         </div>
                     </div>
                     <div class="rwd-object-hlist rwd-object-halign">
@@ -309,12 +331,14 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <hr/>
 
             <div id="styleguide">
                 <h1>Style Guide</h1>
+
+                <hr/>
 
                 <h2>Sections <a href="#">Linked</a></h2>
                 <p>The main page header of this guide is an <code>h1</code> element. Any header elements may include links, as depicted in the example.</p>
@@ -325,8 +349,6 @@
                 <p>The header above is an <code>h4</code> element, which may be used for any form of page-level header which falls below the <code>h3</code> header in a document hierarchy.</p>
                 <h5>Fifth-Level Header <a href="#">Linked</a></h5>
                 <p>The header above is an <code>h5</code> element, which may be used for any form of page-level header which falls below the <code>h4</code> header in a document hierarchy.</p>
-                <h6>Sixth-Level Header <a href="#">Linked</a></h6>
-                <p>The header above is an <code>h6</code> element, which may be used for any form of page-level header which falls below the <code>h5</code> header in a document hierarchy.</p>
 
                 <h2 id="grouping">Grouping content</h2>
                 <h3>Paragraphs</h3>
@@ -339,17 +361,6 @@
                     <p><i>Maybe it won&#8217;t be that bad</i>, he told himself. The lie was comforting enough to get him through the rest of the night&#8217;s shift.</p>
                     <hr/>
                     <p>The Carlton AllLander drove Dudley home just after dawn. Like the astronomer, the vehicle was old and worn, but perfectly capable of doing its job. It had a cheap diesel engine, common enough on a semi-frontier world like Gralmond, although its drive array was a thoroughly modern photoneural processor. With its high suspension and deep-tread tyres it could plough along the dirt track to the observatory in all weather and seasons, including the metre-deep snow of Gralmond&#8217;s winters.</p>
-                </div>
-
-                <h3>Pre-formatted text</h3>
-                <p>The <code>pre</code> element represents a block of pre-formatted text, in which structure is represented by typographic conventions rather than by elements. Such examples are an e-mail (with paragraphs indicated by blank lines, lists indicated by lines prefixed with a bullet), fragments of computer code (with structure indicated according to the conventions of that language) or displaying <abbr title="American Standard Code for Information Interchange">ASCII</abbr> art. Here&#8217;s an example showing the printable characters of <abbr>ASCII</abbr>:</p>
-                <div class="example">
-    <pre><samp>&#32; ! " # $ % &amp; ' ( ) * + , - . /
-        0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
-        @ A B C D E F G H I J K L M N O
-        P Q R S T U V W X Y Z [ \ ] ^ _
-        ` a b c d e f g h i j k l m n o
-        p q r s t u v w x y z { | } ~</samp></pre>
                 </div>
 
                 <h3>Blockquotes</h3>
@@ -429,6 +440,8 @@
                     </dl>
                 </div>
 
+                <hr/>
+
                 <h3>Figures</h3>
                 <p>Figures are usually used to refer to images:</p>
                 <div class="example">
@@ -460,6 +473,8 @@
                         Winston Churchill, in <cite><a href="http://hansard.millbanksystems.com/commons/1947/nov/11/parliament-bill#column_206">a speech to the House of Commons</a></cite>. 11th November 1947
                     </figcaption>
                 </div>
+
+                <hr/>
 
                 <h2 id="text">Text-level Semantics</h2>
                 <p>There are a number of inline <abbr title="HyperText Markup Language">HTML</abbr> elements you may use anywhere within other elements.</p>
@@ -524,36 +539,6 @@
                     <p>Queen Elizabeth II was proclaimed sovereign of each of the Commonwealth realms on <time datetime="1952-02-6">6</time> and <time datetime="1952-02-7">7 February 1952</time>, after the death of her father, King George VI.</p>
                 </div>
 
-                <h3>Code</h3>
-                <p>The <code>code</code> element is used to represent fragments of computer code. Useful for technology-oriented sites, not so useful otherwise. Example:</p>
-                <div class="example">
-                    <p>When you call the <code>activate()</code> method on the <code>robotSnowman</code> object, the eyes glow.</p>
-                </div>
-                <p>Used in conjunction with the <code>pre</code> element:</p>
-                <div class="example">
-    <pre><code>function getJelly() {
-        &#160;&#160;&#160;&#160;echo $aDeliciousSnack;
-        }</code></pre>
-                </div>
-
-                <h3>Variable</h3>
-                <p>The <code>var</code> element is used to denote a variable in a mathematical expression or programming context, but can also be used to indicate a placeholder where the contents should be replaced with your own value. Example:</p>
-                <div class="example">
-                    <p>If there are <var>n</var> pipes leading to the ice cream factory then I expect at <em>least</em> <var>n</var> flavours of ice cream to be available for purchase!</p>
-                </div>
-
-                <h3>Sample output</h3>
-                <p>The <code>samp</code> element is used to represent (sample) output from a program or computing system. Useful for technology-oriented sites, not so useful otherwise. Example:</p>
-                <div class="example">
-                    <p>The computer said <samp>Too much cheese in tray two</samp> but I didn&#8217;t know what that meant.</p>
-                </div>
-
-                <h3>Keyboard entry</h3>
-                <p>The <code>kbd</code> element is used to denote user input (typically via a keyboard, although it may also be used to represent other input methods, such as voice commands). Example:<p>
-                <div class="example">
-                    <p>To take a screenshot on your Mac, press <kbd>&#8984; Cmd</kbd> + <kbd>&#8679; Shift</kbd> + <kbd>3</kbd>.</p>
-                </div>
-
                 <h3>Superscript and subscript text</h3>
                 <p>The <code>sup</code> element represents a superscript and the sub element represents a <code>sub</code>. These elements must be used only to mark up typographical conventions with specific meanings, not for typographical presentation. As a guide, only use these elements if their absence would change the meaning of the content. Example:</p>
                 <div class="example">
@@ -584,6 +569,8 @@
                 <div class="example">
                     <p>She bought <del datetime="2005-05-30T13:00:00">two</del> <ins datetime="2005-05-30T13:00:00">five</ins> pairs of shoes.</p>
                 </div>
+
+                <hr/>
 
                 <h2 id="tables">Tabular data</h2>
                 <p>Tables should be used when displaying tabular data. The <code>thead</code>, <code>tfoot</code> and <code>tbody</code> elements enable you to group rows within each a table.</p>
@@ -667,7 +654,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
 
         <!-- Use either zepto js -->

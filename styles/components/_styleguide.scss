@@ -1,3 +1,46 @@
+p, pre, blockquote, ul, ol, dl, figure, table, fieldset {
+	@include rem(margin-bottom, $text-flow-margin);
+}
+
+h1, h2, h3, h4, h5 {
+	line-height: 1.2;
+	margin: 0 0 0.5em 0;
+	font-weight: normal;
+}
+
+h1 {
+	@include rem(font-size, $h1-font-size);
+}
+h2 {
+	@include rem(font-size, $h2-font-size);
+}
+h3 {
+	@include rem(font-size, $h3-font-size);
+}
+h4 {
+	@include rem(font-size, $h4-font-size);
+}
+h5 {
+	@include rem(font-size, $h5-font-size);
+}
+
+
+a {
+	color: $link-color;
+	&:visited {
+		color: $link-color-visited;
+	}
+	&:link, &:visited {
+		text-decoration: underline;
+	}
+	&:hover, &:focus, &:active {
+		text-decoration: underline;
+	}
+	&.external-link, &.external-link-new-window {
+	}
+}
+
+
 hr {
 	font-weight: 700;
 	@include rem(font-size, 32);

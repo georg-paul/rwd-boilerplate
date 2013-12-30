@@ -39,6 +39,7 @@ html {
 
 body {
 	@include rem(font-size, $base-font-size);
+	font-family: $base-font-family;
 	line-height: $base-line-height / $base-font-size;
 }
 

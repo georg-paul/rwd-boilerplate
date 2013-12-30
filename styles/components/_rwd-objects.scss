@@ -106,11 +106,13 @@
 	.img, .video {
 		float: left;
 		overflow: hidden;
+		@include rem(margin-right, $media-margin);
 		img {
 			display: block;
 		}
 		&.right {
 			float: right;
+			@include rem(margin-left, $media-margin);
 			margin-right: 0;
 		}
 	}

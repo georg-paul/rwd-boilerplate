@@ -1,26 +1,35 @@
-
-// LAYOUT SETTINGS (declaration in px)
-$container-max-width: 960;
-$container-side-space: 30;
-
-
-// RWD OBJECTS (declaration in px)
-// rwd-object-grid
-$grid-columns: 12;
-$grid-gutter: 30;
-
-// rwd-object-media
-$media-text-min-width: 250;
-
-
-// FONT SIZE (declaration in px)
-$base-font-size: 16;
-$base-line-height: 24;
-
-
-// LOADING ANIMATION
+// LOADING ANIMATION (px)
 $spinner-bg-color-hex: #fff;
 $spinner-color-r: 0;
 $spinner-color-g: 0;
 $spinner-color-b: 0;
 $spinner-size: 40;
+
+// FONT STYLES (px)
+$base-font-family: Arial, sans-serif;
+$base-font-size: 16;
+$base-line-height: 26;
+
+$h1-font-size: 42;
+$h2-font-size: 30;
+$h3-font-size: 24;
+$h4-font-size: $base-font-size;
+$h5-font-size: $base-font-size;
+
+// LAYOUT (px)
+$container-max-width: 960;
+$container-side-space: 30;
+$text-flow-margin: $base-font-size / 1.25;
+
+// COLORS
+$link-color: #0000FF;
+$link-color-visited: #EE82EE;
+
+// RWD OBJECTS (px)
+// rwd-object-grid
+$grid-columns: 12;
+$grid-gutter: 30;
+
+// rwd-object-media
+$media-margin: 25;
+$media-text-min-width: 250;
