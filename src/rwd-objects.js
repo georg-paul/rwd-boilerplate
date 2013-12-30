@@ -287,8 +287,5 @@ function RwdObjects() {
 	};
 }
 
-
-(function () {
-	"use strict";
-	new RwdObjects().init();
-}());
+var RwdObjectsInstance = new RwdObjects();
+RwdObjectsInstance.init();
