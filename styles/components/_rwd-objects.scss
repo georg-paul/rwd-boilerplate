@@ -294,6 +294,7 @@
 		}
 		.item {
 			float: left;
+			overflow: hidden;
 			@include box-sizing(border-box);
 		}
 	}
