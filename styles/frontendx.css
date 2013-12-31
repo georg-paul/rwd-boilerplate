@@ -227,7 +227,7 @@ hr {
   display: block; }
   hr:after {
     content: '···';
-    color: #bbb;
+    color: #ddd;
     letter-spacing: 1em;
     padding-left: 1em;
     height: 0; }
@@ -261,6 +261,10 @@ hr {
   float: left;
   height: 100%;
   list-style: none;
+  margin-left: 12.5px;
+  margin-left: 0.78125rem;
+  margin-right: 12.5px;
+  margin-right: 0.78125rem;
   line-height: 1em; }
   .rwd-object-hnav > ul > li ul {
     display: none;
@@ -276,7 +280,8 @@ hr {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
-    margin-right: 0;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     border-left: 0 none !important;

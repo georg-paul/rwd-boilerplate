@@ -6,7 +6,8 @@
 		> li {
 			width: 100%;
 			@include box-sizing(border-box);
-			margin-right: 0;
+			margin-right: 0 !important;
+			margin-left: 0 !important;
 			padding-left: 0 !important;
 			padding-right: 0 !important;
 			border-left: 0 none !important;
@@ -65,6 +66,8 @@
 			float: left;
 			height: 100%;
 			list-style: none;
+			@include rem(margin-left, $hnav-margin / 2);
+			@include rem(margin-right, $hnav-margin / 2);
 			line-height: 1em;
 			> a {
 
