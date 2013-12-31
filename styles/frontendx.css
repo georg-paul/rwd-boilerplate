@@ -743,7 +743,7 @@ hr {
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       -ms-box-sizing: border-box; }
-  .rwd-object-slider.fade .container .item {
+  .rwd-object-slider.fade > .container > .item {
     float: none;
     position: absolute;
     max-width: 100%;
@@ -752,11 +752,11 @@ hr {
     -webkit-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
     -o-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
     transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1); }
-    .rwd-object-slider.fade .container .item.active {
+    .rwd-object-slider.fade > .container > .item.active {
       z-index: 1;
       opacity: 1; }
-  .javascript-is-disabled .rwd-object-slider.fade .container .item {
+  .javascript-is-disabled .rwd-object-slider.fade > .container > .item {
     position: static;
     opacity: 1; }
-  .javascript-is-disabled .rwd-object-slider .next-button, .javascript-is-disabled .rwd-object-slider .prev-button, .javascript-is-disabled .rwd-object-slider .progress {
+  .javascript-is-disabled .rwd-object-slider .next-button, .javascript-is-disabled .rwd-object-slider .prev-button {
     display: none; }

@@ -298,7 +298,7 @@
 		}
 	}
 	&.fade {
-		.container .item {
+		> .container > .item {
 			float: none;
 			position: absolute;
 			max-width: 100%;
@@ -312,11 +312,11 @@
 	}
 	.javascript-is-disabled & {
 		&.fade {
-			.container .item {
+			> .container > .item {
 				position: static;
 				opacity: 1;
 			}
 		}
-		.next-button, .prev-button, .progress { display: none; }
+		.next-button, .prev-button { display: none; }
 	}
 }

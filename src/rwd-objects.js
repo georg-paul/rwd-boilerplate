@@ -178,10 +178,9 @@ function RwdObjects() {
 		self.$slider = $rwdObj.find('> .container');
 		self.$sliderItems = self.$slider.find('> .item');
 		self.itemWidth = $rwdObj.width();
-		self.$nextButton = $rwdObj.find('.next-button');
-		self.$prevButton = $rwdObj.find('.prev-button');
-		self.$nextAndPrevButton = $rwdObj.find('.next-button, .prev-button');
-		self.$progressBars = $rwdObj.find('.progress-bar');
+		self.$nextButton = $rwdObj.find('> .slider-nav .next-button');
+		self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
+		self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
 		self.fadeEffect = !!($rwdObj.hasClass('fade'));
 
 		this.init = function () {
@@ -198,7 +197,7 @@ function RwdObjects() {
 			self.$sliderItems.first().addClass('active');
 			self.$prevButton.addClass('disabled');
 			self.$progressBars.each(function () {
-				$(this).find('li:first-child').addClass('active');
+				$(this).find('li').first().addClass('active');
 			});
 
 			waitForImagesToLoad(self.$slider, function () {
@@ -207,8 +206,8 @@ function RwdObjects() {
 		};
 
 		this.next = function (targetXPos, targetItemIndex) {
-			var $activeItem = self.$slider.find('.active'),
-				$nextItem = self.$slider.find('.item:nth-child(' + (targetItemIndex + 1) + ')');
+			var $activeItem = self.$slider.find('> .active'),
+				$nextItem = self.$slider.find('> .item:nth-child(' + (targetItemIndex + 1) + ')');
 
 			self.$slider.addClass('is-animated');
 			$activeItem.removeClass('active');
@@ -230,19 +229,20 @@ function RwdObjects() {
 			if (targetItemIndex === 0) {
 				self.$prevButton.addClass('disabled');
 				self.$nextButton.removeClass('disabled');
-			} else if (targetItemIndex === self.$slider.find('.item:last-child').index()) {
+			} else if (targetItemIndex === self.$slider.find('> .item:last-child').index()) {
 				self.$nextButton.addClass('disabled');
 				self.$prevButton.removeClass('disabled');
 			} else {
-				self.$nextAndPrevButton.removeClass('disabled');
+				self.$nextButton.removeClass('disabled');
+				self.$prevButton.removeClass('disabled');
 			}
 		};
 
-		this.eventNextAndPrevButton = function () {
-			self.$nextAndPrevButton.bind('click', function (e) {
+		this.eventNextAndPrevButton = function ($button) {
+			$button.bind('click', function (e) {
 				e.preventDefault();
 				var isNextButton = $(e.target).hasClass('next-button'),
-					targetItemIndex = (isNextButton) ? self.$slider.find('.active').next().index() : self.$slider.find('.active').prev().index(),
+					targetItemIndex = (isNextButton) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index(),
 					targetXPos = (isNextButton) ? parseInt(self.$slider.css('left'), 10) - self.itemWidth : parseInt(self.$slider.css('left'), 10) + self.itemWidth;
 
 				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
@@ -257,7 +257,7 @@ function RwdObjects() {
 				e.preventDefault();
 				var targetItemIndex = $(this).closest('li').index();
 
-				if (!self.isCarouselAnimated() && self.$slider.find('.active').index() !== targetItemIndex) {
+				if (!self.isCarouselAnimated() && self.$slider.find('> .active').index() !== targetItemIndex) {
 					self.updateProgressBars(targetItemIndex);
 					self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
 				}
@@ -278,7 +278,8 @@ function RwdObjects() {
 		};
 
 		this.bindEvents = function () {
-			self.eventNextAndPrevButton();
+			self.eventNextAndPrevButton(self.$nextButton);
+			self.eventNextAndPrevButton(self.$prevButton);
 			self.eventProgressButton();
 			self.eventTransitionEnd();
 		};
