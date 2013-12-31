@@ -106,7 +106,7 @@ body {
   font-size: 16px;
   font-size: 1rem;
   font-family: Arial, sans-serif;
-  line-height: 1.5; }
+  line-height: 1.625; }
 
 .frontendx-delimiter {
   max-width: 960px;
@@ -738,7 +738,11 @@ hr {
       -o-transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1);
       transition: all 1.5s cubic-bezier(0.54, 0, 0.52, 1); }
     .rwd-object-slider .container .item {
-      float: left; }
+      float: left;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -ms-box-sizing: border-box; }
   .rwd-object-slider.fade .container .item {
     float: none;
     position: absolute;

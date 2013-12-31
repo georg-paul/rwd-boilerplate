@@ -202,7 +202,7 @@ function RwdObjects() {
 			});
 
 			waitForImagesToLoad(self.$slider, function () {
-				self.$slider.css('height', self.$sliderItems.first().height());
+				self.$slider.css('height', self.$sliderItems.first().outerHeight());
 			});
 		};
 
@@ -216,9 +216,9 @@ function RwdObjects() {
 			self.toggleControlsStateClasses(targetItemIndex);
 
 			if (self.fadeEffect) {
-				self.$slider.css({ height: $nextItem.height() });
+				self.$slider.css({ height: $nextItem.outerHeight() });
 			} else {
-				self.$slider.css({ left: targetXPos, height: $nextItem.height() });
+				self.$slider.css({ left: targetXPos, height: $nextItem.outerHeight() });
 			}
 		};
 

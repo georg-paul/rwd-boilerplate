@@ -294,6 +294,7 @@
 		}
 		.item {
 			float: left;
+			@include box-sizing(border-box);
 		}
 	}
 	&.fade {
