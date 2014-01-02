@@ -31,7 +31,7 @@ function RwdObjects() {
 
 	var self = this;
 
-	this.init = function () {
+	this.init = function (revert) {
 		$('[class*="rwd-object"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),
@@ -42,17 +42,42 @@ function RwdObjects() {
 				objType = classNames[i].split('rwd-object-')[1];
 				if (objType !== undefined) {
 					if (objType === 'halign' || objType === 'valign-middle') {
-						self.halign($rwdObj);
+						if (!revert) {
+							self.halign($rwdObj);
+						} else {
+							$rwdObj.removeClass('no-side-by-side');
+							$rwdObj.removeClass('nearly-no-side-by-side');
+							$rwdObj.closest('.rwd-object-halign-container').removeClass('children-no-side-by-side');
+							$rwdObj.closest('.rwd-object-halign-container').removeClass('children-nearly-no-side-by-side');
+						}
 					} else if (objType === 'media') {
-						self.media($rwdObj);
+						if (!revert) {
+							self.media($rwdObj);
+						} else {
+							$rwdObj.removeClass('no-side-by-side');
+						}
 					} else if (objType === 'hnav') {
-						self.hnav($rwdObj);
+						if (!revert) {
+							self.hnav($rwdObj);
+						} else {
+							$rwdObj.removeClass('breakpoint-small');
+							$rwdObj.closest('.rwd-object-hnav-container').removeClass('hnav-breakpoint-small');
+							$rwdObj.removeClass('dropdown');
+							$rwdObj.find('> ul').css('display', '');
+							$rwdObj.find('*').unbind();
+						}
 					} else if (objType === 'vnav') {
-						self.vnav($rwdObj);
+						if (!revert) {
+							self.vnav($rwdObj);
+						} else {
+							$rwdObj.find('*').unbind();
+						}
 					} else if (objType.indexOf('columns-') !== -1) {
-						self.columns($rwdObj);
-					} else if (objType === 'slider') {
-						var sliderInstance = new self.Slider($rwdObj);
+						if (!revert) {
+							self.columns($rwdObj);
+						} else {
+							$rwdObj.removeClass('stacked-columns');
+						}
 					}
 				}
 			}
@@ -171,122 +196,7 @@ function RwdObjects() {
 			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
 		});
 	};
-
-	this.Slider = function ($rwdObj) {
-		var self = this;
-
-		self.$slider = $rwdObj.find('> .container');
-		self.$sliderItems = self.$slider.find('> .item');
-		self.itemWidth = $rwdObj.width();
-		self.$nextButton = $rwdObj.find('> .slider-nav .next-button');
-		self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
-		self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
-		self.fadeEffect = !!($rwdObj.hasClass('fade'));
-
-		this.init = function () {
-			self.setStyles();
-			self.bindEvents();
-		};
-
-		this.setStyles = function () {
-			if (!self.fadeEffect) {
-				self.$slider.css('width', self.$sliderItems.length * self.itemWidth);
-				self.$sliderItems.css('width', self.itemWidth);
-			}
-
-			self.$sliderItems.first().addClass('active');
-			self.$prevButton.addClass('disabled');
-			self.$progressBars.each(function () {
-				$(this).find('li').first().addClass('active');
-			});
-
-			waitForImagesToLoad(self.$slider, function () {
-				self.$slider.css('height', self.$sliderItems.first().outerHeight());
-			});
-		};
-
-		this.next = function (targetXPos, targetItemIndex) {
-			var $activeItem = self.$slider.find('> .active'),
-				$nextItem = self.$slider.find('> .item:nth-child(' + (targetItemIndex + 1) + ')');
-
-			self.$slider.addClass('is-animated');
-			$activeItem.removeClass('active');
-			$nextItem.addClass('active');
-			self.toggleControlsStateClasses(targetItemIndex);
-
-			if (self.fadeEffect) {
-				self.$slider.css({ height: $nextItem.outerHeight() });
-			} else {
-				self.$slider.css({ left: targetXPos, height: $nextItem.outerHeight() });
-			}
-		};
-
-		this.isCarouselAnimated = function () {
-			return self.$slider.hasClass('is-animated');
-		};
-
-		this.toggleControlsStateClasses = function (targetItemIndex) {
-			if (targetItemIndex === 0) {
-				self.$prevButton.addClass('disabled');
-				self.$nextButton.removeClass('disabled');
-			} else if (targetItemIndex === self.$slider.find('> .item:last-child').index()) {
-				self.$nextButton.addClass('disabled');
-				self.$prevButton.removeClass('disabled');
-			} else {
-				self.$nextButton.removeClass('disabled');
-				self.$prevButton.removeClass('disabled');
-			}
-		};
-
-		this.eventNextAndPrevButton = function ($button) {
-			$button.bind('click', function (e) {
-				e.preventDefault();
-				var isNextButton = $(e.target).hasClass('next-button'),
-					targetItemIndex = (isNextButton) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index(),
-					targetXPos = (isNextButton) ? parseInt(self.$slider.css('left'), 10) - self.itemWidth : parseInt(self.$slider.css('left'), 10) + self.itemWidth;
-
-				if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
-					self.updateProgressBars(targetItemIndex);
-					self.next(targetXPos, targetItemIndex);
-				}
-			});
-		};
-
-		this.eventProgressButton = function () {
-			self.$progressBars.find('.progress').bind('click', function (e) {
-				e.preventDefault();
-				var targetItemIndex = $(this).closest('li').index();
-
-				if (!self.isCarouselAnimated() && self.$slider.find('> .active').index() !== targetItemIndex) {
-					self.updateProgressBars(targetItemIndex);
-					self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
-				}
-			});
-		};
-
-		this.updateProgressBars = function (targetItemIndex) {
-			self.$progressBars.each(function () {
-				$(this).find('li').removeClass('active');
-				$(this).find('li:nth-child(' + (targetItemIndex + 1) + ')').addClass('active');
-			});
-		};
-
-		this.eventTransitionEnd = function () {
-			self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd', function () {
-				self.$slider.removeClass('is-animated');
-			});
-		};
-
-		this.bindEvents = function () {
-			self.eventNextAndPrevButton(self.$nextButton);
-			self.eventNextAndPrevButton(self.$prevButton);
-			self.eventProgressButton();
-			self.eventTransitionEnd();
-		};
-
-		self.init();
-	};
 }
 
 var RwdObjectsInstance = new RwdObjects();
-RwdObjectsInstance.init();
+RwdObjectsInstance.init(false);
