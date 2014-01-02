@@ -8,20 +8,19 @@
 		clearTimeout(resizeTimeout);
 		resizeTimeout = setTimeout(function () {
 
-			// Clear object instances first
+			// Remove applied classes and clear object instances first
+			ElementQueriesInstance.revertApplication();
 			ElementQueriesInstance = null;
-			RwdObjectsInstance = null;
-
-			// Restore the inital state of the body element
-			$('body').html($bodySnaphot.html());
+			//RwdObjectsInstance = null;
 
 			// Re-run Element Queries
 			ElementQueriesInstance = new ElementQueries();
 			ElementQueriesInstance.init();
 
 			// Re-run Rwd Objects
-			RwdObjectsInstance = new RwdObjects();
-			RwdObjectsInstance.init();
+			//RwdObjectsInstance = new RwdObjects();
+			//RwdObjectsInstance.init();
+
 		}, 100);
 	});
 }());
