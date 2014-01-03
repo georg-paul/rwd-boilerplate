@@ -204,7 +204,7 @@ h5 {
 a {
   color: blue; }
   a:visited {
-    color: violet; }
+    color: blue; }
   a:link, a:visited {
     text-decoration: underline; }
   a:hover, a:focus, a:active {
