@@ -1,5 +1,5 @@
 /*jslint browser: true, nomen: false, devel: true*/
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -25,6 +25,8 @@
  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+var RwdObjectsInstance;
 
 function RwdObjects() {
 	"use strict";
@@ -198,5 +200,9 @@ function RwdObjects() {
 	};
 }
 
-var RwdObjectsInstance = new RwdObjects();
-RwdObjectsInstance.init(false);
+$(document).ready(function () {
+	"use strict";
+
+	RwdObjectsInstance = new RwdObjects();
+	RwdObjectsInstance.init(false);
+});

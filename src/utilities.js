@@ -24,3 +24,20 @@ function waitForImagesToLoad($element, callback) {
 		});
 	}
 }
+
+function getScrollBarWidth() {
+	"use strict";
+	var width = 0;
+
+	if (document.body.clientHeight > $('html').height()) {
+		document.body.style.overflow = 'hidden';
+		width = document.body.clientWidth;
+		document.body.style.overflow = 'scroll';
+		width -= document.body.clientWidth;
+		if (!width) {
+			width = document.body.offsetWidth - document.body.clientWidth;
+		}
+		document.body.style.overflow = '';
+	}
+	return width;
+}

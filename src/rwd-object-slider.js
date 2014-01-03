@@ -149,7 +149,11 @@ function RwdObjectSlider($rwdObj) {
 	};
 }
 
-$('.rwd-object-slider').each(function (i) {
-	RwdObjectSliderInstance = new RwdObjectSlider($(this));
-	RwdObjectSliderInstance.init(0);
+$(document).ready(function () {
+	"use strict";
+
+	$('.rwd-object-slider').each(function () {
+		RwdObjectSliderInstance = new RwdObjectSlider($(this));
+		RwdObjectSliderInstance.init(0);
+	});
 });
