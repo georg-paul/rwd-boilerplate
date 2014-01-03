@@ -79,6 +79,7 @@ function RwdObjects() {
 							self.columns($rwdObj);
 						} else {
 							$rwdObj.removeClass('stacked-columns');
+							self.moveContentWithinColumns($rwdObj, true);
 						}
 					}
 				}
@@ -178,22 +179,22 @@ function RwdObjects() {
 		// If the breakpoint is reached and the columns are stacked
 		if (breakpoint > availableWidth) {
 			$rwdObj.addClass('stacked-columns');
-			self.moveContentWithinColumns($rwdObj);
+			self.moveContentWithinColumns($rwdObj, false);
 		}
 	};
 
-	this.moveContentWithinColumns = function ($rwdObj) {
+	this.moveContentWithinColumns = function ($rwdObj, revert) {
 		$rwdObj.find('[data-move-down]').each(function () {
 			var $elementToMove = $(this),
 				columnIndex = $elementToMove.closest('.column').index() + 1,
-				targetColumn = columnIndex + parseInt($elementToMove.attr('data-move-down'), 10);
+				targetColumn = (revert) ? columnIndex - parseInt($elementToMove.attr('data-move-down'), 10) : columnIndex + parseInt($elementToMove.attr('data-move-down'), 10);
 
 			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
 		});
 		$rwdObj.find('[data-move-up]').each(function () {
 			var $elementToMove = $(this),
 				columnIndex = $elementToMove.closest('.column').index() + 1,
-				targetColumn = columnIndex - parseInt($elementToMove.attr('data-move-up'), 10);
+				targetColumn = (revert) ? columnIndex + parseInt($elementToMove.attr('data-move-up'), 10) : columnIndex - parseInt($elementToMove.attr('data-move-up'), 10);
 
 			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
 		});
