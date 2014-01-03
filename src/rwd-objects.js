@@ -132,7 +132,7 @@ function RwdObjects() {
 			};
 			mediaImage.src =  imageSrc;
 		} else {
-			if ($rwdObj.width() < $media.outerWidth() + mediaTextMinWidth) {
+			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
 				$rwdObj.addClass('no-side-by-side');
 			}
 		}
@@ -146,7 +146,7 @@ function RwdObjects() {
 
 		$rootUL.find('> li').each(function () {
 			$listItem = $(this);
-			totalWidth += $listItem.outerWidth();
+			totalWidth += $listItem.outerWidth(true);
 		});
 
 		// rounding bug?!
