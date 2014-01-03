@@ -766,5 +766,3 @@ hr {
     opacity: 1; }
   .javascript-is-disabled .rwd-object-slider .next-button, .javascript-is-disabled .rwd-object-slider .prev-button {
     display: none; }
-  .rwd-object-slider .progress-bar .active .progress {
-    outline: 1px solid red; }
