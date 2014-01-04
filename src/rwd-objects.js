@@ -60,11 +60,12 @@ function RwdObjects() {
 						}
 					} else if (objType === 'hnav') {
 						if (!revert) {
-							self.hnav($rwdObj);
+							if (!$rwdObj.hasClass('no-dropdown')) {
+								self.hnav($rwdObj);
+							}
 						} else {
 							$rwdObj.removeClass('breakpoint-small');
 							$rwdObj.closest('.rwd-object-hnav-container').removeClass('hnav-breakpoint-small');
-							$rwdObj.removeClass('dropdown');
 							$rwdObj.find('> ul').css('display', '');
 							$rwdObj.find('*').unbind();
 						}
@@ -140,24 +141,17 @@ function RwdObjects() {
 
 	this.hnav = function ($rwdObj) {
 		var $rootUL = $rwdObj.find('> ul'),
-			totalWidth = 0,
-			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart',
-			$listItem;
+			firstLevelItems = $rootUL.find('> li'),
+			firstTopValue = firstLevelItems.first().position().top,
+			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
 
-		$rootUL.find('> li').each(function () {
-			$listItem = $(this);
-			totalWidth += $listItem.outerWidth(true);
+		firstLevelItems.each(function () {
+			if ($(this).position().top > firstTopValue) {
+				$rwdObj.addClass('breakpoint-small');
+				$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
+				return false;
+			}
 		});
-
-		// rounding bug?!
-		if (totalWidth > $rootUL.width() + 3) {
-			$rwdObj.addClass('breakpoint-small');
-			$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
-		}
-
-		if (!$rwdObj.hasClass('no-dropdown')) {
-			$rwdObj.addClass('dropdown');
-		}
 
 		$rwdObj.find('.toggle').bind(clickEventType, function () {
 			$rootUL.toggle();
