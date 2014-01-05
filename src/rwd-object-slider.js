@@ -151,9 +151,13 @@ function RwdObjectSlider($rwdObj) {
 
 $(document).ready(function () {
 	"use strict";
+	var $slider,
+		startItemIndex = 0;
 
 	$('.rwd-object-slider').each(function () {
-		RwdObjectSliderInstance = new RwdObjectSlider($(this));
-		RwdObjectSliderInstance.init(0);
+		$slider = $(this);
+		startItemIndex = $slider.attr('data-start-item') || 0;
+		RwdObjectSliderInstance = new RwdObjectSlider($slider);
+		RwdObjectSliderInstance.init(parseInt(startItemIndex));
 	});
 });
