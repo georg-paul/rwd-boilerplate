@@ -249,6 +249,12 @@
 		> .column {
 			width: percentage($grid-columns / $column-count / $grid-columns);
 		}
+		&.fixed-width {
+			> .column {
+				@include rem(width, $container-max-width / $column-count + $grid-gutter / $column-count);
+				@include rem(padding-bottom, $grid-gutter);
+			}
+		}
 	}
 
 	// 2-columns
@@ -259,6 +265,10 @@
 					[class*="rwd-object-columns-#{$column-count}-#{$i}-#{$j}"] {
 						> .column:nth-child(1) { width: percentage($i / $grid-columns); }
 						> .column:nth-child(2) { width: percentage($j / $grid-columns); }
+						&.fixed-width {
+							> .column:nth-child(1) { @include rem(width, $container-max-width / $grid-columns * $i + $grid-gutter / $grid-columns * $i); }
+							> .column:nth-child(2) { @include rem(width, $container-max-width / $grid-columns * $j + $grid-gutter / $grid-columns * $j); }
+						}
 					}
 				}
 			}
@@ -275,6 +285,11 @@
 							> .column:nth-child(1) { width: percentage($i / $grid-columns); }
 							> .column:nth-child(2) { width: percentage($j / $grid-columns); }
 							> .column:nth-child(3) { width: percentage($k / $grid-columns); }
+							&.fixed-width {
+								> .column:nth-child(1) { @include rem(width, $container-max-width / $grid-columns * $i + $grid-gutter / $grid-columns * $i); }
+								> .column:nth-child(2) { @include rem(width, $container-max-width / $grid-columns * $j + $grid-gutter / $grid-columns * $j); }
+								> .column:nth-child(3) { @include rem(width, $container-max-width / $grid-columns * $k + $grid-gutter / $grid-columns * $k); }
+							}
 						}
 					}
 				}
