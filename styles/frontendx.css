@@ -1106,12 +1106,19 @@ hr {
     .rwd-object-slider .container .item {
       float: left;
       overflow: hidden;
+      position: relative;
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       -ms-box-sizing: border-box;
       margin-right: 30px;
       margin-right: 1.875rem; }
+      .rwd-object-slider .container .item:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden; }
   .rwd-object-slider.fade > .container > .item {
     float: none;
     position: absolute;
@@ -1129,3 +1136,7 @@ hr {
     opacity: 1; }
   .javascript-is-disabled .rwd-object-slider .next-button, .javascript-is-disabled .rwd-object-slider .prev-button {
     display: none; }
+  .rwd-object-slider[class*="no-image-scaling-"] > .container > .item img {
+    max-width: none !important; }
+  .rwd-object-slider.no-image-scaling-align-right > .container > .item img {
+    float: right; }
