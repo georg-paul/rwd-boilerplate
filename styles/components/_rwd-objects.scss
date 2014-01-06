@@ -315,6 +315,7 @@
 			float: left;
 			overflow: hidden;
 			@include box-sizing(border-box);
+			@include rem(margin-right, $slider-margin);
 		}
 	}
 	&.fade {

@@ -36,6 +36,8 @@ function RwdObjectSlider($rwdObj) {
 	self.$slider = $rwdObj.find('> .container');
 	self.$sliderItems = self.$slider.find('> .item');
 	self.itemWidth = $rwdObj.width();
+	self.itemMargin = parseInt(self.$sliderItems.first().css('margin-right'), 10);
+	self.itemOuterWidth = self.itemWidth + self.itemMargin;
 	self.$nextButton = $rwdObj.find('> .slider-nav .next-button');
 	self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
 	self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
@@ -49,8 +51,8 @@ function RwdObjectSlider($rwdObj) {
 	this.setStyles = function (startItemIndex) {
 		if (!self.fadeEffect) {
 			self.$slider.css({
-				'width': self.$sliderItems.length * self.itemWidth,
-				'left': startItemIndex * self.itemWidth * -1
+				'width': self.$sliderItems.length * self.itemOuterWidth,
+				'left': startItemIndex * self.itemOuterWidth * -1
 			});
 			self.$sliderItems.css('width', self.itemWidth);
 		}
@@ -111,7 +113,7 @@ function RwdObjectSlider($rwdObj) {
 
 			if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
 				self.updateProgressBars(targetItemIndex);
-				self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
+				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
 		});
 	};
@@ -123,7 +125,7 @@ function RwdObjectSlider($rwdObj) {
 
 			if (!self.isCarouselAnimated() && self.$slider.find('> .active').index() !== targetItemIndex) {
 				self.updateProgressBars(targetItemIndex);
-				self.next(targetItemIndex * self.itemWidth * -1, targetItemIndex);
+				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
 		});
 	};
