@@ -69,36 +69,6 @@
 
                         <hr/>
 
-                        <h2>rwd-object-hnav</h2>
-                        <nav class="rwd-object-hnav" style="margin-bottom: 1.5rem;">
-                            <button class="toggle">Toggle</button>
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li>
-                                    <a href="#">About Us</a>
-                                    <ul>
-                                        <li><a href="#">Page 1</a></li>
-                                        <li><a href="#">Page 2</a></li>
-                                        <li><a href="#">Page 3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Team</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </nav>
-
-                        <nav class="rwd-object-hnav no-dropdown">
-                            <ul>
-                                <li><a href="#">rwd-object-hnav</a></li>
-                                <li> <a href="#">with</a></li>
-                                <li><a href="#">class</a></li>
-                                <li><a href="#">no-dropdown</a></li>
-                            </ul>
-                        </nav>
-
-                        <hr/>
-
                         <h2>rwd-object-media (image left beside text)</h2>
                         <div class="rwd-object-media">
                             <div class="img">
@@ -146,8 +116,49 @@
                                 </p>
                             </div>
                         </div>
+
                         <hr/>
 
+                        <h2>rwd-object-hnav</h2>
+                        <nav class="rwd-object-hnav" style="margin-bottom: 1.5rem;">
+                            <button class="toggle">Toggle</button>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li>
+                                    <a href="#">About Us</a>
+                                    <ul>
+                                        <li><a href="#">Page 1</a></li>
+                                        <li><a href="#">Page 2</a></li>
+                                        <li><a href="#">Page 3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Portfolio</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+
+                        <hr/>
+
+                        <h2>rwd-object-hnav (no dropdown)</h2>
+                        <nav class="rwd-object-hnav no-dropdown">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li>
+                                    <a href="#">About Us</a>
+                                    <ul>
+                                        <li><a href="#">Page 1</a></li>
+                                        <li><a href="#">Page 2</a></li>
+                                        <li><a href="#">Page 3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Portfolio</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+
+                        <hr/>
 
                         <h2>rwd-object-columns</h2>
                         <h3>2 equal columns</h3>
@@ -313,23 +324,23 @@
                         <h3>2 columns / 3-9</h3>
                         <div class="rwd-object-columns-2-3-9 fixed-width fluid-if-stacked">
                             <div class="column" >
-                                <div style="background-color: #ccc; height: 200px;">&nbsp;</div>
+                                <div style="background-color: #ccc; height: 150px;">&nbsp;</div>
                             </div>
                             <div class="column" >
-                                <div style="background-color: #ccc; height: 200px;">&nbsp;</div>
+                                <div style="background-color: #ccc; height: 150px;">&nbsp;</div>
                             </div>
                         </div>
 
                         <h3>3 columns / 3-6-3</h3>
                         <div class="rwd-object-columns-3-3-6-3 fixed-width fluid-if-stacked">
                             <div class="column" >
-                                <div style="background-color: #ccc; height: 200px;">&nbsp;</div>
+                                <div style="background-color: #ccc; height: 150px;">&nbsp;</div>
                             </div>
                             <div class="column" >
-                                <div style="background-color: #ccc; height: 200px;">&nbsp;</div>
+                                <div style="background-color: #ccc; height: 150px;">&nbsp;</div>
                             </div>
                             <div class="column" >
-                                <div style="background-color: #ccc; height: 200px;">&nbsp;</div>
+                                <div style="background-color: #ccc; height: 150px;">&nbsp;</div>
                             </div>
                         </div>
 
@@ -337,7 +348,7 @@
 
                         <h2>rwd-object-slider (default slide effect)</h2>
                         <div class="rwd-object-slider">
-                            <div class="slider-nav rwd-object-halign">
+                            <div class="slider-nav rwd-object-halign" style="margin-bottom: 1rem;">
                                 <div class="left">
                                     <button class="prev-button">Previous</button>
                                     <button class="next-button">Next</button>
@@ -361,7 +372,7 @@
                                     <img src="http://lorempixel.com/q/960/300/sports/2" alt="" width="960" height="300" />
                                 </div>
                             </div>
-                            <div class="slider-nav rwd-object-hnav rwd-object-halign">
+                            <div class="slider-nav rwd-object-hnav rwd-object-halign" style="margin-top: 1rem;">
                                 <ul class="progress-bar center">
                                     <li><a class="progress" href="#slider-1-item-1">Item 1</a></li>
                                     <li><a class="progress" href="#slider-1-item-2">Item 2</a></li>
@@ -455,8 +466,15 @@
 
                         <hr/>
 
-                        <h2>rwd-object-slider (fade effect)</h2>
                         <div class="rwd-object-slider fade" data-start-item="1">
+                            <div class="slider-nav rwd-object-hlist rwd-object-halign">
+                                <h2 class="left">rwd-object-slider (fade effect)</h2>
+                                <ul class="progress-bar right">
+                                    <li><button class="progress">1</button></li>
+                                    <li><button class="progress">2</button></li>
+                                    <li><button class="progress">3</button></li>
+                                </ul>
+                            </div>
                             <div class="container">
                                 <div class="item">
                                     <h3>Item 1</h3>
@@ -471,14 +489,8 @@
                                     <img src="http://lorempixel.com/q/960/400/nature/5" alt="" width="960" height="400" />
                                 </div>
                             </div>
-                            <div class="slider-nav rwd-object-hnav rwd-object-halign">
-                                <ul class="progress-bar center">
-                                    <li><a class="progress" href="#">Item 1</a></li>
-                                    <li><a class="progress" href="#">Item 2</a></li>
-                                    <li><a class="progress" href="#">Item 3</a></li>
-                                </ul>
-                            </div>
                         </div>
+                        <hr/>
                     </section>
                     <section class="item" id="element-queries">
                         <h1>Element Queries</h1>
@@ -492,6 +504,7 @@
                             Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                             Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
                         </p>
+                        <hr/>
                     </section>
                     <section class="item" id="styleguide">
                         <h1>Style Guide</h1>
