@@ -35,6 +35,7 @@ function RwdObjectSlider($rwdObj) {
 
 	self.$slider = $rwdObj.find('> .container');
 	self.$sliderItems = self.$slider.find('> .item');
+	self.itemCount = self.$sliderItems.length;
 	self.itemWidth = $rwdObj.width();
 	self.itemMargin = parseInt(self.$sliderItems.first().css('margin-right'), 10);
 	self.itemOuterWidth = self.itemWidth + self.itemMargin;
@@ -42,34 +43,38 @@ function RwdObjectSlider($rwdObj) {
 	self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
 	self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
 	self.fadeEffect = !!($rwdObj.hasClass('fade'));
+	self.autoPlayInterval = $rwdObj.attr('data-autoplay-interval') || 5000;
+	self.autoPlayStart = $rwdObj.attr('data-autoplay-start') || 2000;
 
-	this.init = function (startItemIndex) {
-		self.setStyles(startItemIndex);
+	this.init = function (startItemIndex, triggeredByResize) {
+		self.startItemIndex = startItemIndex || 0;
+		self.triggeredByResize = triggeredByResize || false;
+		self.setStyles();
 		self.bindEvents();
 	};
 
-	this.setStyles = function (startItemIndex) {
+	this.setStyles = function () {
 		if (!self.fadeEffect) {
 			self.$slider.css({
-				'width': self.$sliderItems.length * self.itemOuterWidth,
-				'left': startItemIndex * self.itemOuterWidth * -1
+				'width': self.itemCount * self.itemOuterWidth,
+				'left': self.startItemIndex * self.itemOuterWidth * -1
 			});
 			self.$sliderItems.css('width', self.itemWidth);
 		}
 
 		self.$sliderItems.removeClass('active');
-		self.$slider.find('> .item:nth-child(' + (startItemIndex + 1) + ')').addClass('active');
-		if (startItemIndex === 0) {
+		self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
+		if (self.startItemIndex === 0) {
 			self.$prevButton.addClass('disabled');
-		} else if (startItemIndex === self.$sliderItems.length) {
+		} else if (self.startItemIndex === self.itemCount) {
 			self.$nextButton.addClass('disabled');
 		}
 		self.$progressBars.each(function () {
-			$(this).find('li:nth-child(' + (startItemIndex + 1) + ')').addClass('active');
+			$(this).find('li:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
 		});
 
 		waitForImagesToLoad(self.$slider, function () {
-			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (startItemIndex + 1) + ')').outerHeight());
+			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
 		});
 	};
 
@@ -77,6 +82,7 @@ function RwdObjectSlider($rwdObj) {
 		var $activeItem = self.$slider.find('> .active'),
 			$nextItem = self.$slider.find('> .item:nth-child(' + (targetItemIndex + 1) + ')');
 
+		self.updateProgressBars(targetItemIndex);
 		self.$slider.addClass('is-animated');
 		$nextItem.addClass('active').siblings().removeClass('active');
 		self.toggleControlsStateClasses(targetItemIndex);
@@ -112,7 +118,7 @@ function RwdObjectSlider($rwdObj) {
 				targetItemIndex = (isNextButton) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index();
 
 			if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
-				self.updateProgressBars(targetItemIndex);
+				self.clearAutoPlayInterval();
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
 		});
@@ -124,7 +130,7 @@ function RwdObjectSlider($rwdObj) {
 			var targetItemIndex = $(this).closest('li').index();
 
 			if (!self.isCarouselAnimated() && self.$slider.find('> .active').index() !== targetItemIndex) {
-				self.updateProgressBars(targetItemIndex);
+				self.clearAutoPlayInterval();
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
 		});
@@ -148,6 +154,28 @@ function RwdObjectSlider($rwdObj) {
 		self.eventNextAndPrevButton(self.$prevButton);
 		self.eventProgressButton();
 		self.eventTransitionEnd();
+		self.autoplay();
+	};
+
+	this.autoplay = function () {
+		if ($rwdObj.hasClass('autoplay') && !self.triggeredByResize) {
+			var activeItemIndex = self.$slider.find('> .active').index(),
+				targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
+
+			window.setTimeout(function () {
+				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+			}, self.autoPlayStart);
+
+			self.instanceInterval = interval.make(function () {
+				activeItemIndex = self.$slider.find('> .active').index();
+				targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
+				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+			}, self.autoPlayInterval);
+		}
+	};
+
+	this.clearAutoPlayInterval = function () {
+		interval.clearAll();
 	};
 }
 
@@ -160,6 +188,6 @@ $(document).ready(function () {
 		$slider = $(this);
 		startItemIndex = $slider.attr('data-start-item') || 0;
 		RwdObjectSliderInstance = new RwdObjectSlider($slider);
-		RwdObjectSliderInstance.init(parseInt(startItemIndex));
+		RwdObjectSliderInstance.init(parseInt(startItemIndex), false);
 	});
 });

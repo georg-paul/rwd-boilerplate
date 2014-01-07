@@ -31,7 +31,10 @@
 				$slider.find('> .slider-nav .next-button').unbind();
 				$slider.find('> .slider-nav .prev-button').unbind();
 				var RwdObjectSliderInstance = new RwdObjectSlider($slider);
-				RwdObjectSliderInstance.init($slider.find('> .container').find('> .active').index());
+				RwdObjectSliderInstance.init($slider.find('> .container').find('> .active').index(), true);
+				if ($slider.hasClass('autoplay')) {
+					RwdObjectSliderInstance.clearAutoPlayInterval();
+				}
 			});
 
 		}, 100);
