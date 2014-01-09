@@ -164,13 +164,12 @@ function RwdObjectSlider($rwdObj) {
 
 			window.setTimeout(function () {
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+				self.instanceInterval = interval.make(function () {
+					activeItemIndex = self.$slider.find('> .active').index();
+					targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
+					self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+				}, self.autoPlayInterval);
 			}, self.autoPlayStart);
-
-			self.instanceInterval = interval.make(function () {
-				activeItemIndex = self.$slider.find('> .active').index();
-				targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
-				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
-			}, self.autoPlayInterval);
 		}
 	};
 
