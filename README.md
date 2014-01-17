@@ -1,2 +1,2 @@
-frontendx
+rwd-boilerplate
 =========

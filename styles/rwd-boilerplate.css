@@ -71,7 +71,7 @@ html {
   /* Prevents iOS text size adjust after orientation change */
   -ms-text-size-adjust: 100%;
   /* www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom */ }
-  html.frontendx-loading.javascript-is-enabled .frontendx-loading {
+  html.rwd-boilerplate-loading.javascript-is-enabled .rwd-boilerplate-loading {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -79,7 +79,7 @@ html {
     top: 0;
     background-color: white;
     z-index: 9999; }
-    html.frontendx-loading.javascript-is-enabled .frontendx-loading .spinner {
+    html.rwd-boilerplate-loading.javascript-is-enabled .rwd-boilerplate-loading .spinner {
       height: 40px;
       width: 40px;
       margin-left: -40px;
@@ -106,7 +106,7 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.625; }
 
-.frontendx-delimiter {
+.rwd-boilerplate-delimiter {
   max-width: 960px;
   max-width: 60rem;
   padding-right: 30px;
@@ -114,13 +114,13 @@ body {
   padding-left: 30px;
   padding-left: 1.875rem;
   margin: 0 auto; }
-  .frontendx-delimiter:after {
+  .rwd-boilerplate-delimiter:after {
     content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility: hidden; }
-  .javascript-is-disabled .frontendx-delimiter {
+  .javascript-is-disabled .rwd-boilerplate-delimiter {
     width: 960px;
     width: 60rem;
     max-width: none; }
