@@ -38,10 +38,7 @@ html {
 
 body {
 	@include rem(font-size, $base-font-size);
-	font-family: $base-font-family;
-	line-height: $base-line-height / $base-font-size;
 }
-
 
 .rwd-boilerplate-delimiter {
 	@include rem(max-width, $container-max-width);
@@ -64,16 +61,6 @@ img, embed, object {
 img {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-// global classes
-.hidden {
-	position: absolute;
-	left: -10000px;
-	top: auto;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
 }
 
 
