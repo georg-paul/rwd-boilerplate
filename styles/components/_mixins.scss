@@ -3,10 +3,6 @@
 	#{$property}: 1 / 16 * $value + 0rem;
 }
 
-@function em($target, $context: $base-font-size) {
-	@return 1 / $context * $target + 0em;
-}
-
 @mixin clear-after {
 	&:after {
 		content: ".";
