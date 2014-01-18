@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 		// Task configuration.
 		uglify: {
 			files: {
-				src: '<%= meta.deployPath %>rwd-boilerplate.min.js',  // source files mask
+				src: '<%= meta.deployPath %>rwd-boilerplate.concat.js',  // source files mask
 				dest: '<%= meta.deployPath %>',    // destination folder
 				expand: true,    // allow dynamic building
 				flatten: true,   // remove all unnecessary nesting
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>resize-orientationchange.js',
 					'<%= meta.srcPath %>hide-loading.js'
 				],
-				dest: '<%= meta.deployPath %>rwd-boilerplate.min.js'
+				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
 			}
 		}
 	});
