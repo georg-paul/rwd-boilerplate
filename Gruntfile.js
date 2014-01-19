@@ -34,8 +34,8 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>'],
-				tasks: ['jshint', 'concat', 'uglify']
+				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>', 'tests/qunit/tests.js'],
+				tasks: ['jshint', 'qunit', 'concat', 'uglify']
 			}
 		},
 
@@ -76,6 +76,10 @@ module.exports = function (grunt) {
 				}
 			},
 			all: ['src/development/*.js']
+		},
+
+		qunit: {
+			all: ['tests/qunit/**/*.html']
 		}
 	});
 
@@ -85,8 +89,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-qunit');
 
 	// Default task
-	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'watch']);
+	grunt.registerTask('default', ['sass', 'jshint', 'qunit', 'concat', 'uglify', 'watch']);
 
 };
