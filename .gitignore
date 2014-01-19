@@ -2,3 +2,5 @@
 *.sass-cache
 node_modules
 styles/rwd-boilerplate.css
+src/rwd-boilerplate.min.js
+src/rwd-boilerplate.concat.js
