@@ -30,7 +30,7 @@ module.exports = function (grunt) {
 
 		watch: {
 			css: {
-				files: ['styles/config/project.scss', 'styles/rwd-boilerplate.scss'],
+				files: ['**/*.scss', '../project-config.scss', 'styles/rwd-boilerplate.scss'],
 				tasks: ['sass']
 			},
 			js:  {
