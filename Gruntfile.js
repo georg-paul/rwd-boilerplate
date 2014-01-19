@@ -29,6 +29,10 @@ module.exports = function (grunt) {
 		},
 
 		watch: {
+			css: {
+				files: ['styles/config/project.scss', 'styles/rwd-boilerplate.scss'],
+				tasks: ['sass']
+			},
 			js:  {
 				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>'],
 				tasks: ['concat', 'uglify']
