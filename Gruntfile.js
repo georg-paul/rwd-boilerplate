@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 		// Metadata.
 		meta: {
 			srcPath: 'src/development/',
+			srcPathElementQueries: 'element-queries/element-queries.js',
 			deployPath: 'src/'
 		},
 
@@ -29,7 +30,7 @@ module.exports = function (grunt) {
 
 		watch: {
 			js:  {
-				files: '<%= meta.srcPath %>*.js',
+				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>'],
 				tasks: ['concat', 'uglify']
 			}
 		},
@@ -41,7 +42,7 @@ module.exports = function (grunt) {
 			dist: {
 				src: [
 					'<%= meta.srcPath %>utilities.js',
-					'../element-queries/element-queries.js',
+					'<%= meta.srcPathElementQueries %>',
 					'<%= meta.srcPath %>rwd-objects.js',
 					'<%= meta.srcPath %>rwd-object-slider.js',
 					'<%= meta.srcPath %>resize-orientationchange.js',
