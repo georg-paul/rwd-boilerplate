@@ -35,7 +35,7 @@ module.exports = function (grunt) {
 			},
 			js:  {
 				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>'],
-				tasks: ['concat', 'uglify']
+				tasks: ['jshint', 'concat', 'uglify']
 			}
 		},
 
@@ -65,6 +65,17 @@ module.exports = function (grunt) {
 					'styles/rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
 				}
 			}
+		},
+
+		jshint: {
+			options: {
+				browser: true,
+				globals: {
+					jQuery: true,
+					$: true
+				}
+			},
+			all: ['src/development/*.js']
 		}
 	});
 
@@ -73,8 +84,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	// Default task
-	grunt.registerTask('default', ['sass', 'concat', 'uglify', 'watch']);
+	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'watch']);
 
 };
