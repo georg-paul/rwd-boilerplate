@@ -1,10 +1,10 @@
-/*jslint browser: true, nomen: false, devel: true*/
+/*jslint browser: true */
 /*global $, waitForImagesToLoad */
 
 /*
  The MIT License (MIT)
 
- Copyright (c) 2013 georg-paul
+ Copyright (c) 2014 georg-paul
 
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
@@ -29,7 +29,7 @@
 var RwdObjectSliderInstance;
 
 function RwdObjectSlider($rwdObj) {
-	"use strict";
+	'use strict';
 
 	var self = this;
 
@@ -179,7 +179,8 @@ function RwdObjectSlider($rwdObj) {
 }
 
 $(document).ready(function () {
-	"use strict";
+	'use strict';
+
 	var $slider,
 		startItemIndex = 0;
 

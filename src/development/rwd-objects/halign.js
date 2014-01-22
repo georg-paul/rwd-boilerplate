@@ -1,0 +1,71 @@
+/*jslint browser: true */
+/*global $ */
+
+/*
+ The MIT License (MIT)
+
+ Copyright (c) 2014 georg-paul
+
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+
+function RwdObjectHalign() {
+	'use strict';
+
+	var self = this;
+
+	this.init = function () {
+		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
+			var $rwdObj = $(this);
+			if (!$rwdObj.hasClass('full-width')) {
+				self.halign($rwdObj);
+			}
+		});
+	};
+
+	this.halign = function ($rwdObj) {
+		self.revertDomChanges($rwdObj);
+
+		var totalChildrenWidth = 0,
+			availableWidth = $rwdObj.width(),
+			halignChild;
+
+		$rwdObj.children().each(function () {
+			halignChild = $(this);
+			totalChildrenWidth += halignChild.width();
+			totalChildrenWidth += parseInt(halignChild.css('margin-left'), 10);
+			totalChildrenWidth += parseInt(halignChild.css('margin-right'), 10);
+		});
+
+		if (totalChildrenWidth > availableWidth) {
+			$rwdObj.addClass('no-side-by-side');
+			$rwdObj.closest('.rwd-object-halign-container').addClass('children-no-side-by-side');
+		} else if (totalChildrenWidth + 50 > availableWidth) {
+			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
+			$rwdObj.closest('.rwd-object-halign-container').addClass('children-nearly-no-side-by-side');
+		}
+	};
+
+	this.revertDomChanges = function ($rwdObj) {
+		$rwdObj.addClass('side-by-side').removeClass('no-side-by-side').removeClass('nearly-no-side-by-side');
+		$rwdObj.closest('.rwd-object-halign-container').removeClass('children-no-side-by-side').removeClass('children-nearly-no-side-by-side');
+	};
+}

@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>*.js', '<%= meta.srcPathElementQueries %>', 'tests/qunit/tests.js'],
+				files: ['<%= meta.srcPath %>**/*.js', '<%= meta.srcPathElementQueries %>', 'tests/qunit/tests.js'],
 				tasks: ['jshint', 'qunit', 'concat', 'uglify']
 			}
 		},
@@ -47,9 +47,14 @@ module.exports = function (grunt) {
 				src: [
 					'<%= meta.srcPath %>utilities.js',
 					'<%= meta.srcPathElementQueries %>',
-					'<%= meta.srcPath %>rwd-objects.js',
-					'<%= meta.srcPath %>rwd-object-slider.js',
-					'<%= meta.srcPath %>resize-orientationchange.js',
+					'<%= meta.srcPath %>rwd-objects/halign.js',
+					'<%= meta.srcPath %>rwd-objects/media.js',
+					'<%= meta.srcPath %>rwd-objects/hnav.js',
+					'<%= meta.srcPath %>rwd-objects/vnav.js',
+					'<%= meta.srcPath %>rwd-objects/columns.js',
+					'<%= meta.srcPath %>rwd-objects/slider.js',
+					'<%= meta.srcPath %>rwd-objects/_init.js',
+					'<%= meta.srcPath %>rwd-objects/_resize-orientationchange.js',
 					'<%= meta.srcPath %>hide-loading.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
@@ -75,7 +80,7 @@ module.exports = function (grunt) {
 					$: true
 				}
 			},
-			all: ['src/development/*.js']
+			all: ['src/development/**/*.js']
 		},
 
 		qunit: {
