@@ -44,8 +44,20 @@ function RwdObjectHalign() {
 	this.halign = function ($rwdObj) {
 		self.revertDomChanges($rwdObj);
 
+		var availableWidth = $rwdObj.width(),
+			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj);
+
+		if (totalChildrenWidth > availableWidth) {
+			$rwdObj.addClass('no-side-by-side');
+			$rwdObj.closest('.rwd-object-halign-container').addClass('children-no-side-by-side');
+		} else if (totalChildrenWidth + 50 > availableWidth) {
+			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
+			$rwdObj.closest('.rwd-object-halign-container').addClass('children-nearly-no-side-by-side');
+		}
+	};
+
+	this.getTotalChildrenWidth = function ($rwdObj) {
 		var totalChildrenWidth = 0,
-			availableWidth = $rwdObj.width(),
 			halignChild;
 
 		$rwdObj.children().each(function () {
@@ -55,13 +67,7 @@ function RwdObjectHalign() {
 			totalChildrenWidth += parseInt(halignChild.css('margin-right'), 10);
 		});
 
-		if (totalChildrenWidth > availableWidth) {
-			$rwdObj.addClass('no-side-by-side');
-			$rwdObj.closest('.rwd-object-halign-container').addClass('children-no-side-by-side');
-		} else if (totalChildrenWidth + 50 > availableWidth) {
-			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
-			$rwdObj.closest('.rwd-object-halign-container').addClass('children-nearly-no-side-by-side');
-		}
+		return totalChildrenWidth;
 	};
 
 	this.revertDomChanges = function ($rwdObj) {

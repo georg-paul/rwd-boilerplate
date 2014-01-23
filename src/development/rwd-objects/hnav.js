@@ -46,11 +46,10 @@ function RwdObjectHnav() {
 
 		var $rootUL = $rwdObj.find('> ul'),
 			firstLevelItems = $rootUL.find('> li'),
-			firstTopValue = firstLevelItems.first().position().top,
 			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
 
 		firstLevelItems.each(function () {
-			if ($(this).position().top > firstTopValue) {
+			if ($(this).position().top > firstLevelItems.first().position().top) {
 				$rwdObj.addClass('breakpoint-small');
 				$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
 				return false;

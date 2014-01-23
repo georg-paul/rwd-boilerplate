@@ -34,45 +34,46 @@ function RwdObjectColumns() {
 
 	this.init = function () {
 		$('[class*="rwd-object-columns-"]').each(function () {
-			self.columns($(this));
+			var $rwdObj = $(this);
+			self.revertDomChanges($rwdObj);
+			self.columns($rwdObj);
 		});
 	};
 
 	this.columns = function ($rwdObj) {
-		self.revertDomChanges($rwdObj);
+		var availableWidth = $rwdObj.parent().width();
 
+		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth) {
+			$rwdObj.addClass('stacked-columns');
+			self.moveContentWithinColumns($rwdObj, false);
+		}
+	};
+
+	this.getBreakpoint = function ($rwdObj, availableWidth) {
 		var columnWidthFixed = $rwdObj.hasClass('fixed-width'),
 			fluidWidthWhenFixedAndStacked = $rwdObj.hasClass('fluid-if-stacked'),
-			$columnsParent = $rwdObj.parent(),
-			availableWidth = $columnsParent.width(),
 			breakpoint = 0,
 			firstTopPosition = 0;
 
-		// Column widths are fixed and should always stay fixed, do nothing
 		if (columnWidthFixed && !fluidWidthWhenFixedAndStacked) {
-			return;
-		}
-		// Columns widths are fixed and should be fluid
-		// if the columns have not enough space side by side
-		else if (columnWidthFixed && fluidWidthWhenFixedAndStacked) {
+			// Column widths are fixed and should always stay fixed
+			breakpoint = 0;
+		} else if (columnWidthFixed && fluidWidthWhenFixedAndStacked) {
+			// Columns widths are fixed and should be fluid if the columns have not enough space side by side
 			firstTopPosition = $rwdObj.find('> .column').first().position().top;
 			$rwdObj.find('> .column').each(function () {
 				if ($(this).position().top > firstTopPosition) {
 					breakpoint = availableWidth + 1;
 				}
 			});
-		}
-		// Column widths are relative and the data-breakpoint attribute contains the breakpoint
-		else {
+		} else {
+			// Column widths are relative and the data-breakpoint attribute contains the breakpoint
 			breakpoint = $rwdObj.attr('data-breakpoint') || 0;
 		}
 
-		// If the breakpoint is reached and the columns are stacked
-		if (breakpoint > availableWidth) {
-			$rwdObj.addClass('stacked-columns');
-			self.moveContentWithinColumns($rwdObj, false);
-		}
+		return breakpoint;
 	};
+
 
 	this.moveContentWithinColumns = function ($rwdObj, revert) {
 		$rwdObj.find('[data-move-down]').each(function () {
