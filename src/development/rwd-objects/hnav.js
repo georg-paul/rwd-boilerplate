@@ -66,6 +66,6 @@ function RwdObjectHnav() {
 		$rwdObj.removeClass('breakpoint-small');
 		$rwdObj.closest('.rwd-object-hnav-container').removeClass('hnav-breakpoint-small');
 		$rwdObj.find('> ul').css('display', '');
-		$rwdObj.find('*').unbind();
+		$rwdObj.find('.toggle').unbind();
 	};
 }
