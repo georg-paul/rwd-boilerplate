@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'styles/rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
+					'../rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
 				}
 			}
 		},
