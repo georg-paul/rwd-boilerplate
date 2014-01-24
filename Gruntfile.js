@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		meta: {
 			srcPath: 'src/development/',
 			srcPathElementQueries: 'element-queries/element-queries.js',
-			deployPath: 'src/'
+			deployPath: '../'
 		},
 
 		banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
