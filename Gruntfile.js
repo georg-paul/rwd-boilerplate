@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		meta: {
 			srcPath: 'src/development/',
 			srcPathElementQueries: 'element-queries/element-queries.js',
-			deployPath: '../'
+			deployPath: 'src/'
 		},
 
 		banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'../rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
+					'styles/rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
 				}
 			}
 		},
