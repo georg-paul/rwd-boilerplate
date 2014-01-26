@@ -2,7 +2,7 @@
 /*global $ */
 
 function waitForImagesToLoad($element, callback) {
-	"use strict";
+	'use strict';
 	var images, loaded;
 
 	// Find the images within $element it that aren't loaded yet
@@ -26,7 +26,7 @@ function waitForImagesToLoad($element, callback) {
 }
 
 function getScrollBarWidth() {
-	"use strict";
+	'use strict';
 	var width = 0;
 
 	if (document.body.clientHeight > $('html').height()) {
@@ -48,29 +48,29 @@ var interval = {
 	intervals : {},
 
 	//create another interval
-	make : function ( fun, delay ) {
+	make : function (fun, delay) {
 		//see explanation after the code
 		var newInterval = setInterval.apply(
 			window,
-			[ fun, delay ].concat( [].slice.call(arguments, 2) )
+			[ fun, delay ].concat([].slice.call(arguments, 2))
 		);
 
-		this.intervals[ newInterval ] = true;
+		this.intervals[newInterval] = true;
 
 		return newInterval;
 	},
 
 	//clear a single interval
-	clear : function ( id ) {
-		return clearInterval( this.intervals[id] );
+	clear : function (id) {
+		return clearInterval(this.intervals[id]);
 	},
 
 	//clear all intervals
 	clearAll : function () {
-		var all = Object.keys( this.intervals ), len = all.length;
+		var all = Object.keys(this.intervals), len = all.length;
 
-		while ( len --> 0 ) {
-			clearInterval( all.shift() );
+		while (len --> 0) {
+			clearInterval(all.shift());
 		}
 	}
 };

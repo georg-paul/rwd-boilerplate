@@ -1,5 +1,5 @@
 /*jslint browser: true */
-/*global $ */
+/*global $, waitForImagesToLoad */
 
 /*
  The MIT License (MIT)
@@ -36,7 +36,9 @@ function RwdObjectHalign() {
 		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
 			var $rwdObj = $(this);
 			if (!$rwdObj.hasClass('full-width')) {
-				self.halign($rwdObj);
+				waitForImagesToLoad($rwdObj, function () {
+					self.halign($rwdObj);
+				});
 			}
 		});
 	};
@@ -50,7 +52,7 @@ function RwdObjectHalign() {
 		if (totalChildrenWidth > availableWidth) {
 			$rwdObj.addClass('no-side-by-side');
 			$rwdObj.closest('.rwd-object-halign-container').addClass('children-no-side-by-side');
-		} else if (totalChildrenWidth + 50 > availableWidth) {
+		} else if ((totalChildrenWidth <= availableWidth) && totalChildrenWidth + 50 > availableWidth) {
 			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
 			$rwdObj.closest('.rwd-object-halign-container').addClass('children-nearly-no-side-by-side');
 		}
