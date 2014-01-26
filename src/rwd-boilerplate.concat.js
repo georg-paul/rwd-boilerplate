@@ -303,14 +303,22 @@ function RwdObjectHalign() {
 		self.revertDomChanges($rwdObj);
 
 		var availableWidth = $rwdObj.width(),
-			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj);
+			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj),
+			containerId = parseInt($rwdObj.attr('data-halign-id'), 10),
+			$container = $('[data-halign-container-id="' + containerId + '"]');
 
 		if (totalChildrenWidth > availableWidth) {
 			$rwdObj.addClass('no-side-by-side');
-			$rwdObj.closest('.rwd-object-halign-container').addClass('children-no-side-by-side');
+			if ($container.length) {
+				$container.addClass('children-no-side-by-side');
+			}
 		} else if ((totalChildrenWidth <= availableWidth) && totalChildrenWidth + 50 > availableWidth) {
 			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
-			$rwdObj.closest('.rwd-object-halign-container').addClass('children-nearly-no-side-by-side');
+			if ($container.length) {
+				$container.addClass('children-nearly-no-side-by-side');
+			}
+		} else {
+			$rwdObj.addClass('side-by-side');
 		}
 	};
 
@@ -329,8 +337,11 @@ function RwdObjectHalign() {
 	};
 
 	this.revertDomChanges = function ($rwdObj) {
-		$rwdObj.addClass('side-by-side').removeClass('no-side-by-side').removeClass('nearly-no-side-by-side');
-		$rwdObj.closest('.rwd-object-halign-container').removeClass('children-no-side-by-side').removeClass('children-nearly-no-side-by-side');
+		var containerId = parseInt($rwdObj.attr('data-halign-id'), 10);
+		if (containerId >= 0) {
+			$('[data-halign-container-id="' + containerId + '"]').removeClass('children-no-side-by-side').removeClass('children-nearly-no-side-by-side');
+		}
+		$rwdObj.removeClass('side-by-side').removeClass('no-side-by-side').removeClass('nearly-no-side-by-side');
 	};
 }
 /*global $ */

@@ -10,7 +10,6 @@ module.exports = function (config) {
 			'src/contributed/Zepto/zepto.min.js',
 			'src/development/**/*.js',
 			'element-queries/*.js',
-			'tests/qunit/tests.js',
 			'element-queries/Tests/Unit/QUnit/element-queriesTest.js'
 		],
 

@@ -35,7 +35,7 @@ module.exports = function (grunt) {
 			},
 			js:  {
 				files: ['<%= meta.srcPath %>**/*.js', '<%= meta.srcPathElementQueries %>', 'tests/qunit/tests.js'],
-				tasks: ['jshint', 'qunit', 'concat', 'uglify']
+				tasks: ['jshint', 'concat', 'uglify', 'qunit']
 			}
 		},
 
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
 		qunit: {
 			all: [
 				'tests/qunit/**/*.html',
-				'element-queries/Tests/Unit/QUnit/*.html'
+				'element-queries/Tests/Unit/QUnit/**/*.html'
 			]
 		}
 	});
@@ -100,6 +100,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 
 	// Default task
-	grunt.registerTask('default', ['sass', 'jshint', 'qunit', 'concat', 'uglify', 'watch']);
+	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
 
 };

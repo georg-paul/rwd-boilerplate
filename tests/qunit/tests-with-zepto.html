@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>QUnit Example</title>
+
+	<link rel="stylesheet" href="qunit-1.12.0.css">
+    <link rel="stylesheet" href="../../styles/rwd-boilerplate.css">
+
+    <script>document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(/(?:^|\s)javascript-is-disabled(?!\S)/g, 'javascript-is-enabled');</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+        <div data-halign-container-id="1">
+            <div class="rwd-object-halign" id="halign-test-1" data-halign-id="1" style="width: 1000px;">
+                <div class="left" style="width: 200px;"></div>
+                <div class="right" style="width: 900px;"></div>
+            </div>
+        </div>
+	</div>
+
+    <script src="../../src/contributed/Zepto/zepto.min.js"></script>
+    <script src="../../src/contributed/Zepto/Modules/selector.js"></script>
+    <script src="../../src/contributed/Zepto/zepto.custom.js"></script>
+
+    <script src="../../src/rwd-boilerplate.min.js"></script>
+	<script src="qunit-1.12.0.js"></script>
+    <script src="tests.js"></script>
+</body>
+</html>
