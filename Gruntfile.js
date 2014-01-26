@@ -84,7 +84,10 @@ module.exports = function (grunt) {
 		},
 
 		qunit: {
-			all: ['tests/qunit/**/*.html']
+			all: [
+				'tests/qunit/**/*.html',
+				'element-queries/Tests/Unit/QUnit/*.html'
+			]
 		}
 	});
 
