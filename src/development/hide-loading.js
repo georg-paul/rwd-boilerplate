@@ -3,5 +3,6 @@
 
 $(document).ready(function () {
 	'use strict';
-	document.querySelector('html').classList.remove('rwd-boilerplate-loading');
+
+	$('html').removeClass('rwd-boilerplate-loading');
 });
