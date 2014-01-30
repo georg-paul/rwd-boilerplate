@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>**/*.js', 'element-queries/domready.js', 'element-queries/element-queries.js', 'tests/qunit/tests.js'],
+				files: ['<%= meta.srcPath %>**/*.js', 'element-queries/element-queries.js', 'tests/qunit/tests.js'],
 				tasks: ['jshint', 'concat', 'uglify', 'qunit']
 			}
 		},
