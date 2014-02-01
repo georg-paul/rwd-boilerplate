@@ -30,31 +30,64 @@ var interval = {
 
 	//create another interval
 	make : function (fun, delay) {
+		'use strict';
 		//see explanation after the code
-		var newInterval = setInterval.apply(
-			window,
-			[ fun, delay ].concat([].slice.call(arguments, 2))
-		);
+		try {
+			var newInterval = setInterval.apply(
+				window,
+				[ fun, delay ].concat([].slice.call(arguments, 2))
+			);
 
-		this.intervals[newInterval] = true;
+			this.intervals[newInterval] = true;
 
-		return newInterval;
+			return newInterval;
+		} catch (e) { }
 	},
 
 	//clear a single interval
 	clear : function (id) {
-		return clearInterval(this.intervals[id]);
+		'use strict';
+		try {
+			return clearInterval(this.intervals[id]);
+		} catch (e) { }
 	},
 
 	//clear all intervals
 	clearAll : function () {
-		var all = Object.keys(this.intervals), len = all.length;
+		'use strict';
+		try {
+			var all = Object.keys(this.intervals), len = all.length;
 
-		while (len --> 0) {
-			clearInterval(all.shift());
-		}
+			while (len --> 0) {
+				clearInterval(all.shift());
+			}
+		} catch (e) { }
 	}
 };
+
+function supportsTransitions() {
+	'use strict';
+
+	var b = document.body || document.documentElement,
+		s = b.style,
+		p = 'transition',
+		v;
+
+	if (typeof s[p] === 'string') {
+		return true;
+	}
+
+	// Tests for vendor specific prop
+	v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+	p = p.charAt(0).toUpperCase() + p.substr(1);
+
+	for (var i = 0; i < v.length; i++) {
+		if(typeof s[v[i] + p] === 'string') {
+			return true;
+		}
+	}
+	return false;
+}
 /*
  The MIT License (MIT)
 
@@ -667,8 +700,15 @@ function RwdObjectSlider($rwdObj) {
 
 		if (self.fadeEffect) {
 			self.$slider.css({ height: $nextItem.outerHeight() });
+			if (!supportsTransitions()) {
+				self.$slider.trigger('jsFallbackTransition');
+			}
+
 		} else {
 			self.$slider.css({ left: targetXPos, height: $nextItem.outerHeight() });
+			if (!supportsTransitions()) {
+				self.$slider.trigger('jsFallbackTransition');
+			}
 		}
 	};
 
@@ -721,7 +761,7 @@ function RwdObjectSlider($rwdObj) {
 	};
 
 	this.eventTransitionEnd = function () {
-		self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd', function () {
+		self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd jsFallbackTransition', function () {
 			self.$slider.removeClass('is-animated');
 		});
 	};
@@ -741,17 +781,21 @@ function RwdObjectSlider($rwdObj) {
 
 			window.setTimeout(function () {
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
-				self.instanceInterval = interval.make(function () {
-					activeItemIndex = self.$slider.find('> .active').index();
-					targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
-					self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
-				}, self.autoPlayInterval);
+				try {
+					self.instanceInterval = interval.make(function () {
+						activeItemIndex = self.$slider.find('> .active').index();
+						targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
+						self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+					}, self.autoPlayInterval);
+				} catch (e) {}
 			}, self.autoPlayStart);
 		}
 	};
 
 	this.clearAutoPlayInterval = function () {
-		interval.clearAll();
+		try {
+			interval.clearAll();
+		} catch (e) {}
 	};
 }
 
@@ -791,7 +835,7 @@ $(document).ready(function () {
 	$(window).bind('resize orientationchange', function () {
 		clearTimeout(resizeTimeout);
 		resizeTimeout = setTimeout(function () {
-			document.querySelector('html').classList.add('rwd-boilerplate-loading'); // show loading animation
+			$('html').addClass('rwd-boilerplate-loading'); // show loading animation
 			wd.location.assign(wd.location.href); // go to the URL
 			wd.location.replace(wd.location.href); // go to the URL and replace previous page in history
 			wd.location.reload(false); // reload page from cache

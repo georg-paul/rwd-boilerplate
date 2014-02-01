@@ -87,8 +87,15 @@ function RwdObjectSlider($rwdObj) {
 
 		if (self.fadeEffect) {
 			self.$slider.css({ height: $nextItem.outerHeight() });
+			if (!supportsTransitions()) {
+				self.$slider.trigger('jsFallbackTransition');
+			}
+
 		} else {
 			self.$slider.css({ left: targetXPos, height: $nextItem.outerHeight() });
+			if (!supportsTransitions()) {
+				self.$slider.trigger('jsFallbackTransition');
+			}
 		}
 	};
 
@@ -141,7 +148,7 @@ function RwdObjectSlider($rwdObj) {
 	};
 
 	this.eventTransitionEnd = function () {
-		self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd', function () {
+		self.$slider.bind('webkitTransitionEnd transitionend oTransitionEnd jsFallbackTransition', function () {
 			self.$slider.removeClass('is-animated');
 		});
 	};
@@ -161,17 +168,21 @@ function RwdObjectSlider($rwdObj) {
 
 			window.setTimeout(function () {
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
-				self.instanceInterval = interval.make(function () {
-					activeItemIndex = self.$slider.find('> .active').index();
-					targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
-					self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
-				}, self.autoPlayInterval);
+				try {
+					self.instanceInterval = interval.make(function () {
+						activeItemIndex = self.$slider.find('> .active').index();
+						targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
+						self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
+					}, self.autoPlayInterval);
+				} catch (e) {}
 			}, self.autoPlayStart);
 		}
 	};
 
 	this.clearAutoPlayInterval = function () {
-		interval.clearAll();
+		try {
+			interval.clearAll();
+		} catch (e) {}
 	};
 }
 
