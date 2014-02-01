@@ -48,6 +48,7 @@ module.exports = function (grunt) {
 			dist: {
 				src: [
 					'<%= meta.srcPath %>utilities.js',
+					'element-queries/minimal-classList-shim.js',
 					'element-queries/element-queries.js',
 					'<%= meta.srcPath %>rwd-objects/halign.js',
 					'<%= meta.srcPath %>rwd-objects/media.js',
