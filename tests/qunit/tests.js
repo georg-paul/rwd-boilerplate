@@ -17,3 +17,7 @@ test("no-side-by-side classes are applied correct", function () {
 	ok($halignTestObject.hasClass('no-side-by-side'), true);
 	ok($('[data-halign-container-id="' + parseInt($halignTestObject.attr('data-halign-id'), 10) + '"]').hasClass('children-no-side-by-side'), true);
 });
+
+test("loading animation has disappeared as expected", function () {
+	equal($('.rwd-boilerplate-loading').length, 0);
+});

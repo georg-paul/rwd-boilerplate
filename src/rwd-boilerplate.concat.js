@@ -886,5 +886,5 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	'use strict';
-	document.querySelector('html').classList.remove('rwd-boilerplate-loading');
+	$('.rwd-boilerplate-loading').removeClass('rwd-boilerplate-loading');
 });
