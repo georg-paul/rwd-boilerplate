@@ -34,9 +34,7 @@ function RwdObjectColumns() {
 
 	this.init = function () {
 		$('[class*="rwd-object-columns-"]').each(function () {
-			var $rwdObj = $(this);
-			self.revertDomChanges($rwdObj);
-			self.columns($rwdObj);
+			self.columns($(this));
 		});
 	};
 
@@ -90,10 +88,5 @@ function RwdObjectColumns() {
 
 			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
 		});
-	};
-
-	this.revertDomChanges = function ($rwdObj) {
-		$rwdObj.removeClass('stacked-columns');
-		self.moveContentWithinColumns($rwdObj, true);
 	};
 }

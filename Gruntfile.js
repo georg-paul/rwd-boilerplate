@@ -18,6 +18,9 @@ module.exports = function (grunt) {
 
 		// Task configuration.
 		uglify: {
+			options: {
+				report: 'gzip'
+			},
 			files: {
 				src: '<%= meta.deployPath %>rwd-boilerplate.concat.js',  // source files mask
 				dest: '<%= meta.deployPath %>',    // destination folder
@@ -53,7 +56,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/columns.js',
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/_init.js',
-					'<%= meta.srcPath %>rwd-objects/_resize-orientationchange.js',
+					'<%= meta.srcPath %>rwd-objects/_resize.js',
 					'<%= meta.srcPath %>hide-loading.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'

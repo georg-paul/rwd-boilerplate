@@ -42,8 +42,6 @@ function RwdObjectHnav() {
 	};
 
 	this.hnav = function ($rwdObj) {
-		self.revertDomChanges($rwdObj);
-
 		var $rootUL = $rwdObj.find('> ul'),
 			firstLevelItems = $rootUL.find('> li'),
 			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
@@ -60,12 +58,5 @@ function RwdObjectHnav() {
 			$rootUL.toggle();
 			$(this).toggleClass('open');
 		});
-	};
-
-	this.revertDomChanges = function ($rwdObj) {
-		$rwdObj.removeClass('breakpoint-small');
-		$rwdObj.closest('.rwd-object-hnav-container').removeClass('hnav-breakpoint-small');
-		$rwdObj.find('> ul').css('display', '');
-		$rwdObj.find('.toggle').unbind();
 	};
 }

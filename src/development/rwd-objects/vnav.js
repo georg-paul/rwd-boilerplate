@@ -39,14 +39,8 @@ function RwdObjectVnav() {
 	};
 
 	this.vnav = function ($rwdObj) {
-		self.revertDomChanges($rwdObj);
-
 		$rwdObj.find('.toggle').bind('click', function () {
 			$rwdObj.children('ul').toggle();
 		});
-	};
-
-	this.revertDomChanges = function ($rwdObj) {
-		$rwdObj.find('*').unbind();
 	};
 }
