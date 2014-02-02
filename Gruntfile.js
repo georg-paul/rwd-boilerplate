@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 
 		watch: {
 			css: {
-				files: ['**/*.scss', '../project-config.scss', 'styles/rwd-boilerplate.scss'],
+				files: ['**/*.scss'],
 				tasks: ['sass']
 			},
 			js:  {
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
 					style: 'compressed'
 				},
 				files: {
-					'styles/rwd-boilerplate.css': 'styles/rwd-boilerplate.scss'
+					'demo/demo.css': 'demo/demo.scss'
 				}
 			}
 		},
