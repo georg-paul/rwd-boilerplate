@@ -823,6 +823,7 @@ $(document).ready(function () {
 		wd = window;
 
 	$(window).bind('resize orientationchange', function () {
+		/*
 		clearTimeout(resizeTimeout);
 		resizeTimeout = setTimeout(function () {
 			$('html').addClass('rwd-boilerplate-loading'); // show loading animation
@@ -830,6 +831,7 @@ $(document).ready(function () {
 			wd.location.replace(wd.location.href); // go to the URL and replace previous page in history
 			wd.location.reload(false); // reload page from cache
 		}, 100);
+		*/
 	});
 }());
 /*global $ */
