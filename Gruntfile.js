@@ -53,6 +53,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/columns.js',
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/_init.js',
+					'<%= meta.srcPath %>rwd-objects/_resize-orientationchange.js',
 					'<%= meta.srcPath %>hide-loading.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
