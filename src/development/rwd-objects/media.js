@@ -39,11 +39,8 @@ function RwdObjectMedia() {
 	};
 
 	this.media = function ($rwdObj) {
-		self.revertDomChanges($rwdObj);
-
 		var $media = ($rwdObj.find('.img').length) ? $rwdObj.find('.img') : $rwdObj.find('.video'),
 			mediaImage = new Image(),
-			imageSrc = ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src'),
 			mediaObjectIsHidden = false,
 			$bd = $rwdObj.children('.bd'),
 			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
@@ -56,15 +53,11 @@ function RwdObjectMedia() {
 				}
 				$media.css('max-width', this.width);
 			};
-			mediaImage.src =  imageSrc;
+			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
 		} else {
 			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
 				$rwdObj.addClass('no-side-by-side');
 			}
 		}
-	};
-
-	this.revertDomChanges = function ($rwdObj) {
-		$rwdObj.removeClass('no-side-by-side');
 	};
 }

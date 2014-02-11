@@ -46,9 +46,8 @@ function RwdObjectSlider($rwdObj) {
 	self.autoPlayInterval = $rwdObj.attr('data-autoplay-interval') || 5000;
 	self.autoPlayStart = $rwdObj.attr('data-autoplay-start') || 2000;
 
-	this.init = function (startItemIndex, triggeredByResize) {
+	this.init = function (startItemIndex) {
 		self.startItemIndex = startItemIndex || 0;
-		self.triggeredByResize = triggeredByResize || false;
 		self.setStyles();
 		self.bindEvents();
 	};
@@ -79,8 +78,7 @@ function RwdObjectSlider($rwdObj) {
 	};
 
 	this.next = function (targetXPos, targetItemIndex) {
-		var $activeItem = self.$slider.find('> .active'),
-			$nextItem = self.$slider.find('> .item:nth-child(' + (targetItemIndex + 1) + ')');
+		var $nextItem = self.$slider.find('> .item:nth-child(' + (targetItemIndex + 1) + ')');
 
 		self.updateProgressBars(targetItemIndex);
 		self.$slider.addClass('is-animated');
@@ -121,8 +119,7 @@ function RwdObjectSlider($rwdObj) {
 	this.eventNextAndPrevButton = function ($button) {
 		$button.bind('click', function (e) {
 			e.preventDefault();
-			var isNextButton = $(e.target).hasClass('next-button'),
-				targetItemIndex = (isNextButton) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index();
+			var targetItemIndex = ($(e.target).hasClass('next-button')) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index();
 
 			if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
 				self.clearAutoPlayInterval();
@@ -165,7 +162,7 @@ function RwdObjectSlider($rwdObj) {
 	};
 
 	this.autoplay = function () {
-		if ($rwdObj.hasClass('autoplay') && !self.triggeredByResize) {
+		if ($rwdObj.hasClass('autoplay')) {
 			var activeItemIndex = self.$slider.find('> .active').index(),
 				targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
 
@@ -199,6 +196,6 @@ $(document).ready(function () {
 		$slider = $(this);
 		startItemIndex = $slider.attr('data-start-item') || 0;
 		RwdObjectSliderInstance = new RwdObjectSlider($slider);
-		RwdObjectSliderInstance.init(parseInt(startItemIndex), false);
+		RwdObjectSliderInstance.init(parseInt(startItemIndex, 10));
 	});
 });

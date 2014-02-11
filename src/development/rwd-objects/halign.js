@@ -44,8 +44,6 @@ function RwdObjectHalign() {
 	};
 
 	this.halign = function ($rwdObj) {
-		self.revertDomChanges($rwdObj);
-
 		var availableWidth = $rwdObj.width(),
 			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj),
 			containerId = parseInt($rwdObj.attr('data-halign-id'), 10),
@@ -78,13 +76,5 @@ function RwdObjectHalign() {
 		});
 
 		return totalChildrenWidth;
-	};
-
-	this.revertDomChanges = function ($rwdObj) {
-		var containerId = parseInt($rwdObj.attr('data-halign-id'), 10);
-		if (containerId >= 0) {
-			$('[data-halign-container-id="' + containerId + '"]').removeClass('children-no-side-by-side').removeClass('children-nearly-no-side-by-side');
-		}
-		$rwdObj.removeClass('side-by-side').removeClass('no-side-by-side').removeClass('nearly-no-side-by-side');
 	};
 }
