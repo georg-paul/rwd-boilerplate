@@ -1,29 +1,5 @@
 /*global $ */
 
-function waitForImagesToLoad($element, callback) {
-	'use strict';
-	var images, loaded;
-
-	// Find the images within $element it that aren't loaded yet
-	images = $element.find('img').filter(function (index, img) {
-		return !this.complete;
-	});
-
-	// Find any?
-	if (images.length === 0) {
-		callback();
-	} else {
-		loaded = 0;
-		images.on('load', function () {
-			// callback if the last image has been loaded?
-			loaded += 1;
-			if (loaded === images.length) {
-				callback();
-			}
-		});
-	}
-}
-
 var interval = {
 	//to keep a reference to all the intervals
 	intervals : {},
@@ -264,7 +240,7 @@ $(document).ready(function () {
 	var ElementQueriesInstance = new ElementQueries();
 	ElementQueriesInstance.init();
 });
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -301,9 +277,7 @@ function RwdObjectHalign() {
 		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
 			var $rwdObj = $(this);
 			if (!$rwdObj.hasClass('full-width')) {
-				waitForImagesToLoad($rwdObj, function () {
-					self.halign($rwdObj);
-				});
+				self.halign($rwdObj);
 			}
 		});
 	};
@@ -602,7 +576,7 @@ function RwdObjectColumns() {
 		});
 	};
 }
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -675,9 +649,7 @@ function RwdObjectSlider($rwdObj) {
 			$(this).find('li:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
 		});
 
-		waitForImagesToLoad(self.$slider, function () {
-			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
-		});
+		self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
 	};
 
 	this.next = function (targetXPos, targetItemIndex) {
@@ -805,7 +777,7 @@ $(document).ready(function () {
 
 /*global $ */
 
-$(document).ready(function () {
+$(window).load(function () {
 	'use strict';
 
 	new RwdObjectHalign().init();
@@ -826,7 +798,6 @@ $(document).ready(function () {
 
 	$(wd).bind('resize orientationchange', function () {
 		var refreshPage = function () {
-			$('html').addClass('rwd-boilerplate-loading'); // show loading animation
 			wd.location.assign(wd.location.href); // go to the URL
 			wd.location.replace(wd.location.href); // go to the URL and replace previous page in history
 			wd.location.reload(); // reload page from cache
@@ -848,7 +819,7 @@ $(document).ready(function () {
 }());
 /*global $ */
 
-$(document).ready(function () {
+$(window).load(function () {
 	'use strict';
 
 	$('html').removeClass('rwd-boilerplate-loading');

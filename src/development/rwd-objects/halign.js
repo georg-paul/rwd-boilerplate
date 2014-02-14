@@ -1,5 +1,5 @@
 /*jslint browser: true */
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -36,9 +36,7 @@ function RwdObjectHalign() {
 		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
 			var $rwdObj = $(this);
 			if (!$rwdObj.hasClass('full-width')) {
-				waitForImagesToLoad($rwdObj, function () {
-					self.halign($rwdObj);
-				});
+				self.halign($rwdObj);
 			}
 		});
 	};

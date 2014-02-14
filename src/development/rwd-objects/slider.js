@@ -1,5 +1,5 @@
 /*jslint browser: true */
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -72,9 +72,7 @@ function RwdObjectSlider($rwdObj) {
 			$(this).find('li:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
 		});
 
-		waitForImagesToLoad(self.$slider, function () {
-			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
-		});
+		self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
 	};
 
 	this.next = function (targetXPos, targetItemIndex) {

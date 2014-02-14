@@ -1,7 +1,7 @@
 /*jslint browser: true */
 /*global $ */
 
-$(document).ready(function () {
+$(window).load(function () {
 	'use strict';
 
 	new RwdObjectHalign().init();
