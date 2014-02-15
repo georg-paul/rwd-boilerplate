@@ -30,6 +30,15 @@ module.exports = function (grunt) {
 			}
 		},
 
+		connect: {
+			server: {
+				options: {
+					base: '',
+					port: 9999
+				}
+			}
+		},
+
 		watch: {
 			css: {
 				files: ['**/*.scss'],
@@ -91,18 +100,55 @@ module.exports = function (grunt) {
 				'tests/qunit/**/*.html',
 				'element-queries/Tests/Unit/QUnit/**/*.html'
 			]
+		},
+
+		'saucelabs-qunit': {
+			all: {
+				options: {
+					//username: '',
+					//key: '',
+					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html', 'http://localhost:9999/tests/qunit/tests-with-zepto.html'],
+					build: '0.1.0',
+					tunnelTimeout: 5,
+					testname: 'QUnit Tests',
+					browsers: [
+						{
+							"browserName": "googlechrome",
+							"platform": "OS X 10.9",
+							"version": "31"
+						},
+						{
+							"browserName": "iphone",
+							"platform": "OS X 10.9",
+							"version": "7"
+						},
+						{
+							"browserName": "firefox",
+							"platform": "Windows 7",
+							"version": "26"
+						},
+						{
+							"browserName": "internet explorer",
+							"platform": "Windows 7",
+							"version": "10"
+						}
+					]
+				}
+			}
 		}
 	});
 
 	// These plugins provide necessary tasks.
+	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-saucelabs');
 
 	// Default task
 	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
-
+	grunt.registerTask('test', ['connect', 'saucelabs-qunit']);
 };

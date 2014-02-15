@@ -1,4 +1,4 @@
-/*global $ */
+/*global $, QUnit */
 
 test("halign: getTotalChildrenWidth returns correct px value", function () {
 	var $halignTestObject = $('#halign-test-1');
@@ -34,4 +34,8 @@ test("columns: columns are stacked after reaching a breakpoint", function () {
 
 test("Misc: loading animation has disappeared as expected", function () {
 	equal($('.rwd-boilerplate-loading').length, 0);
+});
+
+QUnit.done(function (results) {
+	window.global_test_results = results;
 });
