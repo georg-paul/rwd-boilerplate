@@ -102,6 +102,15 @@ module.exports = function (grunt) {
 			]
 		},
 
+		blanket_qunit: {
+			all: {
+				options: {
+					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html?coverage=true&gruntReport', 'http://localhost:9999/tests/qunit/tests-with-zepto.html?coverage=true&gruntReport'],
+					threshold: 5
+				}
+			}
+		},
+
 		'saucelabs-qunit': {
 			all: {
 				options: {
@@ -147,8 +156,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-saucelabs');
+	grunt.loadNpmTasks('grunt-blanket-qunit');
 
 	// Default task
 	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
 	grunt.registerTask('test', ['connect', 'saucelabs-qunit']);
+	grunt.registerTask('cov', ['connect', 'blanket_qunit']);
 };
