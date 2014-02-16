@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 			all: {
 				options: {
 					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html?coverage=true&gruntReport', 'http://localhost:9999/tests/qunit/tests-with-zepto.html?coverage=true&gruntReport'],
-					threshold: 5
+					threshold: 20
 				}
 			}
 		},

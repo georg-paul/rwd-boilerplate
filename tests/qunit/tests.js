@@ -24,6 +24,8 @@
 	});
 
 
+
+
 	module("rwd-object-columns");
 
 	test("getBreakpoint returns correct value for fixed width columns", function () {
@@ -39,6 +41,25 @@
 		ColumnsTestInstance.init();
 		ok($columsTestObject.hasClass('stacked-columns'), true);
 	});
+
+
+
+
+	module("rwd-object-slider");
+
+	test("isCarouselAnimated returns false if no animation is currently running", function () {
+		var SliderInstance = new RwdObjectSlider($('<div class="rwd-object-slider"><div class="container"></div></div>'));
+
+		ok(SliderInstance.isCarouselAnimated() === false);
+	});
+
+	test("isCarouselAnimated returns true if slider is animated currently", function () {
+		var SliderInstance = new RwdObjectSlider($('<div class="rwd-object-slider"><div class="container is-animated"></div></div>'));
+
+		ok(SliderInstance.isCarouselAnimated());
+	});
+
+
 
 
 	module("misc");
