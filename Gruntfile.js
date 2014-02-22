@@ -70,6 +70,14 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>hide-loading.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
+			},
+			zepto: {
+				src: [
+					'src/contributed/Zepto/zepto.min.js',
+					'src/contributed/Zepto/Modules/selector.js',
+					'src/contributed/Zepto/zepto.custom.js'
+				],
+				dest: 'src/contributed/Zepto/zepto.custom-build.concat.js'
 			}
 		},
 
