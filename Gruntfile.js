@@ -150,8 +150,8 @@ module.exports = function (grunt) {
 		'saucelabs-qunit': {
 			all: {
 				options: {
-					username: 'gpaul',
-					key: '4c74d53d-fea3-4372-a4d2-650790756205',
+					//username: '',
+					//key: '',
 					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html', 'http://localhost:9999/tests/qunit/tests-with-zepto.html'],
 					build: '0.1.0',
 					tunnelTimeout: 5,
