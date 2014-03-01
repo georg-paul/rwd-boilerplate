@@ -91,8 +91,8 @@ module.exports = function (grunt) {
 			distJquery: {
 				src: [
 					'bower_components/jquery/dist/jquery.min.js',
-					'element-queries/minimal-classList-shim.js',
-					'element-queries/element-queries.js',
+					'bower_components/element-queries/minimal-classList-shim.js',
+					'bower_components/element-queries/element-queries.js',
 					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js'
@@ -102,8 +102,8 @@ module.exports = function (grunt) {
 					'bower_components/zepto/zepto.min.js',
 					'<%= meta.srcPath %>zepto/modules/selector.js',
 					'<%= meta.srcPath %>zepto/modifications.js',
-					'element-queries/minimal-classList-shim.js',
-					'element-queries/element-queries.js',
+					'bower_components/element-queries/minimal-classList-shim.js',
+					'bower_components/element-queries/element-queries.js',
 					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
 				],
 				dest: '<%= meta.deployPath %>rwd-boilerplate.zepto.concat.js'
@@ -134,8 +134,7 @@ module.exports = function (grunt) {
 
 		qunit: {
 			all: [
-				'tests/qunit/**/*.html',
-				'element-queries/Tests/Unit/QUnit/**/*.html'
+				'tests/qunit/**/*.html'
 			]
 		},
 
