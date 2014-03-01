@@ -1,2 +1,6 @@
 @import "../styles/_default-config";
 @import "../styles/_include-components";
+
+// element queries demo styles
+.demo-text.eq-max-width-2000.eq-min-width-400 { color: red; }
+.demo-text.eq-max-width-600 { color: blue; }
