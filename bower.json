@@ -1,0 +1,13 @@
+{
+    "name": "rwd-boilerplate",
+    "version": "0.1.0",
+    "main": [
+        "src/rwd-boilerplate.jquery.concat.js",
+        "src/rwd-boilerplate.zepto.concat.js"
+    ],
+    "dependencies": {
+        "jquery": ">= 2.0.0",
+        "zepto": ">= 1.1.1"
+    },
+    "private": true
+}

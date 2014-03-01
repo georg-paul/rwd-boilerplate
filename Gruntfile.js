@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
 		// Metadata.
 		meta: {
-			srcPath: 'src/development/',
+			srcPath: 'src/components/',
 			deployPath: 'src/'
 		},
 
@@ -21,12 +21,19 @@ module.exports = function (grunt) {
 			options: {
 				report: 'gzip'
 			},
-			files: {
-				src: '<%= meta.deployPath %>rwd-boilerplate.concat.js',  // source files mask
+			rwdBoilerplateJquery: {
+				src: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js',
 				dest: '<%= meta.deployPath %>',    // destination folder
 				expand: true,    // allow dynamic building
 				flatten: true,   // remove all unnecessary nesting
-				ext: '.min.js'   // replace .js to .min.js
+				ext: '.jquery.min.js'   // replace .js to .min.js
+			},
+			rwdBoilerplateZepto: {
+				src: '<%= meta.deployPath %>rwd-boilerplate.zepto.concat.js',
+				dest: '<%= meta.deployPath %>',
+				expand: true,
+				flatten: true,
+				ext: '.zepto.min.js'
 			}
 		},
 
@@ -45,7 +52,7 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>**/*.js', 'element-queries/element-queries.js', 'tests/qunit/tests.js'],
+				files: ['<%= meta.srcPath %>rwd-objects/*.js', '<%= meta.srcPath %>utilities/*.js', 'tests/qunit/tests.js'],
 				tasks: ['jshint', 'concat', 'uglify', 'qunit']
 			}
 		},
@@ -54,11 +61,21 @@ module.exports = function (grunt) {
 			options: {
 				stripBanners: true
 			},
-			dist: {
+			jQuery: {
+				src: 'bower_components/jquery/dist/jquery.min.js',
+				dest: 'tests/qunit/jquery.js'
+			},
+			zepto: {
 				src: [
-					'<%= meta.srcPath %>utilities.js',
-					'element-queries/minimal-classList-shim.js',
-					'element-queries/element-queries.js',
+					'bower_components/zepto/zepto.min.js',
+					'<%= meta.srcPath %>zepto/modules/selector.js',
+					'<%= meta.srcPath %>zepto/modifications.js'
+				],
+				dest: 'tests/qunit/zepto.js'
+			},
+			rwdBoilerplate: {
+				src: [
+					'<%= meta.srcPath %>utilities/utilities.js',
 					'<%= meta.srcPath %>rwd-objects/halign.js',
 					'<%= meta.srcPath %>rwd-objects/media.js',
 					'<%= meta.srcPath %>rwd-objects/hnav.js',
@@ -67,17 +84,29 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/_init.js',
 					'<%= meta.srcPath %>rwd-objects/_resize.js',
-					'<%= meta.srcPath %>hide-loading.js'
+					'<%= meta.srcPath %>utilities/hide-loading.js'
 				],
-				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
+				dest: '<%= meta.srcPath %>rwd-boilerplate.concat.js'
 			},
-			zepto: {
+			distJquery: {
 				src: [
-					'src/contributed/Zepto/zepto.min.js',
-					'src/contributed/Zepto/Modules/selector.js',
-					'src/contributed/Zepto/zepto.custom.js'
+					'bower_components/jquery/dist/jquery.min.js',
+					'element-queries/minimal-classList-shim.js',
+					'element-queries/element-queries.js',
+					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
 				],
-				dest: 'src/contributed/Zepto/zepto.custom-build.concat.js'
+				dest: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js'
+			},
+			distZepto: {
+				src: [
+					'bower_components/zepto/zepto.min.js',
+					'<%= meta.srcPath %>zepto/modules/selector.js',
+					'<%= meta.srcPath %>zepto/modifications.js',
+					'element-queries/minimal-classList-shim.js',
+					'element-queries/element-queries.js',
+					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
+				],
+				dest: '<%= meta.deployPath %>rwd-boilerplate.zepto.concat.js'
 			}
 		},
 
@@ -100,7 +129,7 @@ module.exports = function (grunt) {
 					$: true
 				}
 			},
-			all: ['src/development/**/*.js']
+			all: ['<%= meta.srcPath %>rwd-objects/*.js', '<%= meta.srcPath %>utilities/*.js']
 		},
 
 		qunit: {
@@ -122,8 +151,8 @@ module.exports = function (grunt) {
 		'saucelabs-qunit': {
 			all: {
 				options: {
-					//username: '',
-					//key: '',
+					username: 'gpaul',
+					key: '4c74d53d-fea3-4372-a4d2-650790756205',
 					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html', 'http://localhost:9999/tests/qunit/tests-with-zepto.html'],
 					build: '0.1.0',
 					tunnelTimeout: 5,
