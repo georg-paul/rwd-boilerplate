@@ -9,5 +9,5 @@
         "jquery": ">= 2.0.0",
         "zepto": ">= 1.1.1"
     },
-    "private": true
+    "private": false
 }
