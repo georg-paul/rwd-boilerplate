@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 		// Task configuration.
 		uglify: {
 			options: {
-				report: 'gzip'
+				//report: 'gzip'
 			},
 			rwdBoilerplateJquery: {
 				src: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js',
@@ -60,18 +60,6 @@ module.exports = function (grunt) {
 		concat: {
 			options: {
 				stripBanners: true
-			},
-			jQuery: {
-				src: 'bower_components/jquery/dist/jquery.min.js',
-				dest: 'tests/qunit/jquery.js'
-			},
-			zepto: {
-				src: [
-					'bower_components/zepto/zepto.min.js',
-					'<%= meta.srcPath %>zepto/modules/selector.js',
-					'<%= meta.srcPath %>zepto/modifications.js'
-				],
-				dest: 'tests/qunit/zepto.js'
 			},
 			rwdBoilerplate: {
 				src: [
@@ -138,15 +126,6 @@ module.exports = function (grunt) {
 			]
 		},
 
-		blanket_qunit: {
-			all: {
-				options: {
-					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html?coverage=true&gruntReport', 'http://localhost:9999/tests/qunit/tests-with-zepto.html?coverage=true&gruntReport'],
-					threshold: 20
-				}
-			}
-		},
-
 		'saucelabs-qunit': {
 			all: {
 				options: {
@@ -192,10 +171,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-saucelabs');
-	grunt.loadNpmTasks('grunt-blanket-qunit');
 
 	// Default task
 	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
 	grunt.registerTask('test', ['connect', 'saucelabs-qunit']);
-	grunt.registerTask('cov', ['connect', 'blanket_qunit']);
 };

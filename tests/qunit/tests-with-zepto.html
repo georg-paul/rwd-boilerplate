@@ -29,27 +29,9 @@
         <div class="rwd-boilerplate-loading"></div>
 	</div>
 
-    <script src="qunit-1.12.0.js"></script>
-    <script type="text/javascript" src="blanket.js"></script>
-    <script>
-        if (location.href.match(/(\?|&)gruntReport($|&|=)/)) {
-            blanket.options("reporter", "http://localhost:9999/tests/qunit/reporter/grunt-reporter.js");
-        }
-    </script>
+	<script src="qunit-1.12.0.js"></script>
 
-    <script src="zepto.js"></script>
-
-    <script src="../../src/components/utilities/utilities.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/halign.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/media.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/hnav.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/vnav.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/columns.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/slider.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/_init.js" data-cover></script>
-    <script src="../../src/components/rwd-objects/_resize.js" data-cover></script>
-    <script src="../../src/components/utilities/hide-loading.js" data-cover></script>
-
-    <script src="tests.js"></script>
+	<script src="../../src/rwd-boilerplate.zepto.min.js"></script>
+	<script src="tests.js"></script>
 </body>
 </html>
