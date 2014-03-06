@@ -53,12 +53,10 @@ body {
 	}
 }
 
-img, embed, object {
+img {
 	max-width: 100% !important;
 	width: auto;
 	height: auto;
-}
-img {
 	display: inline-block;
 	vertical-align: middle;
 }
