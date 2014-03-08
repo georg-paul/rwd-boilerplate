@@ -70,9 +70,7 @@ function RwdObjectHalign() {
 
 		$rwdObj.children().each(function () {
 			halignChild = $(this);
-			totalChildrenWidth += halignChild.width();
-			totalChildrenWidth += parseInt(halignChild.css('margin-left'), 10);
-			totalChildrenWidth += parseInt(halignChild.css('margin-right'), 10);
+			totalChildrenWidth += halignChild.outerWidth(true);
 		});
 
 		return totalChildrenWidth;
