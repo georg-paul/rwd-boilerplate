@@ -1,0 +1,33 @@
+a:link {
+	color: $a-color;
+	text-decoration: $a-text-decoration;
+}
+a:visited {
+	color: $a-color-visited;
+	text-decoration: $a-text-decoration-visited;
+}
+a:hover {
+	color: $a-color-hover;
+	text-decoration: $a-text-decoration-hover;
+}
+a:focus {
+	color: $a-color-focus;
+	text-decoration: $a-text-decoration-focus;
+}
+
+
+
+p, pre, blockquote, ul, ol, dl, table, form {
+	@include rem(margin-bottom, $text-flow-margin);
+}
+
+@for $h-type from 1 through 5 {
+	h#{$h-type} {
+		@include rem(font-size, nth($h-font-size, $h-type));
+		@include rem(line-height, nth($h-line-height, $h-type));
+		@include rem(margin-bottom, nth($h-margin-bottom, $h-type));
+		font-weight: nth($h-font-weight, $h-type);
+		text-transform: nth($h-text-transform, $h-type);
+		color: nth($h-color, $h-type);
+	}
+}
