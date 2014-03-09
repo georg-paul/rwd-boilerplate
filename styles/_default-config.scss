@@ -40,12 +40,16 @@ $a-text-decoration-hover: none;
 $a-text-decoration-focus: none;
 
 // headlines
-$h-font-size: 45, 36, 26, 18, $body-font-size;
+$h-font-size: 45, 36, 24, 18, $body-font-size;
 $h-line-height: 54, 44, 32, 21, 18;
-$h-margin-bottom: 5, 5, 5, 5, 5;
+$h-margin-bottom: 15, 8, 5, 5, 5;
 $h-font-weight: 600, 400, 600, 600, 600;
-$h-text-transform: uppercase, uppercase, uppercase, none, none;
+$h-text-transform: uppercase, none, uppercase, none, none;
 $h-color: $body-color, $body-color, $body-color, $body-color, $body-color;
 
 // type
 $text-flow-margin: $body-font-size * 1.5;
+
+// layout
+$main-section-margin-bottom: 90;
+$sub-section-margin-bottom: 25;

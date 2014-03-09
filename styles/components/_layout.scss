@@ -1,0 +1,12 @@
+.main-section {
+	@include rem(margin-bottom, $main-section-margin-bottom);
+	> :last-child {
+		margin-bottom: 0;
+		p, pre, blockquote, ul, ol, dl, table, form {
+			&:last-child { margin-bottom: 0; }
+		}
+	}
+}
+.sub-section {
+	@include rem(margin-bottom, $sub-section-margin-bottom);
+}

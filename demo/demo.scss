@@ -4,3 +4,9 @@
 // element queries demo styles
 .demo-text.eq-max-width-2000.eq-min-width-400 { color: red; }
 .demo-text.eq-max-width-600 { color: blue; }
+
+// layout
+.demo-header {
+	@include rem(margin-top, 30);
+	@include rem(margin-bottom, 50);
+}
