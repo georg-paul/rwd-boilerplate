@@ -22,17 +22,31 @@ $slider-margin: $grid-gutter;
 
 // styleguide
 
+// colors
+$color-1: #354458;
+$color-2: #3a9ad9;
+$color-3: #29aba4;
+$color-4: #e9e0d6;
+$color-5: #eb7260;
+/*
+$color-1: #354458;
+$color-2: #de4d4e;
+$color-3: #6e9ecf;
+$color-4: #ffd041;
+$color-5: #29aba4;
+*/
+
 // body
-$body-color: #000;
+$body-color: $color-1;
 $body-font-size: 16;
 $body-line-height: 24;
 $body-font-family: 'Myriad Pro', Arial, sans-serif;
 
 // links
-$a-color: #1E0FBE;
-$a-color-visited: #1E0FBE;
-$a-color-hover: #1E0FBE;
-$a-color-focus: #1E0FBE;
+$a-color: $color-3;
+$a-color-visited: $color-3;
+$a-color-hover: $color-3;
+$a-color-focus: $color-3;
 
 $a-text-decoration: underline;
 $a-text-decoration-visited: underline;
@@ -44,8 +58,8 @@ $h-font-size: 45, 36, 24, 18, $body-font-size;
 $h-line-height: 54, 44, 32, 21, 18;
 $h-margin-bottom: 15, 8, 5, 5, 5;
 $h-font-weight: 600, 400, 600, 600, 600;
-$h-text-transform: uppercase, none, uppercase, none, none;
-$h-color: $body-color, $body-color, $body-color, $body-color, $body-color;
+$h-text-transform: uppercase, none, none, none, none;
+$h-color: $color-1, $color-1, $color-1, $color-1, $color-1;
 
 // type
 $text-flow-margin: $body-font-size * 1.5;

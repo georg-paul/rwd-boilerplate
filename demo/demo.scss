@@ -7,15 +7,60 @@
 
 // layout
 .demo-header {
-	@include rem(padding-top, 30);
-	@include rem(padding-bottom, 30);
+	background: $color-3;
+	position: relative;
+	z-index: 10;
+	font-family: Arial, sans-serif;
+	.rwd-object-hnav {
+		> ul {
+			> li > a {
+				border-left: 1px solid rgba(255,255,255,0.1);
+			}
+		}
+		li {
+			margin: 0;
+			&:hover {
+				a {
+					background: $color-1;
+					color: #fff;
+				}
+			}
+			ul li a {
+				text-transform: none;
+				border-bottom: 1px solid rgba(255,255,255,0.2);
+				@include rem(padding-top, 15);
+				@include rem(padding-bottom, 15);
+				&:hover {
+					background: #efefef;
+					color: $color-1;
+				}
+			}
+		}
+		a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			@include rem(padding-top, 27);
+			@include rem(padding-bottom, 27);
+			@include rem(padding-left, 32);
+			@include rem(padding-right, 32);
+		}
+	}
+}
+
+.demo-header-secondary {
+	@include rem(padding-top, 6);
+	@include rem(padding-bottom, 6);
+	background-color: $color-1;
+	a {
+		color: #fff;
+	}
 }
 
 body > .main-section {
-	&:nth-child(odd) {
-		background: #f1f1f1;
-		@include rem(padding-top, 70);
-		@include rem(padding-bottom, 70);
-	}
+	margin-bottom: 0;
+	@include rem(padding-top, 70);
+	@include rem(padding-bottom, 70);
+	border-bottom: 2px solid #eee;
 	.main-section:last-child { margin-bottom: 0; }
 }
