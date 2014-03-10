@@ -42,8 +42,8 @@
 			text-transform: uppercase;
 			@include rem(padding-top, 27);
 			@include rem(padding-bottom, 27);
-			@include rem(padding-left, 32);
-			@include rem(padding-right, 32);
+			@include rem(padding-left, 30);
+			@include rem(padding-right, 30);
 		}
 	}
 }
