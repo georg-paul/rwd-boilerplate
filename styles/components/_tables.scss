@@ -1,0 +1,27 @@
+table {
+	width: $table-width;
+	th {
+		font-weight: $table-th-font-weight;
+		text-align: $table-th-text-align;
+		background-color: $table-th-bg-color;
+		@include rem(padding-top, nth($table-th-padding, 1));
+		@include rem(padding-right, nth($table-th-padding, 2));
+		@include rem(padding-bottom, nth($table-th-padding, 3));
+		@include rem(padding-left, nth($table-th-padding, 4));
+		white-space: $table-th-whitespace;
+	}
+	td {
+		font-weight: $table-td-font-weight;
+		text-align: $table-td-text-align;
+		@include rem(padding-top, nth($table-td-padding, 1));
+		@include rem(padding-right, nth($table-td-padding, 2));
+		@include rem(padding-bottom, nth($table-td-padding, 3));
+		@include rem(padding-left, nth($table-td-padding, 4));
+	}
+	tbody tr:nth-child(odd) td {
+		background-color: $table-td-bg-color-odd;
+	}
+	tbody tr:nth-child(even) td {
+		background-color: $table-td-bg-color-even;
+	}
+}

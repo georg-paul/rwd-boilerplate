@@ -67,6 +67,13 @@
 	});
 
 
+	module("rwd-object-table");
+
+	test("oversize class is applied when table width exceeds available space", function () {
+		ok($('#table-test-1').hasClass('oversize'), true);
+		ok(!$('#table-test-2').hasClass('oversize'), true);
+	});
+
 
 
 	module("misc");

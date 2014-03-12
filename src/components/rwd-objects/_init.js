@@ -9,4 +9,5 @@ $(document).ready(function () {
 	new RwdObjectMedia().init();
 	new RwdObjectVnav().init();
 	new RwdObjectColumns().init();
+	new RwdObjectTable().init();
 });

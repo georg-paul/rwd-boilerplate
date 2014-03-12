@@ -69,6 +69,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/hnav.js',
 					'<%= meta.srcPath %>rwd-objects/vnav.js',
 					'<%= meta.srcPath %>rwd-objects/columns.js',
+					'<%= meta.srcPath %>rwd-objects/table.js',
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/_init.js',
 					'<%= meta.srcPath %>rwd-objects/_resize.js',

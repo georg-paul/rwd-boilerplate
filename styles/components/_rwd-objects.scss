@@ -311,3 +311,35 @@
 		> .container > .item img { float: right; }
 	}
 }
+
+/* inspired by http://dbushell.com/2012/01/05/responsive-tables-2/ */
+/* no media queries used though, rwd-object-table javascript solution */
+.rwd-object-table {
+	&.oversize {
+		width: 100%;
+		display: block;
+		thead {
+			display: block;
+			float: left;
+			tr {
+				display: block;
+			}
+			th {
+				display: block;
+			}
+		}
+		tbody {
+			display: block;
+			width: auto;
+			overflow-x: auto;
+			white-space: nowrap;
+			tr {
+				display: inline-block;
+				vertical-align: top;
+			}
+			td {
+				display: block;
+			}
+		}
+	}
+}
