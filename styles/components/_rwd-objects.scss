@@ -319,6 +319,7 @@
 		width: 100%;
 		display: block;
 		thead {
+			@include rem(max-width, $rwd-thead-max-width);
 			display: block;
 			float: left;
 			tr {

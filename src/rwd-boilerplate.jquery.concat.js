@@ -694,17 +694,40 @@ function RwdObjectTable() {
 
 	this.init = function () {
 		$('.rwd-object-table').each(function () {
-			self.table($(this));
+			var $rwdObj = $(this);
+
+			if ($rwdObj.width() > $rwdObj.parent().width()) {
+				$rwdObj.addClass('oversize');
+				self.equalCellHeightPerRow($rwdObj);
+			}
 		});
 	};
 
-	this.table = function ($rwdObj) {
-		var availableWidth = $rwdObj.parent().width(),
-			tableWidth = $rwdObj.width();
+	this.equalCellHeightPerRow = function ($rwdObj) {
+		$rwdObj.find('th, td').each(function () {
+			$(this).css('min-height', self.getArrayOfMaxHeightValues($rwdObj)[$(this).index()]);
+		});
+	};
 
-		if (tableWidth > availableWidth) {
-			$rwdObj.addClass('oversize');
+	this.getArrayOfMaxHeightValues = function ($rwdObj) {
+		var maxCellHeights = [],
+			columnCount = $rwdObj.find('tr').first().children().length;
+
+		for (var i = 1; i <= columnCount; i++) {
+			maxCellHeights.push(self.getMaxHeightPerRow($rwdObj, i));
 		}
+		return maxCellHeights;
+	};
+
+	this.getMaxHeightPerRow = function ($rwdObj, iterator) {
+		var tdHeight,
+			maxHeight = 0;
+
+		$rwdObj.find('tr > :nth-child(' + iterator + ')').each(function () {
+			tdHeight = $(this).height();
+			maxHeight = (tdHeight > maxHeight) ? tdHeight : maxHeight;
+		});
+		return maxHeight;
 	};
 }
 /*global $, waitForImagesToLoad */
@@ -930,7 +953,7 @@ $(document).ready(function () {
 		winWidth = window.innerWidth,
 		winHeight = window.innerHeight;
 
-	$(wd).bind('resize orientationchange', function () {
+	$(wd).bind('orientationchange', function () {
 		var refreshPage = function () {
 			$('html').addClass('rwd-boilerplate-loading'); // show loading animation
 			wd.location.assign(wd.location.href); // go to the URL
