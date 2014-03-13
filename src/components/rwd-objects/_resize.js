@@ -9,7 +9,7 @@
 		winWidth = window.innerWidth,
 		winHeight = window.innerHeight;
 
-	$(wd).bind('resize orientationchange', function () {
+	$(wd).bind('orientationchange', function () {
 		var refreshPage = function () {
 			$('html').addClass('rwd-boilerplate-loading'); // show loading animation
 			wd.location.assign(wd.location.href); // go to the URL
