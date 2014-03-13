@@ -318,28 +318,33 @@
 	&.oversize {
 		width: 100%;
 		display: block;
-		thead {
-			@include rem(max-width, $rwd-thead-max-width);
-			display: block;
-			float: left;
-			tr {
-				display: block;
-			}
-			th {
-				display: block;
-			}
-		}
-		tbody {
-			display: block;
-			width: auto;
+		&.simple-scrolling {
 			overflow-x: auto;
-			white-space: nowrap;
-			tr {
-				display: inline-block;
-				vertical-align: top;
-			}
-			td {
+		}
+		&.fixed-thead {
+			thead {
+				@include rem(max-width, $rwd-thead-max-width);
 				display: block;
+				float: left;
+				tr {
+					display: block;
+				}
+				th {
+					display: block;
+				}
+			}
+			tbody {
+				display: block;
+				width: auto;
+				overflow-x: auto;
+				white-space: nowrap;
+				tr {
+					display: inline-block;
+					vertical-align: top;
+				}
+				td {
+					display: block;
+				}
 			}
 		}
 	}

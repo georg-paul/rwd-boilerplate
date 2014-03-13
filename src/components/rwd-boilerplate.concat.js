@@ -463,7 +463,10 @@ function RwdObjectTable() {
 
 			if ($rwdObj.width() > $rwdObj.parent().width()) {
 				$rwdObj.addClass('oversize');
-				self.equalCellHeightPerRow($rwdObj);
+				if (!$rwdObj.hasClass('simple-scrolling')) {
+					$rwdObj.addClass('fixed-thead');
+					self.equalCellHeightPerRow($rwdObj);
+				}
 			}
 		});
 	};
