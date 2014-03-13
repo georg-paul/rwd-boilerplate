@@ -38,10 +38,18 @@ module.exports = function (grunt) {
 		},
 
 		connect: {
-			server: {
+			saucelabs: {
 				options: {
 					base: '',
 					port: 9999
+				}
+			},
+			dev: {
+				options: {
+					hostname: '',
+					base: '',
+					port: 9999,
+					keepalive: true
 				}
 			}
 		},
@@ -175,5 +183,6 @@ module.exports = function (grunt) {
 
 	// Default task
 	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
-	grunt.registerTask('test', ['connect', 'saucelabs-qunit']);
+	grunt.registerTask('connect-keep-alive', ['connect:dev']);
+	grunt.registerTask('test', ['connect:saucelabs', 'saucelabs-qunit']);
 };
