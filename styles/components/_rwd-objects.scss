@@ -320,6 +320,7 @@
 		display: block;
 		&.simple-scrolling {
 			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
 		}
 		&.fixed-thead {
 			thead {
@@ -337,6 +338,7 @@
 				display: block;
 				width: auto;
 				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
 				white-space: nowrap;
 				tr {
 					display: inline-block;
