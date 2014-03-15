@@ -200,6 +200,12 @@
 		}
 	}
 
+	&.fixed-width {
+		.column {
+			max-width: 100%;
+		}
+	}
+
 	&.stacked-columns {
 		@include stacked-columns;
 	}
