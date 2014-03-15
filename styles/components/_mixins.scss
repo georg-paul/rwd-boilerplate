@@ -16,10 +16,11 @@
 @mixin hnav-small {
 	> ul {
 		display: none;
-		float: left;
+		float: none;
 		width: 100%;
 		> li {
 			width: 100%;
+			float: none;
 			@include box-sizing(border-box);
 			margin-right: 0 !important;
 			margin-left: 0 !important;
