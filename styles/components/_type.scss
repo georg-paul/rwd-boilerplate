@@ -31,3 +31,29 @@ p, pre, blockquote, ul, ol, dl, table, form {
 		color: nth($h-color, $h-type);
 	}
 }
+
+.content-ul {
+	list-style: $ul-bullet-position $ul-bullet-type;
+	@include rem(margin-left, $ul-margin-left);
+	li {
+		@include rem(margin-bottom, $ul-li-margin-bottom);
+		ul {
+			@include rem(margin-left, $ul-margin-left);
+			list-style: $ul-bullet-type-level-2;
+			margin-bottom: 0;
+		}
+	}
+}
+
+.content-ol {
+	list-style: $ol-bullet-position $ol-bullet-type;
+	@include rem(margin-left, $ol-margin-left);
+	li {
+		@include rem(margin-bottom, $ol-li-margin-bottom);
+		ol {
+			@include rem(margin-left, $ol-margin-left);
+			list-style: $ol-bullet-type-level-2;
+			margin-bottom: 0;
+		}
+	}
+}

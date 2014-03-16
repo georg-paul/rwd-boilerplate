@@ -18,45 +18,29 @@
 
         <div class="demo-header">
             <div class="rwd-boilerplate-delimiter">
-                <nav class="rwd-object-hnav">
-                    <button class="toggle">Toggle</button>
-                    <ul>
-                        <li>
-                            <a href="#base">Base</a>
-                        </li>
-                        <li>
-                            <a href="#rwd-objects">RWD Objects</a>
-                            <ul>
-                                <li><a href="#rwd-object-halign">halign</a></li>
-                                <li><a href="#rwd-object-media">media</a></li>
-                                <li><a href="#rwd-object-hnav">hnav</a></li>
-                                <li><a href="#rwd-object-columns">columns</a></li>
-                                <li><a href="#rwd-object-slider">slider</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#element-queries">Element Queries</a>
-                        </li>
-                        <li>
-                            <a href="#ui">UI</a>
-                        </li>
-                        <li>
-                            <a href="#layout">Layout</a>
-                        </li>
-                        <li>
-                            <a href="#tables">Tables</a>
-                        </li>
-                        <li>
-                            <a href="#forms">Forms</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-
-        <div class="demo-header-secondary">
-            <div class="rwd-boilerplate-delimiter">
                 <div class="rwd-object-halign">
+                    <nav class="rwd-object-hnav left">
+                        <button class="toggle">Toggle navigation</button>
+                        <ul>
+                            <li>
+                                <a href="#rwd-objects">RWD Objects</a>
+                                <ul>
+                                    <li><a href="#rwd-object-halign">halign</a></li>
+                                    <li><a href="#rwd-object-media">media</a></li>
+                                    <li><a href="#rwd-object-hnav">hnav</a></li>
+                                    <li><a href="#rwd-object-columns">columns</a></li>
+                                    <li><a href="#rwd-object-slider">slider</a></li>
+                                    <li><a href="#rwd-object-table">table</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#element-queries">Element Queries</a>
+                            </li>
+                            <li>
+                                <a href="#ui">UI</a>
+                            </li>
+                        </ul>
+                    </nav>
                     <div class="right">
                         <a href="https://github.com/georg-paul/rwd-boilerplate">View on GitHub</a>
                     </div>
@@ -64,28 +48,40 @@
             </div>
         </div>
 
+        <section class="main-section demo-hero">
+            <div class="rwd-boilerplate-delimiter">
+                <h1 id="base">rwd-boilerplate</h1>
+                <p>
+                    RWD Boilerplate is built for the purpose of reusing recurring patterns. It does not use media queries at all.
+                    The responsiveness is achieved by a combination of responsive objects and element queries.
+                </p>
+            </div>
+        </section>
+
         <section class="main-section">
             <div class="rwd-boilerplate-delimiter">
-                <h1 id="base">Headline h1</h1>
+                <h2>Introduction</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a href="#">Aenean commodo</a> ligula eget dolor. Aenean massa. Cum sociis natoque
-                    penatibus et magnis disparturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                    Each web application consists of recurring patterns and each pattern can be transformed into an object. That's the main purpose of this framework.
+                    Its purpose is NOT to be an alterative to frameworks like bootstrap or foundation.
                 </p>
-                <h2>Headline h2</h2>
+                <h3>Getting started</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                    penatibus et magnis disparturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                    In order to start, you can:
                 </p>
-                <h3>Headline h3</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                    penatibus et magnis disparturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-                </p>
-                <h4>Headline h4</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                    penatibus et magnis disparturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-                </p>
+                <ul class="content-ul">
+                    <li>
+                        <a href="https://github.com/georg-paul/rwd-boilerplate/releases/tag/v0.5.0">Download the latest release</a>
+                        or <a href="https://github.com/georg-paul/rwd-boilerplate/">view the code on github</a>
+                    </li>
+                    <li>
+                        <code>bower install rwd-boilerplate</code>
+                    </li>
+                    <li>
+                        Add as a submodule of your own repo:
+                        <code>git submodule add https://github.com/georg-paul/rwd-boilerplate.git your/path</code>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -536,141 +532,159 @@
             </div>
         </section>
 
+
+        <section class="main-section">
+            <div class="rwd-boilerplate-delimiter">
+                <h1 id="rwd-object-table">rwd-object-table</h1>
+
+                <table class="rwd-object-table">
+                    <thead>
+                    <tr>
+
+                        <th>Name</th>
+                        <th>E-Mail</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Postal Code</th>
+                        <th>City</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Carey Cooley</td>
+                        <td>marcelo.kory.augustus@sayscale.me</td>
+                        <td>109-822-5654</td>
+                        <td>81845 State Hwy 36 W</td>
+                        <td>15008</td>
+                        <td>Hallsburg</td>
+                    </tr>
+                    <tr>
+                        <td>Flossie Springer</td>
+                        <td>roman.darnell@out.com</td>
+                        <td>270-265-1379</td>
+                        <td>2687 State Hwy 72E</td>
+                        <td>55531</td>
+                        <td>Llano Grande</td>
+                    </tr>
+                    <tr>
+                        <td>June Moreno</td>
+                        <td>nigel.efren.antwan@flyfold.info</td>
+                        <td>787-152-4189</td>
+                        <td>9760 N US Hwy 287</td>
+                        <td>75150</td>
+                        <td>Spearman</td>
+                    </tr>
+                    <tr>
+                        <td>Rosalinda Barnes</td>
+                        <td>glenna.gabriela@sweetswim.info</td>
+                        <td>549-393-7998</td>
+                        <td>128 E Loop 335 S</td>
+                        <td>99489</td>
+                        <td>Munday</td>
+                    </tr>
+                    <tr>
+                        <td>Rosario Blackburn</td>
+                        <td>quintin@card.edu</td>
+                        <td>798-467-1729</td>
+                        <td>50076 I- 20T Bus</td>
+                        <td>66554</td>
+                        <td>Amarillo</td>
+                    </tr>
+                    <tr>
+                        <td>Shiela Winter</td>
+                        <td>india@breath.info</td>
+                        <td>948-683-8300</td>
+                        <td>979 W Morris St</td>
+                        <td>61258</td>
+                        <td>Boyd</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="rwd-object-table simple-scrolling">
+                    <thead>
+                    <tr>
+
+                        <th>Name</th>
+                        <th>E-Mail</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Carey Cooley</td>
+                        <td>marcelo.kory.augustus@sayscale.me</td>
+                        <td>109-822-5654</td>
+                    </tr>
+                    <tr>
+                        <td>Flossie Springer</td>
+                        <td>roman.darnell@out.com</td>
+                        <td>270-265-1379</td>
+                    </tr>
+                    <tr>
+                        <td>June Moreno</td>
+                        <td>nigel.efren.antwan@flyfold.info</td>
+                        <td>787-152-4189</td>
+                    </tr>
+                    <tr>
+                        <td>Rosalinda Barnes</td>
+                        <td>glenna.gabriela@sweetswim.info</td>
+                        <td>549-393-7998</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <section class="main-section">
             <div class="rwd-boilerplate-delimiter">
                 <h1 id="element-queries">Element Queries</h1>
-                <p class="demo-text">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                <p>
+                    This framework does not rely on media queries to achieve responsive styling and behaviour. It uses javascript powered element queries.
+                    Element queries are not a web standard or even based on any specification. They should be if you ask me. <br />
+                    <strong>Context matters and every element needs appropriate presentation depending on the dimensions of its parent element.</strong>
+                </p>
+                <h3>max-width</h3>
+                <p>
+                    <code>.demo-text-1.eq-max-width-2000 { color: red; }</code><br />
+                </p>
+                <p class="demo-text-1">
+                    This paragraph has the class <strong>"demo-text-1"</strong><br />
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                     Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
                     ultricies nec, pellentesque eu, pretium quis, sem. Lorem ipsum dolor sit amet, consectetuer adipiscing
-                    elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-                    parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                    quis, sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                    elit.
+                </p>
+
+                <h3>min-width</h3>
+                <p>
+                    <code>.demo-text-2.eq-min-width-600 { color: green; }</code><br />
+                </p>
+                <p class="demo-text-2">
+                    This paragraph has the class <strong>"demo-text-2"</strong><br />
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                    ultricies nec, pellentesque eu, pretium quis, sem. Lorem ipsum dolor sit amet, consectetuer adipiscing
+                    elit.
+                </p>
+
+                <h3>max- and min-width</h3>
+                <p>
+                    <code>.demo-text-3.eq-min-width-600.eq-max-width-2000 { color: blue; }</code><br />
+                </p>
+                <p class="demo-text-3">
+                    This paragraph has the class <strong>"demo-text-3"</strong><br />
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                    ultricies nec, pellentesque eu, pretium quis, sem. Lorem ipsum dolor sit amet, consectetuer adipiscing
+                    elit.
                 </p>
             </div>
         </section>
 
-
         <section class="main-section">
             <div class="rwd-boilerplate-delimiter">
                 <h1 id="ui">UI</h1>
-            </div>
-        </section>
-
-        <section class="main-section">
-            <div class="rwd-boilerplate-delimiter">
-                <h1 id="layout">Layout</h1>
-            </div>
-        </section>
-
-        <section class="main-section">
-            <div class="rwd-boilerplate-delimiter">
-                <h1 id="tables">Tables</h1>
-
-				<table class="rwd-object-table">
-					<thead>
-						<tr>
-
-							<th>Name</th>
-							<th>E-Mail</th>
-							<th>Phone</th>
-							<th>Address</th>
-							<th>Postal Code</th>
-							<th>City</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Carey Cooley</td>
-							<td>marcelo.kory.augustus@sayscale.me</td>
-							<td>109-822-5654</td>
-							<td>81845 State Hwy 36 W</td>
-							<td>15008</td>
-							<td>Hallsburg</td>
-						</tr>
-						<tr>
-							<td>Flossie Springer</td>
-							<td>roman.darnell@out.com</td>
-							<td>270-265-1379</td>
-							<td>2687 State Hwy 72E</td>
-							<td>55531</td>
-							<td>Llano Grande</td>
-						</tr>
-						<tr>
-							<td>June Moreno</td>
-							<td>nigel.efren.antwan@flyfold.info</td>
-							<td>787-152-4189</td>
-							<td>9760 N US Hwy 287</td>
-							<td>75150</td>
-							<td>Spearman</td>
-						</tr>
-						<tr>
-							<td>Rosalinda Barnes</td>
-							<td>glenna.gabriela@sweetswim.info</td>
-							<td>549-393-7998</td>
-							<td>128 E Loop 335 S</td>
-							<td>99489</td>
-							<td>Munday</td>
-						</tr>
-						<tr>
-							<td>Rosario Blackburn</td>
-							<td>quintin@card.edu</td>
-							<td>798-467-1729</td>
-							<td>50076 I- 20T Bus</td>
-							<td>66554</td>
-							<td>Amarillo</td>
-						</tr>
-						<tr>
-							<td>Shiela Winter</td>
-							<td>india@breath.info</td>
-							<td>948-683-8300</td>
-							<td>979 W Morris St</td>
-							<td>61258</td>
-							<td>Boyd</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="rwd-object-table simple-scrolling">
-					<thead>
-					<tr>
-
-						<th>Name</th>
-						<th>E-Mail</th>
-						<th>Phone</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>Carey Cooley</td>
-						<td>marcelo.kory.augustus@sayscale.me</td>
-						<td>109-822-5654</td>
-					</tr>
-					<tr>
-						<td>Flossie Springer</td>
-						<td>roman.darnell@out.com</td>
-						<td>270-265-1379</td>
-					</tr>
-					<tr>
-						<td>June Moreno</td>
-						<td>nigel.efren.antwan@flyfold.info</td>
-						<td>787-152-4189</td>
-					</tr>
-					<tr>
-						<td>Rosalinda Barnes</td>
-						<td>glenna.gabriela@sweetswim.info</td>
-						<td>549-393-7998</td>
-					</tr>
-					</tbody>
-				</table>
-            </div>
-        </section>
-
-        <section class="main-section">
-            <div class="rwd-boilerplate-delimiter">
-                <h1 id="forms">Forms</h1>
             </div>
         </section>
 

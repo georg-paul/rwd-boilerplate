@@ -28,19 +28,12 @@ $color-2: #3a9ad9;
 $color-3: #29aba4;
 $color-4: #e9e0d6;
 $color-5: #eb7260;
-/*
-$color-1: #354458;
-$color-2: #de4d4e;
-$color-3: #6e9ecf;
-$color-4: #ffd041;
-$color-5: #29aba4;
-*/
 
 // body
 $body-color: $color-1;
 $body-font-size: 16;
-$body-line-height: 24;
-$body-font-family: 'Myriad Pro', Arial, sans-serif;
+$body-line-height: 26;
+$body-font-family: Arial, sans-serif;
 
 // links
 $a-color: $color-3;
@@ -54,15 +47,27 @@ $a-text-decoration-hover: none;
 $a-text-decoration-focus: none;
 
 // headlines
-$h-font-size: 45, 36, 24, 18, $body-font-size;
-$h-line-height: 54, 44, 32, 21, 18;
+$h-font-size: 48, 36, 24, 18, $body-font-size;
+$h-line-height: 56, 44, 32, 21, 18;
 $h-margin-bottom: 15, 8, 5, 5, 5;
 $h-font-weight: 600, 400, 600, 600, 600;
-$h-text-transform: uppercase, none, none, none, none;
+$h-text-transform: lowercase, none, none, none, none;
 $h-color: $color-1, $color-1, $color-1, $color-1, $color-1;
 
 // type
 $text-flow-margin: $body-font-size * 1.5;
+
+$ul-bullet-position: outside;
+$ul-bullet-type: disc;
+$ul-bullet-type-level-2: circle;
+$ul-margin-left: 20;
+$ul-li-margin-bottom: $body-font-size;
+
+$ol-bullet-position: outside;
+$ol-bullet-type: decimal;
+$ol-bullet-type-level-2: decimal;
+$ol-margin-left: 20;
+$ol-li-margin-bottom: $body-font-size;
 
 // layout
 $main-section-margin-bottom: 70;
@@ -72,7 +77,7 @@ $sub-section-margin-bottom: 25;
 $table-width: 100%;
 $table-th-whitespace: nowrap;
 $table-th-bg-color: #fff;
-$table-td-bg-color-odd: #f9f9f9;
+$table-td-bg-color-odd: #efefef;
 $table-td-bg-color-even: #fff;
 $table-th-font-weight: bold;
 $table-td-font-weight: normal;
