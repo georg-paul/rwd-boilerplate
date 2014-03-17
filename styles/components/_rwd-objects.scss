@@ -41,9 +41,17 @@
 			}
 		}
 	}
+
+	&.align-right {
+		> ul {
+			float: right;
+		}
+	}
+
 	&.breakpoint-small {
 		@include hnav-small;
 	}
+
 	.toggle { display: none; }
 }
 
