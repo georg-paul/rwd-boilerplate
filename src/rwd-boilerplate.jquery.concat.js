@@ -235,6 +235,8 @@ if (typeof $ === 'undefined' && typeof DomReady !== 'undefined') {
 		ElementQueriesInstance.init();
 	});
 }
+/*global $ */
+
 function waitForImagesToLoad($element, callback) {
 	'use strict';
 	var images, loaded;
