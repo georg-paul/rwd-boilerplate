@@ -721,7 +721,7 @@ function RwdObjectColumns() {
 
 		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth) {
 			$rwdObj.addClass('stacked-columns');
-			self.moveContentWithinColumns($rwdObj, false);
+			self.moveContentWithinColumns($rwdObj);
 		}
 	};
 
@@ -751,21 +751,53 @@ function RwdObjectColumns() {
 	};
 
 
-	this.moveContentWithinColumns = function ($rwdObj, revert) {
-		$rwdObj.find('[data-move-down]').each(function () {
-			var $elementToMove = $(this),
-				columnIndex = $elementToMove.closest('.column').index() + 1,
-				targetColumn = (revert) ? columnIndex - parseInt($elementToMove.attr('data-move-down'), 10) : columnIndex + parseInt($elementToMove.attr('data-move-down'), 10);
+	this.moveContentWithinColumns = function ($rwdObj) {
+		var $elementsToMove = $rwdObj.find('[data-move-to]');
 
-			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
-		});
-		$rwdObj.find('[data-move-up]').each(function () {
-			var $elementToMove = $(this),
-				columnIndex = $elementToMove.closest('.column').index() + 1,
-				targetColumn = (revert) ? columnIndex + parseInt($elementToMove.attr('data-move-up'), 10) : columnIndex - parseInt($elementToMove.attr('data-move-up'), 10);
+		if ($elementsToMove.length) {
+			$elementsToMove.each(function () {
+				var $this = $(this),
+					$targetColumn = $rwdObj.children(':nth-child(' + parseInt($this.attr('data-move-to'), 10) + ')');
 
-			$elementToMove.appendTo($rwdObj.children(':nth-child(' + targetColumn + ')'));
-		});
+				if (self.shouldElementBeMovedToSpecificDomNode($this)) {
+					self.moveContentToSpecificDomNode($this, $targetColumn);
+				} else {
+					$this.appendTo($targetColumn);
+				}
+			});
+		}
+	};
+
+	this.shouldElementBeMovedToSpecificDomNode = function ($elementToMove) {
+		return !!((!!$elementToMove.attr('data-insert-before') || $elementToMove.attr('data-insert-after')));
+	};
+
+	this.moveContentToSpecificDomNode = function ($elementToMove, $targetColumn) {
+		var attributeInsertBefore = $elementToMove.attr('data-insert-before'),
+			provisionalSelector = (!!attributeInsertBefore) ? attributeInsertBefore : $elementToMove.attr('data-insert-after'),
+			$targetNode = $targetColumn.find(self.getValidSelector(provisionalSelector)).first();
+
+		if ($targetNode) {
+			if ($elementToMove.attr('data-insert-before')) {
+				$elementToMove.insertBefore($targetNode);
+			} else {
+				$elementToMove.insertAfter($targetNode);
+			}
+		}
+	};
+
+	this.getValidSelector = function (dataAttributeValue) {
+		var targetSelector = '';
+
+		if (dataAttributeValue.indexOf('tag-') === 0) {
+			targetSelector = dataAttributeValue.replace('tag-', '');
+		} else if (dataAttributeValue.indexOf('class-') === 0) {
+			targetSelector = dataAttributeValue.replace('class-', '.');
+		} else if (dataAttributeValue.indexOf('id-') === 0) {
+			targetSelector = dataAttributeValue.replace('id-', '#');
+		}
+
+		return targetSelector;
 	};
 }
 /*global $ */
