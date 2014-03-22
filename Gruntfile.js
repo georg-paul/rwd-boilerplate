@@ -38,12 +38,6 @@ module.exports = function (grunt) {
 		},
 
 		connect: {
-			saucelabs: {
-				options: {
-					base: '',
-					port: 9999
-				}
-			},
 			dev: {
 				options: {
 					hostname: '',
@@ -131,41 +125,6 @@ module.exports = function (grunt) {
 			all: [
 				'tests/qunit/**/*.html'
 			]
-		},
-
-		'saucelabs-qunit': {
-			all: {
-				options: {
-					//username: '',
-					//key: '',
-					urls: ['http://localhost:9999/tests/qunit/tests-with-jquery.html', 'http://localhost:9999/tests/qunit/tests-with-zepto.html'],
-					build: '0.1.0',
-					tunnelTimeout: 5,
-					testname: 'QUnit Tests',
-					browsers: [
-						{
-							"browserName": "googlechrome",
-							"platform": "OS X 10.9",
-							"version": "31"
-						},
-						{
-							"browserName": "iphone",
-							"platform": "OS X 10.9",
-							"version": "7"
-						},
-						{
-							"browserName": "firefox",
-							"platform": "Windows 7",
-							"version": "26"
-						},
-						{
-							"browserName": "internet explorer",
-							"platform": "Windows 7",
-							"version": "10"
-						}
-					]
-				}
-			}
 		}
 	});
 
@@ -177,10 +136,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
-	grunt.loadNpmTasks('grunt-saucelabs');
 
 	// Default task
 	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
 	grunt.registerTask('connect-keep-alive', ['connect:dev']);
-	grunt.registerTask('test', ['connect:saucelabs', 'saucelabs-qunit']);
 };

@@ -1,0 +1,39 @@
+{
+    "username": "",
+    "key": "",
+    "test_framework": "qunit",
+    "test_path": [
+        "tests/qunit/tests-with-jquery.html",
+        "tests/qunit/tests-with-zepto.html"
+    ],
+    "browsers": [
+        {
+            "browser": "safari",
+            "browser_version": "latest",
+            "os": "OS X",
+            "os_version": "Mountain Lion",
+            "device": null
+        },
+        {
+            "browser": "ie",
+            "browser_version": "9.0",
+            "os": "Windows",
+            "os_version": "7",
+            "device": null
+        },
+        {
+            "browser": "ie",
+            "browser_version": "10.0",
+            "os": "Windows",
+            "os_version": "8",
+            "device": null
+        },
+        {
+            "browser": "Mobile Safari",
+            "os": "ios",
+            "os_version": "6.0",
+            "browser_version": null,
+            "device": "iPhone 5"
+        }
+    ]
+}
