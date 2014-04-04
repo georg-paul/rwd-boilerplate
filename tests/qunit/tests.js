@@ -49,7 +49,13 @@
 		ok($columsTestObject.hasClass('stacked-columns'), true);
 	});
 
+	test("columns are stacked when css mixin stacked-columns was used", function () {
+		var $columsTestObject = $('#columns-test-2'),
+			ColumnsTestInstance = new RwdObjectColumns();
 
+		ColumnsTestInstance.init();
+		ok($columsTestObject.hasClass('stacked-columns'), true);
+	});
 
 
 	module("rwd-object-slider");

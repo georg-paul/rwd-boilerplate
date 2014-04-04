@@ -41,10 +41,23 @@ function RwdObjectColumns() {
 	this.columns = function ($rwdObj) {
 		var availableWidth = $rwdObj.parent().width();
 
-		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth) {
+		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth || self.areStackedColumnsCausedByElementQueries( $rwdObj.find('> .column'))) {
 			$rwdObj.addClass('stacked-columns');
 			self.moveContentWithinColumns($rwdObj);
+			self.convertToSliderItems($rwdObj);
 		}
+	};
+
+	this.areStackedColumnsCausedByElementQueries = function ($columns) {
+		var areThey = false,
+			positionTop = $columns.first().position().top;
+
+		$columns.each(function () {
+			if ($(this).position().top > positionTop) {
+				areThey = true;
+			}
+		});
+		return areThey;
 	};
 
 	this.getBreakpoint = function ($rwdObj, availableWidth) {
@@ -87,6 +100,16 @@ function RwdObjectColumns() {
 					$this.appendTo($targetColumn);
 				}
 			});
+		}
+	};
+
+	this.convertToSliderItems = function ($rwdObj) {
+		if ($rwdObj.hasClass('convert-columns-to-slider-items')) {
+			$rwdObj.find('> .column').each(function () {
+				var $newSliderItem = $(this).children().wrapAll('<div class="item"></div>');
+				$newSliderItem.parent().prependTo($(this).closest('.container'));
+			});
+			$rwdObj.closest('.item').remove();
 		}
 	};
 

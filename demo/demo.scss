@@ -115,3 +115,11 @@ code {
 	white-space: nowrap;
 	font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
+
+#slider-with-columns-demo {
+	&.eq-max-width-720 {
+		.rwd-object-columns-3 {
+			@include stacked-columns;
+		}
+	}
+}
