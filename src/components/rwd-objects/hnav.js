@@ -35,6 +35,7 @@ function RwdObjectHnav() {
 	this.init = function () {
 		$('.rwd-object-hnav').each(function () {
 			var $rwdObj = $(this);
+			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			if (!$rwdObj.hasClass('no-dropdown')) {
 				self.hnav($rwdObj);
 			}

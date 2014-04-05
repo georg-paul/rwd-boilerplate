@@ -3,5 +3,5 @@
 
 $(document).ready(function () {
 	'use strict';
-	$('.rwd-boilerplate-loading').removeClass('rwd-boilerplate-loading');
+	$('html.rwd-boilerplate-loading').removeClass('rwd-boilerplate-loading');
 });

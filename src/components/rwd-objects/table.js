@@ -35,6 +35,7 @@ function RwdObjectTable() {
 	this.init = function () {
 		$('.rwd-object-table').each(function () {
 			var $rwdObj = $(this);
+			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 
 			if ($rwdObj.width() > $rwdObj.parent().width()) {
 				$rwdObj.addClass('oversize');

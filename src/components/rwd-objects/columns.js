@@ -34,14 +34,16 @@ function RwdObjectColumns() {
 
 	this.init = function () {
 		$('[class*="rwd-object-columns-"]').each(function () {
-			self.columns($(this));
+			var $rwdObj = $(this);
+			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
+			self.columns($rwdObj);
 		});
 	};
 
 	this.columns = function ($rwdObj) {
 		var availableWidth = $rwdObj.parent().width();
 
-		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth || self.areStackedColumnsCausedByElementQueries( $rwdObj.find('> .column'))) {
+		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth || (self.areStackedColumnsCausedByElementQueries($rwdObj.find('> .column')) && !$rwdObj.hasClass('fixed-width'))) {
 			$rwdObj.addClass('stacked-columns');
 			self.moveContentWithinColumns($rwdObj);
 			self.convertToSliderItems($rwdObj);

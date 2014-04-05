@@ -85,7 +85,7 @@
 	module("misc");
 
 	test("loading animation has disappeared as expected", function () {
-		equal($('.rwd-boilerplate-loading').length, 0);
+		equal($('html.rwd-boilerplate-loading').length, 0);
 	});
 
 

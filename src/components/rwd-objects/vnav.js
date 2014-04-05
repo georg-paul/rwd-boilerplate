@@ -34,7 +34,9 @@ function RwdObjectVnav() {
 
 	this.init = function () {
 		$('.rwd-object-vnav').each(function () {
-			self.vnav($(this));
+			var $rwdObj = $(this);
+			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
+			self.vnav($rwdObj);
 		});
 	};
 

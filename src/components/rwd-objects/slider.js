@@ -186,16 +186,22 @@ function RwdObjectSlider($rwdObj) {
 	};
 }
 
-$(document).ready(function () {
+
+function RwdObjectSliderInstances() {
 	'use strict';
 
-	var $slider,
-		startItemIndex = 0;
+	var self = this;
 
-	$('.rwd-object-slider').each(function () {
-		$slider = $(this);
-		startItemIndex = $slider.attr('data-start-item') || 0;
-		RwdObjectSliderInstance = new RwdObjectSlider($slider);
-		RwdObjectSliderInstance.init(parseInt(startItemIndex, 10));
-	});
-});
+	self.init = function () {
+		var $slider,
+			startItemIndex = 0;
+
+		$('.rwd-object-slider').each(function () {
+			$slider = $(this);
+			$slider.data('old-state', $slider.get(0).outerHTML);
+			startItemIndex = $slider.attr('data-start-item') || 0;
+			RwdObjectSliderInstance = new RwdObjectSlider($slider);
+			RwdObjectSliderInstance.init(parseInt(startItemIndex, 10));
+		});
+	};
+}
