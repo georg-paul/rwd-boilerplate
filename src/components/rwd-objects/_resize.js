@@ -53,12 +53,10 @@ function WindowResize() {
 	};
 
 	self.refreshPage = function () {
-		var $html = $('html');
-		$html.addClass('rwd-boilerplate-loading');
+		rwdBoilerplateShowLoading();
 		self.removeAppliedElementQueries();
 		self.restoreRwdObjectsToInitialState();
 		self.reinitializeRwdBoilerplate();
-		$html.removeClass('rwd-boilerplate-loading');
 	};
 
 	self.removeAppliedElementQueries = function () {

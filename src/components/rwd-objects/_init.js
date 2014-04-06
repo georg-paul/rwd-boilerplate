@@ -39,6 +39,8 @@ function RwdObjects() {
 		new RwdObjectColumns().init();
 		new RwdObjectTable().init();
 		new RwdObjectSliderInstances().init();
+
+		rwdBoilerplateHideLoading();
 	};
 }
 

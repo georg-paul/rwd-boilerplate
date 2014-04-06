@@ -89,3 +89,15 @@ function supportsTransitions() {
 	}
 	return false;
 }
+
+function rwdBoilerplateHideLoading () {
+	'use strict';
+
+	$('html').removeClass('rwd-boilerplate-loading');
+}
+
+function rwdBoilerplateShowLoading () {
+	'use strict';
+
+	$('html').addClass('rwd-boilerplate-loading');
+}

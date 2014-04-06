@@ -432,6 +432,18 @@ function supportsTransitions() {
 	}
 	return false;
 }
+
+function rwdBoilerplateHideLoading () {
+	'use strict';
+
+	$('html').removeClass('rwd-boilerplate-loading');
+}
+
+function rwdBoilerplateShowLoading () {
+	'use strict';
+
+	$('html').addClass('rwd-boilerplate-loading');
+}
 /*global $, waitForImagesToLoad */
 
 /*
@@ -1152,6 +1164,8 @@ function RwdObjects() {
 		new RwdObjectColumns().init();
 		new RwdObjectTable().init();
 		new RwdObjectSliderInstances().init();
+
+		rwdBoilerplateHideLoading();
 	};
 }
 
@@ -1200,29 +1214,25 @@ function WindowResize() {
 
 	self.init = function () {
 		$(self.wd).bind('resize', function () {
-			var refreshPage = function () {
-				var $html = $('html');
-
-				$html.addClass('rwd-boilerplate-loading');
-				self.removeAppliedElementQueries();
-				self.restoreRwdObjectsToInitialState();
-				self.reinitializeRwdBoilerplate();
-				$html.removeClass('rwd-boilerplate-loading');
-			};
-
-			// New height and width
 			var winNewWidth = window.innerWidth,
 				winNewHeight = window.innerHeight;
 
 			// Compare the new height and width with old one
 			if (self.winWidth !== winNewWidth || self.winHeight !== winNewHeight) {
 				window.clearTimeout(self.resizeTimeout);
-				self.resizeTimeout = self.wd.setTimeout(refreshPage, 10);
+				self.resizeTimeout = self.wd.setTimeout(self.refreshPage, 100);
 			}
 			// Update the width and height
 			self.winWidth = winNewWidth;
 			self.winHeight = winNewHeight;
 		});
+	};
+
+	self.refreshPage = function () {
+		rwdBoilerplateShowLoading();
+		self.removeAppliedElementQueries();
+		self.restoreRwdObjectsToInitialState();
+		self.reinitializeRwdBoilerplate();
 	};
 
 	self.removeAppliedElementQueries = function () {
@@ -1260,10 +1270,4 @@ $(document).ready(function () {
 	'use strict';
 
 	new WindowResize().init();
-});
-/*global $ */
-
-$(document).ready(function () {
-	'use strict';
-	$('html.rwd-boilerplate-loading').removeClass('rwd-boilerplate-loading');
 });
