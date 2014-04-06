@@ -1,6 +1,6 @@
 {
-    "username": "",
-    "key": "",
+    "username": "georgpaul",
+    "key": "KRTEsS6hVH1GszkaZr61",
     "test_framework": "qunit",
     "test_path": [
         "tests/qunit/tests-with-jquery.html",
@@ -56,6 +56,20 @@
             "os_version": "6.0",
             "browser_version": null,
             "device": "iPhone 5"
+        },
+        {
+            "browser": "Android",
+            "os": "android",
+            "os_version": "4.0",
+            "browser_version": null,
+            "device": "Samsung Galaxy Note 10.1"
+        },
+        {
+            "browser": "Android",
+            "os": "android",
+            "os_version": "4.0",
+            "browser_version": null,
+            "device": "Samsung Galaxy S III"
         }
     ]
 }
