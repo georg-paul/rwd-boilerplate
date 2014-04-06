@@ -1,6 +1,6 @@
 {
-    "username": "georgpaul",
-    "key": "KRTEsS6hVH1GszkaZr61",
+    "username": "",
+    "key": "",
     "test_framework": "qunit",
     "test_path": [
         "tests/qunit/tests-with-jquery.html",
