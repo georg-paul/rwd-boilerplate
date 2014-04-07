@@ -1000,6 +1000,10 @@ function RwdObjectSliderInstances() {
 	var self = this;
 
 	self.init = function () {
+		if (typeof initCallbackRwdObjectSlider === 'function') {
+			initCallbackRwdObjectSlider();
+		}
+
 		var $slider,
 			startItemIndex = 0;
 
