@@ -48,5 +48,9 @@ function RwdObjects() {
 $(document).ready(function () {
 	'use strict';
 
+	if (typeof initCallbackRwdObjects === 'function') {
+		initCallbackRwdObjects();
+	}
+
 	new RwdObjects().init();
 });
