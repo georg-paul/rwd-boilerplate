@@ -1146,8 +1146,9 @@ function WindowResize() {
 	};
 
 	self.restoreRwdObjectsToInitialState = function () {
-		RwdObjectSliderInstance.clearAutoPlayInterval();
-
+		if (typeof RwdObjectSliderInstance !== undefined) {
+			RwdObjectSliderInstance.clearAutoPlayInterval();
+		}
 		$('[class*="rwd-object-"]').each(function () {
 			$(this).replaceWith($(this).data('old-state'));
 		});
