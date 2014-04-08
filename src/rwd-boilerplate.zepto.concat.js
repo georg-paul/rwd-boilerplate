@@ -968,7 +968,14 @@ function RwdObjectSlider($rwdObj) {
 	this.init = function (startItemIndex) {
 		self.startItemIndex = startItemIndex || 0;
 		self.setStyles();
-		self.bindEvents();
+
+		if (self.itemCount > 1) {
+			self.bindEvents();
+		} else {
+			self.$nextButton.addClass('disabled');
+			self.$prevButton.addClass('disabled');
+			self.$progressBars.addClass('disabled');
+		}
 	};
 
 	this.setStyles = function () {
