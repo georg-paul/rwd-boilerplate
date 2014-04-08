@@ -83,6 +83,7 @@ function WindowResize() {
 		$('[class*="rwd-object-"]').each(function () {
 			$(this).replaceWith($(this).data('old-state'));
 		});
+		$('[data-halign-container-id]').removeClass('children-no-side-by-side children-nearly-no-side-by-side');
 	};
 
 	self.reinitializeRwdBoilerplate = function () {
