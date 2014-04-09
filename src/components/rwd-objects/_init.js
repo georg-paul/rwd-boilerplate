@@ -31,7 +31,7 @@ function RwdObjects() {
 
 	var self = this;
 
-	self.init = function () {
+	this.init = function () {
 		new RwdObjectHalign().init();
 		new RwdObjectHnav().init();
 		new RwdObjectMedia().init();

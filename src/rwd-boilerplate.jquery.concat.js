@@ -916,6 +916,10 @@ function RwdObjectSlider($rwdObj) {
 				self.$slider.trigger('jsFallbackTransition');
 			}
 		}
+
+		if (typeof nextCallbackRwdObjectSlider === 'function') {
+			nextCallbackRwdObjectSlider($rwdObj, targetItemIndex);
+		}
 	};
 
 	this.isCarouselAnimated = function () {
@@ -1011,7 +1015,7 @@ function RwdObjectSliderInstances() {
 
 	var self = this;
 
-	self.init = function () {
+	this.init = function () {
 		if (typeof initCallbackRwdObjectSlider === 'function') {
 			initCallbackRwdObjectSlider();
 		}
@@ -1060,7 +1064,7 @@ function RwdObjects() {
 
 	var self = this;
 
-	self.init = function () {
+	this.init = function () {
 		new RwdObjectHalign().init();
 		new RwdObjectHnav().init();
 		new RwdObjectMedia().init();
