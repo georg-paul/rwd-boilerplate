@@ -495,12 +495,12 @@ function RwdObjectHalign() {
 			containerId = parseInt($rwdObj.attr('data-halign-id'), 10),
 			$container = $('[data-halign-container-id="' + containerId + '"]');
 
-		if (totalChildrenWidth > availableWidth) {
+		if (totalChildrenWidth >= availableWidth) {
 			$rwdObj.addClass('no-side-by-side');
 			if ($container.length) {
 				$container.addClass('children-no-side-by-side');
 			}
-		} else if ((totalChildrenWidth <= availableWidth) && totalChildrenWidth + 50 > availableWidth) {
+		} else if ((totalChildrenWidth < availableWidth) && totalChildrenWidth + 50 > availableWidth) {
 			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
 			if ($container.length) {
 				$container.addClass('children-nearly-no-side-by-side');

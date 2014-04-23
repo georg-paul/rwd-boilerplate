@@ -21,13 +21,19 @@
 	test("no-side-by-side and side-by-side classes are applied correct", function () {
 		var $halignTestObject1 = $('#halign-test-1'),
 			$halignTestObject3 = $('#halign-test-3'),
+			$halignTestObject4 = $('#halign-test-4'),
 			HalignTestInstance = new RwdObjectHalign();
 
 		HalignTestInstance.init();
+
 		ok($halignTestObject1.hasClass('no-side-by-side'), true);
 		ok($('[data-halign-container-id="' + parseInt($halignTestObject1.attr('data-halign-id'), 10) + '"]').hasClass('children-no-side-by-side'), true);
+
 		ok(!$halignTestObject3.hasClass('no-side-by-side'), true);
 		ok($halignTestObject3.hasClass('side-by-side'), true);
+
+		ok($halignTestObject4.hasClass('no-side-by-side'), true);
+		ok(!$halignTestObject4.hasClass('side-by-side'), true);
 	});
 
 
