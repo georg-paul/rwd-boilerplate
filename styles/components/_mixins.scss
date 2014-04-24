@@ -36,7 +36,8 @@
 			}
 		}
 	}
-	.toggle {
+	.toggle,
+	[data-trigger-flyout-id] {
 		display: inline-block;
 		cursor: pointer;
 	}

@@ -38,6 +38,8 @@ function RwdObjects() {
 		new RwdObjectVnav().init();
 		new RwdObjectColumns().init();
 		new RwdObjectTable().init();
+		new TraverseFlyoutComponents().init();
+		new RwdObjectFlyout().init();
 		new RwdObjectSliderInstances().init();
 
 		rwdBoilerplateHideLoading();

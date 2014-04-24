@@ -7,6 +7,15 @@
 .demo-text-3.eq-min-width-600.eq-max-width-2000 { color: blue; }
 
 // layout
+
+.demo-hero {
+	background-color: #f5f5f5;
+
+	h1.clone-to-flyout-1-slot-1-component-intro {
+		display: none;
+	}
+}
+
 .demo-header {
 	background: $color-3;
 	width: 100%;
@@ -79,6 +88,9 @@
 						}
 					}
 				}
+				&.append-to-flyout-1-slot-2-component-main-nav {
+					display: none;
+				}
 			}
 		}
 	}
@@ -86,6 +98,9 @@
 		line-height: 1;
 		@include rem(padding-top, 23);
 		@include rem(padding-bottom, 23);
+		&.clone-to-flyout-1-slot-3-component-secondary-nav {
+			display: none;
+		}
 	}
 }
 
@@ -95,10 +110,6 @@ body > .main-section {
 	@include rem(padding-bottom, 70);
 	border-bottom: 2px solid #eee;
 	.main-section:last-child { margin-bottom: 0; }
-}
-
-.demo-hero {
-	background-color: #f5f5f5;
 }
 
 code {
@@ -120,6 +131,46 @@ code {
 	&.eq-max-width-720 {
 		.rwd-object-columns-3 {
 			@include stacked-columns;
+		}
+	}
+}
+
+.rwd-object-flyout {
+	padding: 20px;
+	background-color: #ddd;
+	.flyout-components {
+		margin-top: 30px;
+	}
+}
+
+.my-super-flyout {
+	background-color: #354458;
+	color: #fff;
+	a {
+		color: #fff;
+	}
+
+	.flyout-components {
+		.component {
+			border-bottom: 1px solid rgba(255,255,255,0.3);
+			padding: 20px 10px;
+		}
+		.component-main-nav {
+			ul { list-style: none; }
+			> ul {
+				margin-bottom: 0;
+				> li > a { font-weight: bold; }
+				a {
+					color: #fff;
+					text-decoration: none;
+				}
+			}
+		}
+		.component-intro {
+			h1 {
+				color: #fff;
+				font-size: 26px;
+			}
 		}
 	}
 }

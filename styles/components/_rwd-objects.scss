@@ -52,7 +52,10 @@
 		@include hnav-small;
 	}
 
-	.toggle { display: none; }
+	.toggle,
+	[data-trigger-flyout-id] {
+		display: none;
+	}
 }
 
 // hlist object
@@ -363,5 +366,28 @@
 				}
 			}
 		}
+	}
+}
+
+.rwd-object-flyout {
+	position: fixed;
+	left: 0;
+	top: 0;
+	overflow-y: auto;
+	@include transition(margin-left 0.4s);
+	@include box-sizing(border-box);
+	z-index: 9999;
+	@include rem(width, $rwd-flyout-width);
+	@include rem(margin-left, $rwd-flyout-width * -1);
+	height: 100%;
+	&.visible {
+		margin-left: 0;
+	}
+}
+
+body {
+	@include transition(margin-left 0.4s);
+	&.flyout-mode {
+		@include rem(margin-left, $rwd-flyout-width);
 	}
 }

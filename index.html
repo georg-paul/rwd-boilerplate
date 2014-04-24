@@ -16,11 +16,23 @@
             <div class="spinner"></div>
         </div>
 
+		<div class="rwd-object-flyout my-super-flyout" data-flyout-id="1">
+			<button class="flyout-close">Close flyout 1</button>
+			<div class="flyout-components"></div>
+		</div>
+
+		<div class="rwd-object-flyout" data-flyout-id="2">
+			<button class="flyout-close">Close flyout 2</button>
+			<div class="flyout-components">
+				<p>Flyout 2 static content. Lorem ipsum dolor sit amet...</p>
+			</div>
+		</div>
+
         <div class="demo-header">
             <div class="rwd-boilerplate-delimiter">
                 <div class="rwd-object-halign">
                     <nav class="rwd-object-hnav left">
-                        <button class="toggle">Toggle navigation</button>
+						<button data-trigger-flyout-id="1">Toggle Flyout</button>
                         <ul>
                             <li>
                                 <a href="#rwd-objects">RWD Objects</a>
@@ -650,6 +662,16 @@
             </div>
         </section>
 
+
+		<section class="main-section">
+			<div class="rwd-boilerplate-delimiter">
+				<h1 id="rwd-object-flyout">rwd-object-flyout</h1>
+
+				<button data-trigger-flyout-id="1">Trigger Flyout 1</button>
+				<button data-trigger-flyout-id="2">Trigger Flyout 2</button>
+			</div>
+		</section>
+
         <section class="main-section">
             <div class="rwd-boilerplate-delimiter">
                 <h1 id="element-queries">Element Queries</h1>
@@ -703,9 +725,9 @@
         </section>
 
         <!-- Use either zepto -->
-        <script src="src/rwd-boilerplate.zepto.min.js"></script>
+        <!--script src="src/rwd-boilerplate.zepto.min.js"></script-->
 
         <!-- or use jQuery instead -->
-        <!--script src="src/rwd-boilerplate.jquery.min.js"></script-->
+        <script src="src/rwd-boilerplate.jquery.concat.js"></script>
 	</body>
 </html>
