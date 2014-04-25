@@ -1064,7 +1064,8 @@ function TraverseFlyoutComponents() {
 	"use strict";
 
 	var self = this,
-		selectorRegExp = new RegExp(/\.(append-to-flyout|clone-to-flyout)\-(\d*)\-(slot)\-(\d*)\-(component)\-(.+)/g);
+		selectorRegExp = new RegExp(/\.(append-to-flyout|clone-to-flyout)\-(\d*)\-(slot)\-(\d*)\-(component)\-(.+)/g),
+		flyoutTargetSlots = [];
 
 	this.init = function () {
 		self.parseStylesheets();
@@ -1147,28 +1148,24 @@ function TraverseFlyoutComponents() {
 	};
 
 	this.traverseElements = function (elements, values, selectorText) {
-		var flyoutID = values.flyoutID,
-			targetSlot = values.targetSlot,
-			componentClass = values.componentClass,
-			elementsLength = elements.length;
-
-		if (elementsLength === 0) {
-			return;
-		}
-
-		for (var i = 0; i < elementsLength; i++) {
-			var $component = $('<div class="component component-' + componentClass + '"></div>'),
+		for (var i = 0; i < elements.length; i++) {
+			var $component = $('<div class="component component-' + values.componentClass + '"></div>'),
 				$target = (selectorText.indexOf('append-to-flyout-') !== -1) ? $(elements[i]) : $(elements[i]).clone();
 
-			self.insertAtIndex($('[data-flyout-id="' + flyoutID + '"] .flyout-components'), $component.append($target), targetSlot);
+			self.insertAtIndex($('[data-flyout-id="' + values.flyoutID + '"] .flyout-components'), $component.append($target), values.targetSlot);
 		}
 	};
 
-	this.insertAtIndex = function($target, $element, index) {
-		var lastIndex = $target.children().size();
+	this.insertAtIndex = function($targetContainer, $element, targetSlot) {
+		flyoutTargetSlots.push(targetSlot);
+		flyoutTargetSlots.sort();
+		targetSlot = flyoutTargetSlots.indexOf(targetSlot);
 
-		$element.appendTo($target);
-		// TODO: insert at correct index
+		if ($targetContainer.children().size() === 0 || targetSlot === 0) {
+			$element.prependTo($targetContainer);
+		} else {
+			$targetContainer.find('.component:nth-child(' + targetSlot + ')').after($element);
+		}
 	};
 }
 

@@ -388,6 +388,7 @@
 body {
 	@include transition(margin-left 0.4s);
 	&.flyout-mode {
+		@include rem(min-width, 320);
 		@include rem(margin-left, $rwd-flyout-width);
 	}
 }
