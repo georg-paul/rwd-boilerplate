@@ -390,5 +390,6 @@ body {
 	&.flyout-mode {
 		@include rem(min-width, 320);
 		@include rem(margin-left, $rwd-flyout-width);
+		overflow: hidden;
 	}
 }
