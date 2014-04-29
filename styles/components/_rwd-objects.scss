@@ -370,7 +370,8 @@
 }
 
 .rwd-object-flyout {
-	position: fixed;
+	display: none;
+	position: absolute;
 	left: 0;
 	top: 0;
 	overflow-y: auto;
@@ -380,7 +381,7 @@
 	@include rem(margin-left, $rwd-flyout-width * -1);
 	height: 100%;
 	&.visible {
-		margin-left: 0;
+		display: block;
 	}
 }
 
@@ -388,7 +389,7 @@ body {
 	&.flyout-mode {
 		@include rem(min-width, 320);
 		@include rem(margin-left, $rwd-flyout-width);
-		overflow: hidden;
+		overflow-x: hidden;
 		position: relative;
 	}
 }
