@@ -374,7 +374,6 @@
 	left: 0;
 	top: 0;
 	overflow-y: auto;
-	@include transition(margin-left 0.4s);
 	@include box-sizing(border-box);
 	z-index: 9999;
 	@include rem(width, $rwd-flyout-width);
@@ -386,10 +385,10 @@
 }
 
 body {
-	@include transition(margin-left 0.4s);
 	&.flyout-mode {
 		@include rem(min-width, 320);
 		@include rem(margin-left, $rwd-flyout-width);
 		overflow: hidden;
+		position: relative;
 	}
 }
