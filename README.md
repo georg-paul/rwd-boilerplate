@@ -15,6 +15,6 @@ Its purpose is NOT to be an alterative to frameworks like bootstrap or foundatio
 
 In order to start, you can:
 
-* [Download the latest release](https://github.com/georg-paul/rwd-boilerplate/releases/tag/v0.5.0) or
+* [Download the latest release](https://github.com/georg-paul/rwd-boilerplate/releases/tag/v0.6.0) or
 * Add the repo as a submodule of your own repo: `git submodule add https://github.com/georg-paul/rwd-boilerplate.git your/path`
 * Install with bower: `bower install rwd-boilerplate`
