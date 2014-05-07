@@ -630,9 +630,14 @@ function RwdObjectColumns() {
 	};
 
 	this.columns = function ($rwdObj) {
-		var availableWidth = $rwdObj.parent().width();
+		var availableWidth = $rwdObj.parent().width(),
+			$columns = $rwdObj.find('> .column');
 
-		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth || (self.areStackedColumnsCausedByElementQueries($rwdObj.find('> .column')) && !$rwdObj.hasClass('fixed-width'))) {
+		if (
+			self.getBreakpoint($rwdObj, availableWidth) > availableWidth ||
+			(self.areStackedColumnsCausedByElementQueries($columns) && !$rwdObj.hasClass('fixed-width')) ||
+			$columns.length === 1
+		) {
 			$rwdObj.addClass('stacked-columns');
 			self.moveContentWithinColumns($rwdObj);
 			self.convertToSliderItems($rwdObj);
