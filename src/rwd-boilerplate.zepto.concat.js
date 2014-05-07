@@ -805,7 +805,7 @@ function RwdObjectColumns() {
 		if ($rwdObj.hasClass('convert-columns-to-slider-items')) {
 			$rwdObj.find('> .column').each(function () {
 				var $newSliderItem = $(this).children().wrapAll('<div class="item"></div>');
-				$newSliderItem.parent().prependTo($(this).closest('.container'));
+				$newSliderItem.parent().appendTo($(this).closest('.container'));
 			});
 			$rwdObj.closest('.item').remove();
 		}
