@@ -91,3 +91,9 @@ $rwd-thead-max-width: 160;
 
 // rwd-object-flyout
 $rwd-flyout-width: 250;
+
+// rwd-object-slider
+$rwd-slider-slide-duration: 0.75s;
+$rwd-slider-fade-duration: 1.5s;
+$rwd-slider-slide-transition: ease;
+$rwd-slider-fade-transition: cubic-bezier(.54,0,.52,1);

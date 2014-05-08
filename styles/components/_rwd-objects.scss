@@ -288,7 +288,7 @@
 		overflow: hidden;
 		left: 0;
 		&.is-animated {
-			@include transition(all 0.75s cubic-bezier(.54,0,.52,1));
+			@include transition(all $rwd-slider-slide-duration $rwd-slider-slide-transition);
 		}
 		.item {
 			float: left;
@@ -305,7 +305,7 @@
 			position: absolute;
 			max-width: 100%;
 			opacity: 0;
-			@include transition(all 1s cubic-bezier(.54,0,.52,1));
+			@include transition(all $rwd-slider-fade-duration $rwd-slider-fade-transition);
 			margin-right: 0;
 			-webkit-backface-visibility: hidden;
 			&.active {
