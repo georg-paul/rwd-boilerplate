@@ -742,8 +742,7 @@ function RwdObjectColumns() {
 
 		if (
 			self.getBreakpoint($rwdObj, availableWidth) > availableWidth ||
-			(self.areStackedColumnsCausedByElementQueries($columns) && !$rwdObj.hasClass('fixed-width')) ||
-			$columns.length === 1
+				(self.areStackedColumnsCausedByElementQueries($rwdObj) && !$rwdObj.hasClass('fixed-width'))
 		) {
 			$rwdObj.addClass('stacked-columns');
 			self.moveContentWithinColumns($rwdObj);
@@ -751,16 +750,8 @@ function RwdObjectColumns() {
 		}
 	};
 
-	this.areStackedColumnsCausedByElementQueries = function ($columns) {
-		var areThey = false,
-			positionTop = $columns.first().position().top;
-
-		$columns.each(function () {
-			if ($(this).position().top > positionTop) {
-				areThey = true;
-			}
-		});
-		return areThey;
+	this.areStackedColumnsCausedByElementQueries = function ($rwdObj) {
+		return (parseInt($rwdObj.css('margin-left'), 10) === 0) ? true : false;
 	};
 
 	this.getBreakpoint = function ($rwdObj, availableWidth) {
