@@ -204,7 +204,8 @@
 		min-height: 1px;
 	}
 	[class*="rwd-object-columns-"] {
-		margin: 0;
+		@include rem(padding-right, $grid-gutter/2);
+		@include rem(padding-left, $grid-gutter/2);
 		.column {
 			&:first-of-type { padding-left: 0; }
 			&:last-of-type { padding-right: 0; }

@@ -227,13 +227,17 @@
             <h2 id="rwd-object-columns">rwd-object-columns</h2>
 
             <div class="main-section">
-                <h3>2 equal columns</h3>
-                <div class="rwd-object-columns-2 sub-section" data-breakpoint="400">
+                <h3>2 equal columns (plus nested columns in second column)</h3>
+                <div class="rwd-object-columns-2 sub-section" id="columns-eq-demo">
                     <div class="column" >
                         <div style="background-color: #ccc;">&nbsp;</div>
                     </div>
                     <div class="column">
-                        <div style="background-color: #ccc;">&nbsp;</div>
+                        <div style="margin-bottom: 15px; background-color: #ccc;">&nbsp;</div>
+						<div class="rwd-object-columns-2">
+							<div class="column"><div style="background-color: #ccc;">&nbsp;</div></div>
+							<div class="column"><div style="background-color: #ccc;">&nbsp;</div></div>
+						</div>
                     </div>
                 </div>
 

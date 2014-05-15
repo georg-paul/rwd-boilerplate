@@ -141,6 +141,18 @@ code {
 	}
 }
 
+#columns-eq-demo {
+	&.eq-max-width-600 {
+		@include stacked-columns;
+	}
+
+	.rwd-object-columns-2 {
+		&.eq-max-width-400 {
+			@include stacked-columns;
+		}
+	}
+}
+
 .rwd-object-flyout {
 	padding: 10px 20px;
 	background-color: #ddd;
