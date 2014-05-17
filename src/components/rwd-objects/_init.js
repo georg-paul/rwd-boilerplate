@@ -26,27 +26,6 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-function RwdObjects() {
-	'use strict';
-
-	var self = this;
-
-	this.init = function () {
-		new RwdObjectHalign().init();
-		new RwdObjectHnav().init();
-		new RwdObjectMedia().init();
-		new RwdObjectVnav().init();
-		new RwdObjectColumns().init();
-		new RwdObjectTable().init();
-		new TraverseFlyoutComponents().init();
-		new RwdObjectFlyout().init();
-		new RwdObjectSliderInstances().init();
-
-		rwdBoilerplateHideLoading();
-	};
-}
-
-
 $(document).ready(function () {
 	'use strict';
 
@@ -54,5 +33,19 @@ $(document).ready(function () {
 		initCallbackRwdObjects();
 	}
 
-	new RwdObjects().init();
+	// set fixed page width to body tag to prevent
+	// visual bugs after resize or orientationchange
+	rwdBoilerplateSetFixedPageWidth();
+
+	new RwdObjectHalign().init();
+	new RwdObjectHnav().init();
+	new RwdObjectMedia().init();
+	new RwdObjectVnav().init();
+	new RwdObjectColumns().init();
+	new RwdObjectTable().init();
+	new TraverseFlyoutComponents().init();
+	new RwdObjectFlyout().init();
+	new RwdObjectSliderInstances().init();
+
+	rwdBoilerplateHideLoading();
 });

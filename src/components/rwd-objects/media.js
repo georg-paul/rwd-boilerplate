@@ -35,7 +35,6 @@ function RwdObjectMedia() {
 	this.init = function () {
 		$('.rwd-object-media').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.media($rwdObj);
 		});
 	};

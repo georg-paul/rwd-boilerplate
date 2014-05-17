@@ -444,6 +444,11 @@ function rwdBoilerplateShowLoading () {
 
 	$('html').addClass('rwd-boilerplate-loading');
 }
+
+function rwdBoilerplateSetFixedPageWidth () {
+	var $body = $('body');
+	$body.css('width', $body.get(0).clientWidth);
+}
 /*global $, waitForImagesToLoad */
 
 /*
@@ -480,7 +485,6 @@ function RwdObjectHalign() {
 	this.init = function () {
 		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			if (!$rwdObj.hasClass('full-width')) {
 				waitForImagesToLoad($rwdObj, function () {
 					self.halign($rwdObj);
@@ -558,7 +562,6 @@ function RwdObjectMedia() {
 	this.init = function () {
 		$('.rwd-object-media').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.media($rwdObj);
 		});
 	};
@@ -622,7 +625,6 @@ function RwdObjectHnav() {
 	this.init = function () {
 		$('.rwd-object-hnav').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			if (!$rwdObj.hasClass('no-dropdown')) {
 				self.hnav($rwdObj);
 			}
@@ -684,7 +686,6 @@ function RwdObjectVnav() {
 	this.init = function () {
 		$('.rwd-object-vnav').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.vnav($rwdObj);
 		});
 	};
@@ -731,7 +732,6 @@ function RwdObjectColumns() {
 	this.init = function () {
 		$('[class*="rwd-object-columns-"]').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.columns($rwdObj);
 		});
 	};
@@ -875,7 +875,6 @@ function RwdObjectTable() {
 	this.init = function () {
 		$('.rwd-object-table').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 
 			if ($rwdObj.width() > $rwdObj.parent().width()) {
 				$rwdObj.addClass('oversize');
@@ -1128,7 +1127,6 @@ function RwdObjectSliderInstances() {
 
 		$('.rwd-object-slider').each(function () {
 			$slider = $(this);
-			$slider.data('old-state', $slider.get(0).outerHTML);
 			startItemIndex = $slider.attr('data-start-item') || 0;
 			RwdObjectSliderInstance = new RwdObjectSlider($slider);
 			RwdObjectSliderInstance.init(parseInt(startItemIndex, 10));
@@ -1282,7 +1280,6 @@ function RwdObjectFlyout() {
 	this.init = function () {
 		$('.rwd-object-flyout').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.bindEvents($(this));
 		});
 	};
@@ -1355,27 +1352,6 @@ function RwdObjectFlyout() {
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-function RwdObjects() {
-	'use strict';
-
-	var self = this;
-
-	this.init = function () {
-		new RwdObjectHalign().init();
-		new RwdObjectHnav().init();
-		new RwdObjectMedia().init();
-		new RwdObjectVnav().init();
-		new RwdObjectColumns().init();
-		new RwdObjectTable().init();
-		new TraverseFlyoutComponents().init();
-		new RwdObjectFlyout().init();
-		new RwdObjectSliderInstances().init();
-
-		rwdBoilerplateHideLoading();
-	};
-}
-
-
 $(document).ready(function () {
 	'use strict';
 
@@ -1383,103 +1359,19 @@ $(document).ready(function () {
 		initCallbackRwdObjects();
 	}
 
-	new RwdObjects().init();
-});
-/*global $ */
+	// set fixed page width to body tag to prevent
+	// visual bugs after resize or orientationchange
+	rwdBoilerplateSetFixedPageWidth();
 
-/*
- The MIT License (MIT)
+	new RwdObjectHalign().init();
+	new RwdObjectHnav().init();
+	new RwdObjectMedia().init();
+	new RwdObjectVnav().init();
+	new RwdObjectColumns().init();
+	new RwdObjectTable().init();
+	new TraverseFlyoutComponents().init();
+	new RwdObjectFlyout().init();
+	new RwdObjectSliderInstances().init();
 
- Copyright (c) 2014 georg-paul
-
- Permission is hereby granted, free of charge, to any person obtaining
- a copy of this software and associated documentation files (the
- "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish,
- distribute, sublicense, and/or sell copies of the Software, and to
- permit persons to whom the Software is furnished to do so, subject to
- the following conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
-function WindowResize() {
-	'use strict';
-
-	var self = this;
-
-	self.resizeTimeout = null;
-	self.wd = window;
-	self.winWidth = window.innerWidth;
-	self.winHeight = window.innerHeight;
-
-	self.init = function () {
-		$(self.wd).bind('resize', function () {
-			var winNewWidth = window.innerWidth,
-				winNewHeight = window.innerHeight;
-
-			// Compare the new height and width with old one
-			if (self.winWidth !== winNewWidth || self.winHeight !== winNewHeight) {
-				window.clearTimeout(self.resizeTimeout);
-				self.resizeTimeout = self.wd.setTimeout(self.refreshPage, 100);
-			}
-			// Update the width and height
-			self.winWidth = winNewWidth;
-			self.winHeight = winNewHeight;
-		});
-	};
-
-	self.refreshPage = function () {
-		rwdBoilerplateShowLoading();
-		self.removeAppliedElementQueries();
-		self.restoreRwdObjectsToInitialState();
-		self.reinitializeRwdBoilerplate();
-	};
-
-	self.removeAppliedElementQueries = function () {
-		$('[class*="eq-max-width-"], [class*="eq-min-width-"]').each(function () {
-			var $this = $(this),
-				prefix = "eq-max-width-",
-				classes = $this.attr("class").split(" ").filter(function (c) {
-					return c.lastIndexOf(prefix, 0) !== 0;
-				});
-			$this.attr("class", classes.join(" "));
-
-			prefix = "eq-min-width-";
-			classes = $this.attr("class").split(" ").filter(function (c) {
-				return c.lastIndexOf(prefix, 0) !== 0;
-			});
-			$this.attr("class", classes.join(" "));
-		});
-	};
-
-	self.restoreRwdObjectsToInitialState = function () {
-		if (typeof RwdObjectSliderInstance !== 'undefined') {
-			RwdObjectSliderInstance.clearAutoPlayInterval();
-		}
-		$('[class*="rwd-object-"]').each(function () {
-			$(this).replaceWith($(this).data('old-state'));
-		});
-		$('[data-halign-container-id]').removeClass('children-no-side-by-side children-nearly-no-side-by-side');
-	};
-
-	self.reinitializeRwdBoilerplate = function () {
-		new ElementQueries().init();
-		new RwdObjects().init();
-	};
-}
-
-$(document).ready(function () {
-	'use strict';
-
-	new WindowResize().init();
+	rwdBoilerplateHideLoading();
 });

@@ -101,3 +101,8 @@ function rwdBoilerplateShowLoading () {
 
 	$('html').addClass('rwd-boilerplate-loading');
 }
+
+function rwdBoilerplateSetFixedPageWidth () {
+	var $body = $('body');
+	$body.css('width', $body.get(0).clientWidth);
+}

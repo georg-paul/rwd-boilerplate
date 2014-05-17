@@ -35,7 +35,6 @@ function RwdObjectHalign() {
 	this.init = function () {
 		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			if (!$rwdObj.hasClass('full-width')) {
 				waitForImagesToLoad($rwdObj, function () {
 					self.halign($rwdObj);

@@ -35,7 +35,6 @@ function RwdObjectColumns() {
 	this.init = function () {
 		$('[class*="rwd-object-columns-"]').each(function () {
 			var $rwdObj = $(this);
-			$rwdObj.data('old-state', $rwdObj.get(0).outerHTML);
 			self.columns($rwdObj);
 		});
 	};

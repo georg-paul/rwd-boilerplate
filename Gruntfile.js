@@ -76,8 +76,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/table.js',
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/flyout.js',
-					'<%= meta.srcPath %>rwd-objects/_init.js',
-					'<%= meta.srcPath %>rwd-objects/_resize.js'
+					'<%= meta.srcPath %>rwd-objects/_init.js'
 				],
 				dest: '<%= meta.srcPath %>rwd-boilerplate.concat.js'
 			},
