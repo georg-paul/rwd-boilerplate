@@ -258,6 +258,9 @@ function waitForImagesToLoad($element, callback) {
 				callback();
 			}
 		});
+		images.on('error', function () {
+			callback();
+		});
 	}
 }
 
@@ -339,10 +342,32 @@ function rwdBoilerplateShowLoading () {
 }
 
 function rwdBoilerplateSetFixedPageWidth () {
+	'use strict';
+
 	var $body = $('body');
 	$body.css('width', $body.get(0).clientWidth);
 }
-/*global $, waitForImagesToLoad */
+
+function rwdBoilerplateRemoveAppliedElementQueries ($context) {
+	'use strict';
+
+	$context.find('[class*="eq-max-width-"], [class*="eq-min-width-"]').each(function () {
+		var $this = $(this);
+
+		rwdBoilerplateRemoveClassesWithGivenPrefix($this, 'eq-max-width-');
+		rwdBoilerplateRemoveClassesWithGivenPrefix($this, 'eq-min-width-');
+	});
+}
+
+function rwdBoilerplateRemoveClassesWithGivenPrefix ($target, classPrefix) {
+	'use strict';
+
+	var classes = $target.attr("class").split(" ").filter(function (c) {
+		return c.lastIndexOf(classPrefix, 0) !== 0;
+	});
+	$target.attr("class", classes.join(" "));
+}
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -375,45 +400,39 @@ function RwdObjectHalign() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
-			var $rwdObj = $(this);
-			if (!$rwdObj.hasClass('full-width')) {
-				waitForImagesToLoad($rwdObj, function () {
-					self.halign($rwdObj);
-				});
-			}
-		});
+	this.init = function ($rwdObj) {
+		var element = {};
+		element.$element = $rwdObj;
+		element.availableWidth = $rwdObj.width();
+		element.totalChildrenWidth = self.getTotalChildrenWidth($rwdObj);
+		element.$container = $('[data-halign-container-id="' + parseInt($rwdObj.attr('data-halign-id'), 10) + '"]');
+
+		self.calculateDimensionsAndConditionallyAddProperClasses(element);
 	};
 
-	this.halign = function ($rwdObj) {
-		var availableWidth = $rwdObj.width(),
-			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj),
-			containerId = parseInt($rwdObj.attr('data-halign-id'), 10),
-			$container = $('[data-halign-container-id="' + containerId + '"]');
-
-		if (totalChildrenWidth >= availableWidth) {
-			$rwdObj.addClass('no-side-by-side');
-			if ($container.length) {
-				$container.addClass('children-no-side-by-side');
-			}
-		} else if ((totalChildrenWidth < availableWidth) && totalChildrenWidth + 50 > availableWidth) {
-			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
-			if ($container.length) {
-				$container.addClass('children-nearly-no-side-by-side');
-			}
+	this.calculateDimensionsAndConditionallyAddProperClasses = function (element) {
+		if (element.totalChildrenWidth >= element.availableWidth) {
+			self.addClasses(element, 'no-side-by-side');
+		} else if (element.totalChildrenWidth + 50 > element.availableWidth) {
+			self.addClasses(element, 'nearly-no-side-by-side');
+			self.addClasses(element, 'side-by-side');
 		} else {
-			$rwdObj.addClass('side-by-side');
+			self.addClasses(element, 'side-by-side');
+		}
+	};
+
+	this.addClasses = function (element, mode) {
+		element.$element.addClass(mode);
+		if (element.$container.length) {
+			element.$container.addClass('children-' + mode);
 		}
 	};
 
 	this.getTotalChildrenWidth = function ($rwdObj) {
-		var totalChildrenWidth = 0,
-			halignChild;
+		var totalChildrenWidth = 0;
 
 		$rwdObj.children().each(function () {
-			halignChild = $(this);
-			totalChildrenWidth += halignChild.outerWidth(true);
+			totalChildrenWidth += $(this).outerWidth(true);
 		});
 
 		return totalChildrenWidth;
@@ -452,14 +471,7 @@ function RwdObjectMedia() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-media').each(function () {
-			var $rwdObj = $(this);
-			self.media($rwdObj);
-		});
-	};
-
-	this.media = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		var $media = ($rwdObj.find('.img').length) ? $rwdObj.find('.img') : $rwdObj.find('.video'),
 			mediaImage = new Image(),
 			mediaObjectIsHidden = false,
@@ -473,6 +485,7 @@ function RwdObjectMedia() {
 					$rwdObj.addClass('no-side-by-side');
 				}
 				$media.css('max-width', this.width);
+				$media.attr('data-image-ready', true);
 			};
 			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
 		} else {
@@ -515,32 +528,25 @@ function RwdObjectHnav() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-hnav').each(function () {
-			var $rwdObj = $(this);
-			if (!$rwdObj.hasClass('no-dropdown')) {
-				self.hnav($rwdObj);
-			}
-		});
-	};
+	this.init = function ($rwdObj) {
+		if (!$rwdObj.hasClass('no-dropdown')) {
+			var $rootUL = $rwdObj.find('> ul'),
+				firstLevelItems = $rootUL.find('> li'),
+				clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
 
-	this.hnav = function ($rwdObj) {
-		var $rootUL = $rwdObj.find('> ul'),
-			firstLevelItems = $rootUL.find('> li'),
-			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
+			firstLevelItems.each(function () {
+				if ($(this).position().top > firstLevelItems.first().position().top) {
+					$rwdObj.addClass('breakpoint-small');
+					$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
+					return false;
+				}
+			});
 
-		firstLevelItems.each(function () {
-			if ($(this).position().top > firstLevelItems.first().position().top) {
-				$rwdObj.addClass('breakpoint-small');
-				$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
-				return false;
-			}
-		});
-
-		$rwdObj.find('.toggle').bind(clickEventType, function () {
-			$rootUL.toggle();
-			$(this).toggleClass('open');
-		});
+			$rwdObj.find('.toggle').bind(clickEventType, function () {
+				$rootUL.toggle();
+				$(this).toggleClass('open');
+			});
+		}
 	};
 }
 /*global $ */
@@ -576,14 +582,7 @@ function RwdObjectVnav() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-vnav').each(function () {
-			var $rwdObj = $(this);
-			self.vnav($rwdObj);
-		});
-	};
-
-	this.vnav = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		$rwdObj.find('.toggle').bind('click', function () {
 			$rwdObj.children('ul').toggle();
 		});
@@ -622,25 +621,38 @@ function RwdObjectColumns() {
 
 	var self = this;
 
-	this.init = function () {
-		$('[class*="rwd-object-columns-"]').each(function () {
-			var $rwdObj = $(this);
-			self.columns($rwdObj);
-		});
-	};
-
-	this.columns = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		var availableWidth = $rwdObj.parent().width(),
 			$columns = $rwdObj.find('> .column');
 
-		if (
-			self.getBreakpoint($rwdObj, availableWidth) > availableWidth ||
-				(self.areStackedColumnsCausedByElementQueries($rwdObj) && !$rwdObj.hasClass('fixed-width'))
-		) {
-			$rwdObj.addClass('stacked-columns');
-			self.moveContentWithinColumns($rwdObj);
-			self.convertToSliderItems($rwdObj);
+		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth) {
+			self.stackColumnsAndTraverseMarkup($rwdObj);
+		} else if (self.areStackedColumnsCausedByElementQueries($rwdObj) && !$rwdObj.hasClass('fixed-width')) {
+			if (self.areColumnsNestedWithinOtherColumns($rwdObj)) {
+				rwdBoilerplateRemoveAppliedElementQueries(self.getFirstParentColumnsOfNestedColumns($rwdObj));
+				new ElementQueries().init();
+				if (self.areStackedColumnsCausedByElementQueries($rwdObj)) {
+					self.stackColumnsAndTraverseMarkup($rwdObj);
+				}
+				self.resetSliderHeight($rwdObj);
+			} else {
+				self.stackColumnsAndTraverseMarkup($rwdObj);
+			}
 		}
+	};
+
+	this.areColumnsNestedWithinOtherColumns = function ($rwdObj) {
+		return (self.getFirstParentColumnsOfNestedColumns($rwdObj).length) ? true : false;
+	};
+
+	this.getFirstParentColumnsOfNestedColumns = function ($rwdObj) {
+		return $rwdObj.parents('[class*="rwd-object-columns-"]').first();
+	};
+
+	this.stackColumnsAndTraverseMarkup = function ($rwdObj) {
+		$rwdObj.addClass('stacked-columns');
+		self.moveContentWithinColumns($rwdObj);
+		self.convertToSliderItems($rwdObj);
 	};
 
 	this.areStackedColumnsCausedByElementQueries = function ($rwdObj) {
@@ -665,7 +677,7 @@ function RwdObjectColumns() {
 				}
 			});
 		} else {
-			// Column widths are relative and the data-breakpoint attribute contains the breakpoint
+			// Column widths are percentage based and the data-breakpoint attribute contains the breakpoint
 			breakpoint = $rwdObj.attr('data-breakpoint') || 0;
 		}
 
@@ -691,12 +703,23 @@ function RwdObjectColumns() {
 	};
 
 	this.convertToSliderItems = function ($rwdObj) {
-		if ($rwdObj.hasClass('convert-columns-to-slider-items')) {
+		var $parentSlider = $rwdObj.closest('.rwd-object-slider');
+
+		if ($rwdObj.hasClass('convert-columns-to-slider-items') && $parentSlider.length) {
 			$rwdObj.find('> .column').each(function () {
 				var $newSliderItem = $(this).children().wrapAll('<div class="item"></div>');
 				$newSliderItem.parent().appendTo($(this).closest('.container'));
 			});
 			$rwdObj.closest('.item').remove();
+			new RwdObjectSlider().init($parentSlider);
+		}
+	};
+
+	this.resetSliderHeight = function ($rwdObj) {
+		var $parentSlider = $rwdObj.closest('.rwd-object-slider');
+
+		if ($parentSlider.length) {
+			$parentSlider.css('height', $parentSlider.find('.item:nth-child(1)').outerHeight());
 		}
 	};
 
@@ -765,18 +788,14 @@ function RwdObjectTable() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-table').each(function () {
-			var $rwdObj = $(this);
-
-			if ($rwdObj.width() > $rwdObj.parent().width()) {
-				$rwdObj.addClass('oversize');
-				if (!$rwdObj.hasClass('simple-scrolling')) {
-					$rwdObj.addClass('fixed-thead');
-					self.equalCellHeightPerRow($rwdObj);
-				}
+	this.init = function ($rwdObj) {
+		if ($rwdObj.width() > $rwdObj.parent().width()) {
+			$rwdObj.addClass('oversize');
+			if (!$rwdObj.hasClass('simple-scrolling')) {
+				$rwdObj.addClass('fixed-thead');
+				self.equalCellHeightPerRow($rwdObj);
 			}
-		});
+		}
 	};
 
 	this.equalCellHeightPerRow = function ($rwdObj) {
@@ -806,7 +825,7 @@ function RwdObjectTable() {
 		return maxHeight;
 	};
 }
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -835,26 +854,31 @@ function RwdObjectTable() {
 
 var RwdObjectSliderInstance;
 
-function RwdObjectSlider($rwdObj) {
+function RwdObjectSlider() {
 	'use strict';
 
 	var self = this;
 
-	self.$slider = $rwdObj.find('> .container');
-	self.$sliderItems = self.$slider.find('> .item');
-	self.itemCount = self.$sliderItems.length;
-	self.itemWidth = $rwdObj.width();
-	self.itemMargin = parseInt(self.$sliderItems.first().css('margin-right'), 10);
-	self.itemOuterWidth = self.itemWidth + self.itemMargin;
-	self.$nextButton = $rwdObj.find('> .slider-nav .next-button');
-	self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
-	self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
-	self.fadeEffect = !!($rwdObj.hasClass('fade'));
-	self.autoPlayInterval = $rwdObj.attr('data-autoplay-interval') || 5000;
-	self.autoPlayStart = $rwdObj.attr('data-autoplay-start') || 2000;
+	this.init = function ($rwdObj) {
+		self.$rwdObj = $rwdObj;
+		self.$slider = $rwdObj.find('> .container');
+		self.$sliderItems = self.$slider.find('> .item');
+		self.itemCount = self.$sliderItems.length;
+		self.itemWidth = $rwdObj.width();
+		self.itemMargin = parseInt(self.$sliderItems.first().css('margin-right'), 10);
+		self.itemOuterWidth = self.itemWidth + self.itemMargin;
+		self.$nextButton = $rwdObj.find('> .slider-nav .next-button');
+		self.$prevButton = $rwdObj.find('> .slider-nav .prev-button');
+		self.$progressBars = $rwdObj.find('> .slider-nav .progress-bar');
+		self.fadeEffect = !!($rwdObj.hasClass('fade'));
+		self.autoPlayInterval = $rwdObj.attr('data-autoplay-interval') || 5000;
+		self.autoPlayStart = $rwdObj.attr('data-autoplay-start') || 2000;
+		self.startItemIndex = parseInt($rwdObj.attr('data-start-item'), 10) || 0;
 
-	this.init = function (startItemIndex) {
-		self.startItemIndex = startItemIndex || 0;
+		if (typeof initCallbackRwdObjectSlider === 'function') {
+			initCallbackRwdObjectSlider();
+		}
+
 		self.setStyles();
 
 		if (self.itemCount > 1) {
@@ -886,9 +910,7 @@ function RwdObjectSlider($rwdObj) {
 			$(this).find('li:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
 		});
 
-		waitForImagesToLoad(self.$slider, function () {
-			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
-		});
+		self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
 	};
 
 	this.next = function (targetXPos, targetItemIndex) {
@@ -913,12 +935,12 @@ function RwdObjectSlider($rwdObj) {
 		}
 
 		if (typeof nextCallbackRwdObjectSlider === 'function') {
-			nextCallbackRwdObjectSlider($rwdObj, targetItemIndex);
+			nextCallbackRwdObjectSlider(self.$rwdObj, targetItemIndex);
 		}
 	};
 
-	this.isCarouselAnimated = function () {
-		return self.$slider.hasClass('is-animated');
+	this.isCarouselAnimated = function ($carousel) {
+		return $carousel.hasClass('is-animated');
 	};
 
 	this.toggleControlsStateClasses = function (targetItemIndex) {
@@ -939,7 +961,7 @@ function RwdObjectSlider($rwdObj) {
 			e.preventDefault();
 			var targetItemIndex = ($(e.target).hasClass('next-button')) ? self.$slider.find('> .active').next().index() : self.$slider.find('> .active').prev().index();
 
-			if (!self.isCarouselAnimated() && !$(this).hasClass('disabled')) {
+			if (!self.isCarouselAnimated(self.$slider) && !$(this).hasClass('disabled')) {
 				self.clearAutoPlayInterval();
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
@@ -951,7 +973,7 @@ function RwdObjectSlider($rwdObj) {
 			e.preventDefault();
 			var targetItemIndex = $(this).closest('li').index();
 
-			if (!self.isCarouselAnimated() && self.$slider.find('> .active').index() !== targetItemIndex) {
+			if (!self.isCarouselAnimated(self.$slider) && self.$slider.find('> .active').index() !== targetItemIndex) {
 				self.clearAutoPlayInterval();
 				self.next(targetItemIndex * self.itemOuterWidth * -1, targetItemIndex);
 			}
@@ -980,7 +1002,7 @@ function RwdObjectSlider($rwdObj) {
 	};
 
 	this.autoplay = function () {
-		if ($rwdObj.hasClass('autoplay')) {
+		if (self.$rwdObj.hasClass('autoplay')) {
 			var activeItemIndex = self.$slider.find('> .active').index(),
 				targetItemIndex = (activeItemIndex + 1 === self.itemCount) ? 0 : activeItemIndex + 1;
 
@@ -1001,29 +1023,6 @@ function RwdObjectSlider($rwdObj) {
 		try {
 			interval.clearAll();
 		} catch (e) {}
-	};
-}
-
-
-function RwdObjectSliderInstances() {
-	'use strict';
-
-	var self = this;
-
-	this.init = function () {
-		if (typeof initCallbackRwdObjectSlider === 'function') {
-			initCallbackRwdObjectSlider();
-		}
-
-		var $slider,
-			startItemIndex = 0;
-
-		$('.rwd-object-slider').each(function () {
-			$slider = $(this);
-			startItemIndex = $slider.attr('data-start-item') || 0;
-			RwdObjectSliderInstance = new RwdObjectSlider($slider);
-			RwdObjectSliderInstance.init(parseInt(startItemIndex, 10));
-		});
 	};
 }
 /*global $ */
@@ -1170,11 +1169,8 @@ function RwdObjectFlyout() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-flyout').each(function () {
-			var $rwdObj = $(this);
-			self.bindEvents($(this));
-		});
+	this.init = function ($rwdObj) {
+		self.bindEvents($rwdObj);
 	};
 
 	this.bindEvents = function ($rwdObj) {
@@ -1218,53 +1214,66 @@ function RwdObjectFlyout() {
 		}
 	};
 }
-/*global $ */
-
-/*
- The MIT License (MIT)
-
- Copyright (c) 2014 georg-paul
-
- Permission is hereby granted, free of charge, to any person obtaining
- a copy of this software and associated documentation files (the
- "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish,
- distribute, sublicense, and/or sell copies of the Software, and to
- permit persons to whom the Software is furnished to do so, subject to
- the following conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+/*global $, ElementQueries, initCallbackRwdObjects, waitForImagesToLoad, rwdBoilerplateSetFixedPageWidth,
+rwdBoilerplateRemoveAppliedElementQueries, rwdBoilerplateHideLoading */
 
 $(document).ready(function () {
 	'use strict';
 
+	// calls the global function 'initCallbackRwdObjects()' if you want to
+	// inject custom code to the DOM before the rwd-objects are initialized
 	if (typeof initCallbackRwdObjects === 'function') {
 		initCallbackRwdObjects();
 	}
 
-	// set fixed page width to body tag to prevent
-	// visual bugs after resize or orientationchange
+	// sets fixed page width to body tag to prevent visual bugs after resize or orientationchange
 	rwdBoilerplateSetFixedPageWidth();
 
-	new RwdObjectHalign().init();
-	new RwdObjectHnav().init();
-	new RwdObjectMedia().init();
-	new RwdObjectVnav().init();
-	new RwdObjectColumns().init();
-	new RwdObjectTable().init();
-	new TraverseFlyoutComponents().init();
-	new RwdObjectFlyout().init();
-	new RwdObjectSliderInstances().init();
+	// iterates over all rwd-objects and run code after all images
+	// within rwd-object-halign and rwd-object-slider have been loaded
+	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider'), function () {
+		$('[class*="rwd-object-"]').each(function () {
+			var $rwdObj = $(this),
+				classNames = $rwdObj.attr('class').split(/\s+/),
+				objType = '',
+				i = 0;
 
-	rwdBoilerplateHideLoading();
+			for (i = 0; i < classNames.length; i += 1) {
+				objType = classNames[i].split('rwd-object-')[1];
+				if (objType !== undefined) {
+					if (objType === 'halign') {
+						new RwdObjectHalign().init($rwdObj);
+					} else if (objType === 'media') {
+						new RwdObjectMedia().init($rwdObj);
+					} else if (objType === 'hnav') {
+						new RwdObjectHnav().init($rwdObj);
+					} else if (objType === 'vnav') {
+						new RwdObjectVnav().init($rwdObj);
+					} else if (objType.indexOf('columns-') !== -1) {
+						new RwdObjectColumns().init($rwdObj);
+					} else if (objType.indexOf('table') !== -1) {
+						new RwdObjectTable().init($rwdObj);
+					} else if (objType.indexOf('slider') !== -1) {
+						new RwdObjectSlider().init($rwdObj);
+					} else if (objType.indexOf('flyout') !== -1) {
+						new RwdObjectFlyout().init($rwdObj);
+					}
+				}
+			}
+		});
+
+		// after all changes to the DOM caused by the rwd-objects are complete
+		// parse the stylesheets, search for flyout patterns and move nodes to flyouts
+		new TraverseFlyoutComponents().init();
+
+		// removes applied element queries and reruns element queries
+		// due to DOM traversing caused by the rwd-objects code
+		rwdBoilerplateRemoveAppliedElementQueries($('html'));
+		new ElementQueries().init();
+
+		// hides the loading animtion
+		// --> Probably hide animation earlier, not in the callback of waitForImagesToLoad
+		// --> FOUC might be better than showing the loading animation for too long
+		rwdBoilerplateHideLoading();
+	});
 });

@@ -32,18 +32,14 @@ function RwdObjectTable() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-table').each(function () {
-			var $rwdObj = $(this);
-
-			if ($rwdObj.width() > $rwdObj.parent().width()) {
-				$rwdObj.addClass('oversize');
-				if (!$rwdObj.hasClass('simple-scrolling')) {
-					$rwdObj.addClass('fixed-thead');
-					self.equalCellHeightPerRow($rwdObj);
-				}
+	this.init = function ($rwdObj) {
+		if ($rwdObj.width() > $rwdObj.parent().width()) {
+			$rwdObj.addClass('oversize');
+			if (!$rwdObj.hasClass('simple-scrolling')) {
+				$rwdObj.addClass('fixed-thead');
+				self.equalCellHeightPerRow($rwdObj);
 			}
-		});
+		}
 	};
 
 	this.equalCellHeightPerRow = function ($rwdObj) {

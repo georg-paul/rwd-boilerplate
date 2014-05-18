@@ -54,7 +54,7 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>rwd-objects/*.js', '<%= meta.srcPath %>utilities/*.js', 'tests/qunit/tests.js'],
+				files: ['<%= meta.srcPath %>rwd-objects/*.js', '<%= meta.srcPath %>utilities/*.js', '<%= meta.srcPath %>init.js', 'tests/qunit/tests.js'],
 				tasks: ['jshint', 'concat', 'uglify', 'qunit']
 			}
 		},
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/table.js',
 					'<%= meta.srcPath %>rwd-objects/slider.js',
 					'<%= meta.srcPath %>rwd-objects/flyout.js',
-					'<%= meta.srcPath %>rwd-objects/_init.js'
+					'<%= meta.srcPath %>init.js'
 				],
 				dest: '<%= meta.srcPath %>rwd-boilerplate.concat.js'
 			},

@@ -22,6 +22,9 @@ function waitForImagesToLoad($element, callback) {
 				callback();
 			}
 		});
+		images.on('error', function () {
+			callback();
+		});
 	}
 }
 
@@ -103,6 +106,28 @@ function rwdBoilerplateShowLoading () {
 }
 
 function rwdBoilerplateSetFixedPageWidth () {
+	'use strict';
+
 	var $body = $('body');
 	$body.css('width', $body.get(0).clientWidth);
+}
+
+function rwdBoilerplateRemoveAppliedElementQueries ($context) {
+	'use strict';
+
+	$context.find('[class*="eq-max-width-"], [class*="eq-min-width-"]').each(function () {
+		var $this = $(this);
+
+		rwdBoilerplateRemoveClassesWithGivenPrefix($this, 'eq-max-width-');
+		rwdBoilerplateRemoveClassesWithGivenPrefix($this, 'eq-min-width-');
+	});
+}
+
+function rwdBoilerplateRemoveClassesWithGivenPrefix ($target, classPrefix) {
+	'use strict';
+
+	var classes = $target.attr("class").split(" ").filter(function (c) {
+		return c.lastIndexOf(classPrefix, 0) !== 0;
+	});
+	$target.attr("class", classes.join(" "));
 }

@@ -4,38 +4,26 @@
 (function (win) {
 	"use strict";
 
-
 	module("rwd-object-halign");
 
 	test("getTotalChildrenWidth returns correct px value", function () {
-		var $halignTestObject1 = $('#halign-test-1'),
-			$halignTestObject2 = $('#halign-test-2'),
-			$halignTestObject3 = $('#halign-test-3'),
-			HalignTestInstance = new RwdObjectHalign();
+		var HalignTestInstance = new RwdObjectHalign();
 
-		equal(HalignTestInstance.getTotalChildrenWidth($halignTestObject1), 1184);
-		equal(HalignTestInstance.getTotalChildrenWidth($halignTestObject2), 1140);
-		equal(HalignTestInstance.getTotalChildrenWidth($halignTestObject3), 700);
+		equal(HalignTestInstance.getTotalChildrenWidth($('#halign-test-1')), 1184);
+		equal(HalignTestInstance.getTotalChildrenWidth($('#halign-test-2')), 1140);
+		equal(HalignTestInstance.getTotalChildrenWidth($('#halign-test-3')), 700);
 	});
 
 	test("no-side-by-side and side-by-side classes are applied correct", function () {
-		var $halignTestObject1 = $('#halign-test-1'),
-			$halignTestObject3 = $('#halign-test-3'),
-			$halignTestObject4 = $('#halign-test-4'),
-			HalignTestInstance = new RwdObjectHalign();
+		ok($('#halign-test-1').hasClass('no-side-by-side'), true);
+		ok($('[data-halign-container-id="' + parseInt($('#halign-test-1').attr('data-halign-id'), 10) + '"]').hasClass('children-no-side-by-side'), true);
 
-		HalignTestInstance.init();
+		ok(!$('#halign-test-3').hasClass('no-side-by-side'), true);
+		ok($('#halign-test-3').hasClass('side-by-side'), true);
 
-		ok($halignTestObject1.hasClass('no-side-by-side'), true);
-		ok($('[data-halign-container-id="' + parseInt($halignTestObject1.attr('data-halign-id'), 10) + '"]').hasClass('children-no-side-by-side'), true);
-
-		ok(!$halignTestObject3.hasClass('no-side-by-side'), true);
-		ok($halignTestObject3.hasClass('side-by-side'), true);
-
-		ok($halignTestObject4.hasClass('no-side-by-side'), true);
-		ok(!$halignTestObject4.hasClass('side-by-side'), true);
+		ok($('#halign-test-4').hasClass('no-side-by-side'), true);
+		ok(!$('#halign-test-4').hasClass('side-by-side'), true);
 	});
-
 
 
 
@@ -48,34 +36,22 @@
 	});
 
 	test("columns are stacked after reaching a breakpoint", function () {
-		var $columsTestObject = $('#columns-test-1'),
-			ColumnsTestInstance = new RwdObjectColumns();
-
-		ColumnsTestInstance.init();
-		ok($columsTestObject.hasClass('stacked-columns'), true);
+		ok($('#columns-test-1').hasClass('stacked-columns'), true);
 	});
 
 	test("columns are stacked when css mixin stacked-columns was used", function () {
-		var $columsTestObject = $('#columns-test-2'),
-			ColumnsTestInstance = new RwdObjectColumns();
-
-		ColumnsTestInstance.init();
-		ok($columsTestObject.hasClass('stacked-columns'), true);
+		ok($('#columns-test-2').hasClass('stacked-columns'), true);
 	});
 
 
 	module("rwd-object-slider");
 
 	test("isCarouselAnimated returns false if no animation is currently running", function () {
-		var SliderInstance = new RwdObjectSlider($('<div class="rwd-object-slider"><div class="container"></div></div>'));
-
-		ok(SliderInstance.isCarouselAnimated() === false);
+		ok(new RwdObjectSlider().isCarouselAnimated($('<div class="container"></div>')) === false);
 	});
 
 	test("isCarouselAnimated returns true if slider is animated currently", function () {
-		var SliderInstance = new RwdObjectSlider($('<div class="rwd-object-slider"><div class="container is-animated"></div></div>'));
-
-		ok(SliderInstance.isCarouselAnimated());
+		ok(new RwdObjectSlider().isCarouselAnimated($('<div class="container is-animated"></div>')));
 	});
 
 

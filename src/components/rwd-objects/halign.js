@@ -1,5 +1,5 @@
 /*jslint browser: true */
-/*global $, waitForImagesToLoad */
+/*global $ */
 
 /*
  The MIT License (MIT)
@@ -32,45 +32,39 @@ function RwdObjectHalign() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-halign, .rwd-object-valign-middle').each(function () {
-			var $rwdObj = $(this);
-			if (!$rwdObj.hasClass('full-width')) {
-				waitForImagesToLoad($rwdObj, function () {
-					self.halign($rwdObj);
-				});
-			}
-		});
+	this.init = function ($rwdObj) {
+		var element = {};
+		element.$element = $rwdObj;
+		element.availableWidth = $rwdObj.width();
+		element.totalChildrenWidth = self.getTotalChildrenWidth($rwdObj);
+		element.$container = $('[data-halign-container-id="' + parseInt($rwdObj.attr('data-halign-id'), 10) + '"]');
+
+		self.calculateDimensionsAndConditionallyAddProperClasses(element);
 	};
 
-	this.halign = function ($rwdObj) {
-		var availableWidth = $rwdObj.width(),
-			totalChildrenWidth = self.getTotalChildrenWidth($rwdObj),
-			containerId = parseInt($rwdObj.attr('data-halign-id'), 10),
-			$container = $('[data-halign-container-id="' + containerId + '"]');
-
-		if (totalChildrenWidth >= availableWidth) {
-			$rwdObj.addClass('no-side-by-side');
-			if ($container.length) {
-				$container.addClass('children-no-side-by-side');
-			}
-		} else if ((totalChildrenWidth < availableWidth) && totalChildrenWidth + 50 > availableWidth) {
-			$rwdObj.addClass('nearly-no-side-by-side side-by-side');
-			if ($container.length) {
-				$container.addClass('children-nearly-no-side-by-side');
-			}
+	this.calculateDimensionsAndConditionallyAddProperClasses = function (element) {
+		if (element.totalChildrenWidth >= element.availableWidth) {
+			self.addClasses(element, 'no-side-by-side');
+		} else if (element.totalChildrenWidth + 50 > element.availableWidth) {
+			self.addClasses(element, 'nearly-no-side-by-side');
+			self.addClasses(element, 'side-by-side');
 		} else {
-			$rwdObj.addClass('side-by-side');
+			self.addClasses(element, 'side-by-side');
+		}
+	};
+
+	this.addClasses = function (element, mode) {
+		element.$element.addClass(mode);
+		if (element.$container.length) {
+			element.$container.addClass('children-' + mode);
 		}
 	};
 
 	this.getTotalChildrenWidth = function ($rwdObj) {
-		var totalChildrenWidth = 0,
-			halignChild;
+		var totalChildrenWidth = 0;
 
 		$rwdObj.children().each(function () {
-			halignChild = $(this);
-			totalChildrenWidth += halignChild.outerWidth(true);
+			totalChildrenWidth += $(this).outerWidth(true);
 		});
 
 		return totalChildrenWidth;

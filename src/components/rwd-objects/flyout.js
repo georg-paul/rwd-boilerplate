@@ -143,11 +143,8 @@ function RwdObjectFlyout() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-flyout').each(function () {
-			var $rwdObj = $(this);
-			self.bindEvents($(this));
-		});
+	this.init = function ($rwdObj) {
+		self.bindEvents($rwdObj);
 	};
 
 	this.bindEvents = function ($rwdObj) {

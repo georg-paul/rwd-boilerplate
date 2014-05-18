@@ -48,9 +48,6 @@
                             <li>
                                 <a href="#element-queries">Element Queries</a>
                             </li>
-                            <li>
-                                <a href="#ui">UI</a>
-                            </li>
                         </ul>
                     </nav>
                     <div class="right">
@@ -338,9 +335,9 @@
 
 
             <h2>rwd-object-columns (switching positions of content within columns when columns are stacked on top of each other)</h2>
-            <div class="rwd-object-columns-3-3-3-6 main-section" data-breakpoint="600">
+            <div class="rwd-object-columns-2-8-4 main-section" data-breakpoint="750">
                 <div class="column" >
-                    <div data-move-to="3">
+                    <div data-move-to="2">
                         <div class="content-element">
                             <h3>Content Element 1</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -352,16 +349,30 @@
 					</div>
                 </div>
                 <div class="column" >
-                    <div class="content-element">
-                        <h3>Content Element 3</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
-                <div class="column" >
                     <div class="second-move-to-demo-content" data-move-to="1" data-insert-before="tag-h3">
                         <div class="content-element">
-                            <h3>Most import content (would be at the bottom when columns are stacked)</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="rwd-object-media">
+                                <div class="img">
+                                    <img src="http://placehold.it/300x200" alt="" width="300" height="200" />
+                                </div>
+                                <div class="bd">
+                                    <h3>Nested media element</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
+                                    </p>
+                                </div>
+                            </div>
+                            <nav class="rwd-object-hnav">
+                                <button class="toggle">Toggle</button>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Portfolio</a></li>
+                                    <li><a href="#">Team</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -550,6 +561,64 @@
                 </div>
             </div>
 
+            <div id="example-nested-columns-and-slider" class="rwd-object-columns-2-3-9" data-breakpoint="959">
+                <div class="column">
+                    <h2>Left column</h2>
+                    <div class="content-element">
+                        <h3>Content Element 1</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div class="content-element">
+                        <h3>Content Element 2</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="rwd-object-slider">
+                        <div class="slider-nav rwd-object-halign">
+                            <h2 class="left">Right column</h2>
+                            <div class="right">
+                                <button class="prev-button">Previous</button>
+                                <button class="next-button">Next</button>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="item">
+                                <div class="rwd-object-columns-2 convert-columns-to-slider-items">
+                                    <div class="column" >
+                                        <h3>Slider item 1</h3>
+                                        <img src="http://placehold.it/300x120" alt="" width="300" height="120" />
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p><a href="#">Read more</a></p>
+                                    </div>
+                                    <div class="column" >
+                                        <h3>Slider item 2</h3>
+                                        <img src="http://placehold.it/300x120" alt="" width="300" height="120" />
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p><a href="#">Read more</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="rwd-object-columns-2 convert-columns-to-slider-items">
+                                    <div class="column" >
+                                        <h3>Slider item 3</h3>
+                                        <img src="http://placehold.it/300x120" alt="" width="300" height="120" />
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p><a href="#">Read more</a></p>
+                                    </div>
+                                    <div class="column" >
+                                        <h3>Slider item 4</h3>
+                                        <img src="http://placehold.it/300x120" alt="" width="300" height="120" />
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p><a href="#">Read more</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="rwd-object-slider fade main-section" data-start-item="1">
                 <div class="slider-nav rwd-object-hlist rwd-object-halign">
@@ -735,12 +804,6 @@
                     ultricies nec, pellentesque eu, pretium quis, sem. Lorem ipsum dolor sit amet, consectetuer adipiscing
                     elit.
                 </p>
-            </div>
-        </section>
-
-        <section class="main-section">
-            <div class="rwd-boilerplate-delimiter">
-                <h1 id="ui">UI</h1>
             </div>
         </section>
 

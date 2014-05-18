@@ -193,3 +193,26 @@ code {
 		}
 	}
 }
+
+.second-move-to-demo-content {
+	.rwd-object-media {
+		&.eq-min-width-400.eq-max-width-450 {
+			h3 { color: green; }
+		}
+		&.eq-max-width-310 {
+			p { color: red; }
+		}
+	}
+}
+
+#example-nested-columns-and-slider {
+	.rwd-object-slider.eq-max-width-711 {
+		.rwd-object-columns-2 {
+			@include stacked-columns;
+		}
+	}
+}
+
+.rwd-object-media .bd {
+	&.eq-min-width-400 { font-size: 18px; }
+}

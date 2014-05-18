@@ -32,31 +32,24 @@ function RwdObjectHnav() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-hnav').each(function () {
-			var $rwdObj = $(this);
-			if (!$rwdObj.hasClass('no-dropdown')) {
-				self.hnav($rwdObj);
-			}
-		});
-	};
+	this.init = function ($rwdObj) {
+		if (!$rwdObj.hasClass('no-dropdown')) {
+			var $rootUL = $rwdObj.find('> ul'),
+				firstLevelItems = $rootUL.find('> li'),
+				clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
 
-	this.hnav = function ($rwdObj) {
-		var $rootUL = $rwdObj.find('> ul'),
-			firstLevelItems = $rootUL.find('> li'),
-			clickEventType = (document.ontouchstart !== null) ? 'click' : 'touchstart';
+			firstLevelItems.each(function () {
+				if ($(this).position().top > firstLevelItems.first().position().top) {
+					$rwdObj.addClass('breakpoint-small');
+					$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
+					return false;
+				}
+			});
 
-		firstLevelItems.each(function () {
-			if ($(this).position().top > firstLevelItems.first().position().top) {
-				$rwdObj.addClass('breakpoint-small');
-				$rwdObj.closest('.rwd-object-hnav-container').addClass('hnav-breakpoint-small');
-				return false;
-			}
-		});
-
-		$rwdObj.find('.toggle').bind(clickEventType, function () {
-			$rootUL.toggle();
-			$(this).toggleClass('open');
-		});
+			$rwdObj.find('.toggle').bind(clickEventType, function () {
+				$rootUL.toggle();
+				$(this).toggleClass('open');
+			});
+		}
 	};
 }

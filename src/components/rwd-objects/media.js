@@ -32,14 +32,7 @@ function RwdObjectMedia() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-media').each(function () {
-			var $rwdObj = $(this);
-			self.media($rwdObj);
-		});
-	};
-
-	this.media = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		var $media = ($rwdObj.find('.img').length) ? $rwdObj.find('.img') : $rwdObj.find('.video'),
 			mediaImage = new Image(),
 			mediaObjectIsHidden = false,
@@ -53,6 +46,7 @@ function RwdObjectMedia() {
 					$rwdObj.addClass('no-side-by-side');
 				}
 				$media.css('max-width', this.width);
+				$media.attr('data-image-ready', true);
 			};
 			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
 		} else {

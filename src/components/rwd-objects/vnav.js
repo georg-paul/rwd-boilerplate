@@ -32,14 +32,7 @@ function RwdObjectVnav() {
 
 	var self = this;
 
-	this.init = function () {
-		$('.rwd-object-vnav').each(function () {
-			var $rwdObj = $(this);
-			self.vnav($rwdObj);
-		});
-	};
-
-	this.vnav = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		$rwdObj.find('.toggle').bind('click', function () {
 			$rwdObj.children('ul').toggle();
 		});

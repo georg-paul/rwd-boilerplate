@@ -32,25 +32,38 @@ function RwdObjectColumns() {
 
 	var self = this;
 
-	this.init = function () {
-		$('[class*="rwd-object-columns-"]').each(function () {
-			var $rwdObj = $(this);
-			self.columns($rwdObj);
-		});
-	};
-
-	this.columns = function ($rwdObj) {
+	this.init = function ($rwdObj) {
 		var availableWidth = $rwdObj.parent().width(),
 			$columns = $rwdObj.find('> .column');
 
-		if (
-			self.getBreakpoint($rwdObj, availableWidth) > availableWidth ||
-				(self.areStackedColumnsCausedByElementQueries($rwdObj) && !$rwdObj.hasClass('fixed-width'))
-		) {
-			$rwdObj.addClass('stacked-columns');
-			self.moveContentWithinColumns($rwdObj);
-			self.convertToSliderItems($rwdObj);
+		if (self.getBreakpoint($rwdObj, availableWidth) > availableWidth) {
+			self.stackColumnsAndTraverseMarkup($rwdObj);
+		} else if (self.areStackedColumnsCausedByElementQueries($rwdObj) && !$rwdObj.hasClass('fixed-width')) {
+			if (self.areColumnsNestedWithinOtherColumns($rwdObj)) {
+				rwdBoilerplateRemoveAppliedElementQueries(self.getFirstParentColumnsOfNestedColumns($rwdObj));
+				new ElementQueries().init();
+				if (self.areStackedColumnsCausedByElementQueries($rwdObj)) {
+					self.stackColumnsAndTraverseMarkup($rwdObj);
+				}
+				self.resetSliderHeight($rwdObj);
+			} else {
+				self.stackColumnsAndTraverseMarkup($rwdObj);
+			}
 		}
+	};
+
+	this.areColumnsNestedWithinOtherColumns = function ($rwdObj) {
+		return (self.getFirstParentColumnsOfNestedColumns($rwdObj).length) ? true : false;
+	};
+
+	this.getFirstParentColumnsOfNestedColumns = function ($rwdObj) {
+		return $rwdObj.parents('[class*="rwd-object-columns-"]').first();
+	};
+
+	this.stackColumnsAndTraverseMarkup = function ($rwdObj) {
+		$rwdObj.addClass('stacked-columns');
+		self.moveContentWithinColumns($rwdObj);
+		self.convertToSliderItems($rwdObj);
 	};
 
 	this.areStackedColumnsCausedByElementQueries = function ($rwdObj) {
@@ -75,7 +88,7 @@ function RwdObjectColumns() {
 				}
 			});
 		} else {
-			// Column widths are relative and the data-breakpoint attribute contains the breakpoint
+			// Column widths are percentage based and the data-breakpoint attribute contains the breakpoint
 			breakpoint = $rwdObj.attr('data-breakpoint') || 0;
 		}
 
@@ -101,12 +114,23 @@ function RwdObjectColumns() {
 	};
 
 	this.convertToSliderItems = function ($rwdObj) {
-		if ($rwdObj.hasClass('convert-columns-to-slider-items')) {
+		var $parentSlider = $rwdObj.closest('.rwd-object-slider');
+
+		if ($rwdObj.hasClass('convert-columns-to-slider-items') && $parentSlider.length) {
 			$rwdObj.find('> .column').each(function () {
 				var $newSliderItem = $(this).children().wrapAll('<div class="item"></div>');
 				$newSliderItem.parent().appendTo($(this).closest('.container'));
 			});
 			$rwdObj.closest('.item').remove();
+			new RwdObjectSlider().init($parentSlider);
+		}
+	};
+
+	this.resetSliderHeight = function ($rwdObj) {
+		var $parentSlider = $rwdObj.closest('.rwd-object-slider');
+
+		if ($parentSlider.length) {
+			$parentSlider.css('height', $parentSlider.find('.item:nth-child(1)').outerHeight());
 		}
 	};
 
