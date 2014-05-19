@@ -1210,7 +1210,7 @@ function RwdObjectFlyout() {
 	};
 }
 /*global $, ElementQueries, initCallbackRwdObjects, waitForImagesToLoad, rwdBoilerplateSetFixedPageWidth,
-rwdBoilerplateRemoveAppliedElementQueries, rwdBoilerplateHideLoading */
+rwdBoilerplateRemoveAppliedElementQueries, rwdBoilerplateHideLoading, rwdBoilerplateDone */
 
 $(document).ready(function () {
 	'use strict';
@@ -1270,5 +1270,11 @@ $(document).ready(function () {
 		// --> Probably hide animation earlier, not in the callback of waitForImagesToLoad
 		// --> FOUC might be better than showing the loading animation for too long
 		rwdBoilerplateHideLoading();
+
+		// you can run your code safely after rwd-boilerplate stuff is done
+		// use the following callback function
+		if (typeof rwdBoilerplateDone === 'function') {
+			rwdBoilerplateDone();
+		}
 	});
 });
