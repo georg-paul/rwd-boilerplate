@@ -474,11 +474,12 @@ function RwdObjectMedia() {
 			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
 
 		if ($media.hasClass('img')) {
+			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
 			mediaObjectIsHidden = ($rwdObj.width() <= 0);
-			if (!mediaObjectIsHidden && ($rwdObj.width() < $media.width() + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
+			if (!mediaObjectIsHidden && ($rwdObj.width() < mediaImage.width + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
 				$rwdObj.addClass('no-side-by-side');
 			}
-			$media.css('max-width', $media.width());
+			$media.css('max-width', mediaImage.width);
 			$media.attr('data-image-ready', true);
 		} else {
 			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
