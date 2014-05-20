@@ -586,15 +586,12 @@ function RwdObjectMedia() {
 			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
 
 		if ($media.hasClass('img')) {
-			mediaImage.onload = function () {
-				mediaObjectIsHidden = ($rwdObj.width() <= 0);
-				if (!mediaObjectIsHidden && ($rwdObj.width() < this.width + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
-					$rwdObj.addClass('no-side-by-side');
-				}
-				$media.css('max-width', this.width);
-				$media.attr('data-image-ready', true);
-			};
-			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
+			mediaObjectIsHidden = ($rwdObj.width() <= 0);
+			if (!mediaObjectIsHidden && ($rwdObj.width() < $media.width() + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
+				$rwdObj.addClass('no-side-by-side');
+			}
+			$media.css('max-width', $media.width());
+			$media.attr('data-image-ready', true);
 		} else {
 			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
 				$rwdObj.addClass('no-side-by-side');
@@ -1336,9 +1333,9 @@ $(document).ready(function () {
 	// sets fixed page width to body tag to prevent visual bugs after resize or orientationchange
 	rwdBoilerplateSetFixedPageWidth();
 
-	// iterates over all rwd-objects and run code after all images
-	// within rwd-object-halign and rwd-object-slider have been loaded
-	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider'), function () {
+	// iterates over all rwd-objects and run code
+	// after all contained images have been loaded
+	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider, .rwd-object-media'), function () {
 		$('[class*="rwd-object-"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),

@@ -14,9 +14,9 @@ $(document).ready(function () {
 	// sets fixed page width to body tag to prevent visual bugs after resize or orientationchange
 	rwdBoilerplateSetFixedPageWidth();
 
-	// iterates over all rwd-objects and run code after all images
-	// within rwd-object-halign and rwd-object-slider have been loaded
-	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider'), function () {
+	// iterates over all rwd-objects and run code
+	// after all contained images have been loaded
+	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider, .rwd-object-media'), function () {
 		$('[class*="rwd-object-"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),

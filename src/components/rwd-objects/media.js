@@ -40,15 +40,12 @@ function RwdObjectMedia() {
 			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
 
 		if ($media.hasClass('img')) {
-			mediaImage.onload = function () {
-				mediaObjectIsHidden = ($rwdObj.width() <= 0);
-				if (!mediaObjectIsHidden && ($rwdObj.width() < this.width + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
-					$rwdObj.addClass('no-side-by-side');
-				}
-				$media.css('max-width', this.width);
-				$media.attr('data-image-ready', true);
-			};
-			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
+			mediaObjectIsHidden = ($rwdObj.width() <= 0);
+			if (!mediaObjectIsHidden && ($rwdObj.width() < $media.width() + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
+				$rwdObj.addClass('no-side-by-side');
+			}
+			$media.css('max-width', $media.width());
+			$media.attr('data-image-ready', true);
 		} else {
 			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
 				$rwdObj.addClass('no-side-by-side');
