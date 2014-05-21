@@ -4,3 +4,4 @@ node_modules
 sauce_connect.log
 /bower_components/*
 browserstack-run.pid
+*.DS_Store
