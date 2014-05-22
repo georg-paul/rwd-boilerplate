@@ -3,26 +3,39 @@
 
 function waitForImagesToLoad($element, callback) {
 	'use strict';
-	var images, loaded;
+	var $images = $element.find('img'),
+		$image,
+		loaded;
+
+	// IE 9/10 prevents the onload event from firing for cached images
+	// Work around this nasty behaviour
+	// http://garage.socialisten.at/2013/06/how-to-fix-the-ie9-image-onload-bug/
+	// http://css-tricks.com/snippets/jquery/fixing-load-in-ie-for-cached-images/
+	// If this solution turns out to have drawbacks for the implemented use cases
+	// I will switch to https://github.com/desandro/imagesloaded
+	$images.each(function () {
+		$image = $(this);
+		$image.attr('src', $image.attr('src'));
+	});
 
 	// Find the images within $element it that aren't loaded yet
-	images = $element.find('img').filter(function (index, img) {
+	$images = $element.find('img').filter(function (index, img) {
 		return !this.complete;
 	});
 
 	// Find any?
-	if (images.length === 0) {
+	if ($images.length === 0) {
 		callback();
 	} else {
 		loaded = 0;
-		images.on('load', function () {
+		$images.on('load', function () {
 			// callback if the last image has been loaded?
 			loaded += 1;
-			if (loaded === images.length) {
+			if (loaded === $images.length) {
 				callback();
 			}
 		});
-		images.on('error', function () {
+		$images.on('error', function () {
 			callback();
 		});
 	}

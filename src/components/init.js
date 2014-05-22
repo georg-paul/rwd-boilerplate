@@ -67,4 +67,9 @@ $(document).ready(function () {
 			rwdBoilerplateDone();
 		}
 	});
+
+	// in the case that the callback of waitForImagesToLoad()
+	// hasn't been fired (which obviously means something went wrong)
+	// hide the loading animation after 4 seconds
+	window.setTimeout(rwdBoilerplateHideLoading, 4000);
 });
