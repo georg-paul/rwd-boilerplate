@@ -1237,9 +1237,6 @@ $(document).ready(function () {
 		initCallbackRwdObjects();
 	}
 
-	// sets fixed page width to body tag to prevent visual bugs after resize or orientationchange
-	rwdBoilerplateSetFixedPageWidth();
-
 	// iterates over all rwd-objects and run code
 	// after all contained images have been loaded
 	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider, .rwd-object-media'), function () {
@@ -1281,6 +1278,10 @@ $(document).ready(function () {
 		// due to DOM traversing caused by the rwd-objects code
 		rwdBoilerplateRemoveAppliedElementQueries($('html'));
 		new ElementQueries().init();
+
+		// sets fixed page width to body tag to prevent
+		// visual bugs after resize or orientationchange
+		rwdBoilerplateSetFixedPageWidth();
 
 		// hides the loading animtion
 		// --> Probably hide animation earlier, not in the callback of waitForImagesToLoad
