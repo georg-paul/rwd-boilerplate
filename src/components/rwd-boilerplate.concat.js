@@ -1050,7 +1050,7 @@ function TraverseFlyoutComponents() {
 	"use strict";
 
 	var self = this,
-		selectorRegExp = new RegExp(/\.(append-to-flyout|clone-to-flyout)\-(\d*)\-(slot)\-(\d*)\-(component)\-(.+)/g),
+		selectorRegExp = new RegExp(/\.(append-to-flyout|clone-to-flyout)\-(\d*)\-(slot)\-(\d*)\-(component-[a-zA-Z0-9-_]+)/g),
 		flyoutTargetSlots = [];
 
 	this.init = function () {

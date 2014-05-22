@@ -66,7 +66,23 @@
 
 	test('getTargetSelector returns the correct target', function () {
 		var fixture = new TraverseFlyoutComponents();
-		equal(fixture.getTargetSelector('.demo-header .append-to-flyout-1-slot-2-component-secondary-nav.right'), '.demo-header .right');
+		equal(fixture.getTargetSelector('.rwd-object-hnav.breakpoint-small>ul.append-to-flyout-1-slot-3-component-foo'), '.rwd-object-hnav.breakpoint-small>ul');
+		equal(fixture.getTargetSelector('.demo-hero h1.clone-to-flyout-1-slot-1-component-foo'), '.demo-hero h1');
+		equal(fixture.getTargetSelector('.demo-header .append-to-flyout-1-slot-2-component-foo.right'), '.demo-header .right');
+
+		equal(fixture.getTargetSelector('.eq-rwd-table-container.eq-max-width-400 .foo.append-to-flyout-1-slot-1-component-foo'), '.eq-rwd-table-container.eq-max-width-400 .foo');
+		equal(fixture.getTargetSelector('DIV.csc-textpic.eq-max-width-6401123 .foo.bar.append-to-flyout-1-slot-1-component-foo'), 'DIV.csc-textpic.eq-max-width-6401123 .foo.bar');
+		equal(fixture.getTargetSelector('.l-facts header.eq-max-width-220 + ul.append-to-flyout-1-slot-1-component-foo'), '.l-facts header.eq-max-width-220 + ul');
+		equal(fixture.getTargetSelector('.news-list .eq-object-column.eq-max-width-410:nth-child(1) + .eq-object-column.append-to-flyout-1-slot-1-component-foo'), '.news-list .eq-object-column.eq-max-width-410:nth-child(1) + .eq-object-column');
+		equal(fixture.getTargetSelector('.eq-max-width-480#extended-header .eq-delimiter .facts.append-to-flyout-1-slot-1-component-foo'), '.eq-max-width-480#extended-header .eq-delimiter .facts');
+		equal(fixture.getTargetSelector('.l-element-queries .demo-text.eq-max-width-400.eq-min-width-100 p.append-to-flyout-1-slot-1-component-foo'), '.l-element-queries .demo-text.eq-max-width-400.eq-min-width-100 p');
+
+		equal(fixture.getTargetSelector('.eq-rwd-table-container.eq-max-width-400 .foo.clone-to-flyout-1-slot-1-component-foo'), '.eq-rwd-table-container.eq-max-width-400 .foo');
+		equal(fixture.getTargetSelector('DIV.csc-textpic.eq-max-width-6401123 .foo.bar.clone-to-flyout-1-slot-1-component-foo'), 'DIV.csc-textpic.eq-max-width-6401123 .foo.bar');
+		equal(fixture.getTargetSelector('.l-facts header.eq-max-width-220 + ul.clone-to-flyout-1-slot-1-component-foo'), '.l-facts header.eq-max-width-220 + ul');
+		equal(fixture.getTargetSelector('.news-list .eq-object-column.eq-max-width-410:nth-child(1) + .eq-object-column.clone-to-flyout-1-slot-1-component-foo'), '.news-list .eq-object-column.eq-max-width-410:nth-child(1) + .eq-object-column');
+		equal(fixture.getTargetSelector('.eq-max-width-480#extended-header .eq-delimiter .facts.clone-to-flyout-1-slot-1-component-foo'), '.eq-max-width-480#extended-header .eq-delimiter .facts');
+		equal(fixture.getTargetSelector('.l-element-queries .demo-text.eq-max-width-400.eq-min-width-100 p.clone-to-flyout-1-slot-1-component-foo'), '.l-element-queries .demo-text.eq-max-width-400.eq-min-width-100 p');
 	});
 
 
