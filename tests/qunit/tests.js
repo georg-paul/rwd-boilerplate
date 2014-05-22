@@ -62,6 +62,12 @@
 		ok(!$('#table-test-2').hasClass('oversize'), true);
 	});
 
+	module("rwd-object-flyout");
+
+	test('getTargetSelector returns the correct target', function () {
+		var fixture = new TraverseFlyoutComponents();
+		equal(fixture.getTargetSelector('.demo-header .append-to-flyout-1-slot-2-component-secondary-nav.right'), '.demo-header .right');
+	});
 
 
 	module("misc");
