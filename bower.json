@@ -1,13 +1,16 @@
 {
-    "name": "rwd-boilerplate",
-    "version": "0.1.0",
-    "main": [
-        "src/rwd-boilerplate.jquery.concat.js",
-        "src/rwd-boilerplate.zepto.concat.js"
-    ],
-    "dependencies": {
-        "jquery": ">= 2.0.0",
-        "zepto": ">= 1.1.1",
-        "element-queries": ">= 1.0.0"
-    }
+	"name": "rwd-boilerplate",
+	"version": "0.1.0",
+	"main": [
+		"dist/jquery/edge/rwd-boilerplate.jquery.min.js",
+		"dist/jquery/legacy/rwd-boilerplate.jquery-1.11.1.min.js",
+		"dist/zepto/rwd-boilerplate.zepto.min.js"
+	],
+	"dependencies": {
+		"jquery": ">= 2.0.0",
+		"jquery-legacy": "jquery#1.11",
+		"zepto": ">= 1.1.1",
+		"element-queries": ">= 1.0.0",
+		"html5shiv": "~3.7.2"
+	}
 }

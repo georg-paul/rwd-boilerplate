@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 		// Metadata.
 		meta: {
 			srcPath: 'src/components/',
-			deployPath: 'src/'
+			deployPath: 'dist/'
 		},
 
 		banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -21,16 +21,30 @@ module.exports = function (grunt) {
 			options: {
 				//report: 'gzip'
 			},
-			rwdBoilerplateJquery: {
-				src: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js',
+			rwdBoilerplateStandalone: {
+				src: '<%= meta.deployPath %>rwd-boilerplate.concat.js',
 				dest: '<%= meta.deployPath %>',    // destination folder
+				expand: true,    // allow dynamic building
+				flatten: true,   // remove all unnecessary nesting
+				ext: '.min.js'   // replace .js to .min.js
+			},
+			rwdBoilerplateJquery: {
+				src: '<%= meta.deployPath %>jquery/edge/rwd-boilerplate.jquery.concat.js',
+				dest: '<%= meta.deployPath %>jquery/edge/',    // destination folder
 				expand: true,    // allow dynamic building
 				flatten: true,   // remove all unnecessary nesting
 				ext: '.jquery.min.js'   // replace .js to .min.js
 			},
+			rwdBoilerplateJqueryLegacy: {
+				src: '<%= meta.deployPath %>jquery/legacy/rwd-boilerplate.jquery-1.11.1.concat.js',
+				dest: '<%= meta.deployPath %>jquery/legacy/',    // destination folder
+				expand: true,    // allow dynamic building
+				flatten: true,   // remove all unnecessary nesting
+				ext: '.jquery-1.11.1.min.js'   // replace .js to .min.js
+			},
 			rwdBoilerplateZepto: {
-				src: '<%= meta.deployPath %>rwd-boilerplate.zepto.concat.js',
-				dest: '<%= meta.deployPath %>',
+				src: '<%= meta.deployPath %>zepto/rwd-boilerplate.zepto.concat.js',
+				dest: '<%= meta.deployPath %>zepto/',
 				expand: true,
 				flatten: true,
 				ext: '.zepto.min.js'
@@ -54,8 +68,12 @@ module.exports = function (grunt) {
 				tasks: ['sass']
 			},
 			js:  {
-				files: ['<%= meta.srcPath %>rwd-objects/*.js', '<%= meta.srcPath %>utilities/*.js', '<%= meta.srcPath %>init.js', 'tests/qunit/tests.js'],
-				tasks: ['jshint', 'concat', 'uglify', 'qunit']
+				files: ['<%= meta.srcPath %>**/*.js', 'tests/qunit/tests.js'],
+				tasks: ['jshint', 'concat', 'copy', 'uglify', 'qunit']
+			},
+			html: {
+				files: ['tests/qunit/**/*.html'],
+				tasks: ['qunit']
 			}
 		},
 
@@ -78,23 +96,51 @@ module.exports = function (grunt) {
 					'<%= meta.srcPath %>rwd-objects/flyout.js',
 					'<%= meta.srcPath %>init.js'
 				],
-				dest: '<%= meta.srcPath %>rwd-boilerplate.concat.js'
+				dest: '<%= meta.deployPath %>rwd-boilerplate.concat.js'
 			},
 			distJquery: {
 				src: [
 					'bower_components/jquery/dist/jquery.min.js',
-					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
+					'<%= meta.deployPath %>rwd-boilerplate.concat.js'
 				],
-				dest: '<%= meta.deployPath %>rwd-boilerplate.jquery.concat.js'
+				dest: '<%= meta.deployPath %>jquery/edge/rwd-boilerplate.jquery.concat.js'
 			},
-			distZepto: {
+			distJqueryLegacy: {
+				src: [
+					'bower_components/jquery-legacy/dist/jquery.min.js',
+					'<%= meta.deployPath %>rwd-boilerplate.concat.js'
+				],
+				dest: '<%= meta.deployPath %>jquery/legacy/rwd-boilerplate.jquery-1.11.1.concat.js'
+			},
+			zeptoCustomBuild: {
 				src: [
 					'bower_components/zepto/zepto.min.js',
 					'<%= meta.srcPath %>zepto/modules/selector.js',
-					'<%= meta.srcPath %>zepto/modifications.js',
-					'<%= meta.srcPath %>rwd-boilerplate.concat.js'
+					'<%= meta.srcPath %>zepto/modifications.js'
 				],
-				dest: '<%= meta.deployPath %>rwd-boilerplate.zepto.concat.js'
+				dest: '<%= meta.deployPath %>zepto/zepto.customized.js'
+			},
+			distZepto: {
+				src: [
+					'<%= meta.deployPath %>zepto/zepto.customized.js',
+					'<%= meta.deployPath %>rwd-boilerplate.concat.js'
+				],
+				dest: '<%= meta.deployPath %>zepto/rwd-boilerplate.zepto.concat.js'
+			}
+		},
+
+		copy: {
+			jQuery: {
+				src: 'bower_components/jquery/dist/jquery.min.js',
+				dest: '<%= meta.deployPath %>jquery/edge/jquery.min.js'
+			},
+			jQueryLegacy: {
+				src: 'bower_components/jquery-legacy/dist/jquery.min.js',
+				dest: '<%= meta.deployPath %>jquery/legacy/jquery-1.11.1.min.js'
+			},
+			html5shiv: {
+				src: 'bower_components/html5shiv/dist/html5shiv.min.js',
+				dest: '<%= meta.deployPath %>jquery/legacy/html5shiv.min.js'
 			}
 		},
 
@@ -135,8 +181,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// Default task
-	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'uglify', 'qunit', 'watch']);
+	grunt.registerTask('default', ['sass', 'jshint', 'concat', 'copy', 'uglify', 'qunit', 'watch']);
 	grunt.registerTask('connect-keep-alive', ['connect:dev']);
 };

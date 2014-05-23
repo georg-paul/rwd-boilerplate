@@ -8,6 +8,8 @@
 
         <link rel="stylesheet" href="demo/demo.css">
 
+		<!--[if lt IE 9]><script type="text/javascript" src="dist/jquery/legacy/html5shiv.min.js"></script><![endif]-->
+
         <script>document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(/(?:^|\s)javascript-is-disabled(?!\S)/g, 'javascript-is-enabled');</script>
 	</head>
 
@@ -825,12 +827,6 @@
             </div>
         </section>
 
-        <!-- Use either zepto -->
-        <!--script src="src/rwd-boilerplate.zepto.min.js"></script-->
-
-        <!-- or use jQuery instead -->
-        <script src="src/rwd-boilerplate.jquery.min.js"></script>
-
 		<!-- callback demo, your custom code goes here -->
 		<!--
 		Currently three different callbacks available:
@@ -841,5 +837,12 @@
 				console.log('callback rwdBoilerplateDone()');
 			}
 		</script>
+
+        <!-- Use either zepto -->
+        <!--script src="dist/zepto/rwd-boilerplate.zepto.min.js"></script-->
+
+        <!-- or use jQuery instead -->
+		<!--script src="dist/jquery/edge/rwd-boilerplate.jquery.min.js"></script-->
+		<script src="dist/jquery/legacy/rwd-boilerplate.jquery-1.11.1.min.js"></script>
 	</body>
 </html>
