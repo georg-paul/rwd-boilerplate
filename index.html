@@ -100,7 +100,7 @@
         <div class="rwd-boilerplate-delimiter">
             <h1 id="rwd-objects">RWD Objects</h1>
 
-            <h2 id="rwd-object-halign">rwd-object-halign</h2>
+            <h2 id="rwd-object-halign">halign</h2>
             <div class="rwd-object-halign main-section" data-halign-id="1">
                 <div class="left">
                     <img src="http://placehold.it/350x100" alt="" width="350" height="100" />
@@ -127,35 +127,16 @@
             </div>
 
 
-            <h2 id="rwd-object-media">rwd-object-media (image left beside text)</h2>
-            <div class="rwd-object-media main-section">
-                <div class="img">
-                    <img src="http://placehold.it/300x120" alt="" width="300" height="120" />
-                    <span class="caption">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-                </div>
-                <div class="bd">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-                    </p>
-                </div>
-            </div>
+            <h2 id="rwd-object-media">media (image beside text)</h2>
 			<div class="rwd-object-media main-section">
-				<div class="img">
-					<div class="some-element">
+				<div class="img right">
+					<figure class="media-figure">
 						<img src="http://placehold.it/300x120" alt="" width="300" height="120" />
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-					</div>
+						<p class="media-caption">
+							Image right beside text, if you have a caption below the image,
+							use "media-figure" and "media-caption" (tag agnostic)
+						</p>
+					</figure>
 				</div>
 				<div class="bd">
 					<p>
@@ -169,8 +150,52 @@
 				</div>
 			</div>
 
+            <div class="rwd-object-media main-section">
+                <div class="img">
+					<img src="http://placehold.it/160x160" alt="" width="160" height="160" />
+                </div>
+                <div class="bd" id="demo-media-bd-min-width">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+                        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                        Aenean massa.
+                    </p>
+					<div class="rwd-object-media sub-section">
+						<div class="img">
+							<img src="http://placehold.it/80x80" alt="" width="80" height="80" />
+						</div>
+						<div class="bd">
+							<p>
+								Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+								Aenean massa. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+								enean commodo ligula eget dolor. Aenean massa.
+							</p>
+							<div class="rwd-object-media sub-section">
+								<img class="img" src="http://placehold.it/40x40" alt="" width="40" height="40" />
+								<p class="bd">
+									Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="rwd-object-media sub-section">
+						<img class="img" src="http://placehold.it/80x80" alt="" width="80" height="80" />
+						<p class="bd">
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+							Aenean massa. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+							enean commodo ligula eget dolor. Aenean massa.
+						</p>
+					</div>
+                </div>
+            </div>
 
-            <h2>rwd-object-media (image right in-text)</h2>
+
+            <h2>media (image in-text)</h2>
             <div class="rwd-object-media main-section">
                 <div class="img right">
                     <img src="http://placehold.it/220x90" alt="" width="220" height="90" />
@@ -190,9 +215,29 @@
                     Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
                 </p>
             </div>
+			<div class="rwd-object-media main-section">
+				<div class="img">
+					<div class="media-figure">
+						<img src="http://placehold.it/150x90" alt="" width="150" height="90" />
+						<span class="media-caption">media caption might contain very looooooooonnnnnnnngg words</span>
+					</div>
+				</div>
+				<p class="bd in-text">
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+					Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+					mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+					quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+					rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+					Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+					Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+					mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+					quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+				</p>
+			</div>
 
 
-            <h2 id="rwd-object-hnav">rwd-object-hnav</h2>
+            <h2 id="rwd-object-hnav">hnav</h2>
             <nav class="rwd-object-hnav main-section">
                 <button class="toggle">Toggle</button>
                 <ul>
@@ -211,7 +256,7 @@
                 </ul>
             </nav>
 
-			<h2>rwd-object-hnav (align right)</h2>
+			<h2>hnav (align right)</h2>
 			<nav class="rwd-object-hnav align-right main-section">
 				<button class="toggle">Toggle</button>
 				<ul>
@@ -222,7 +267,7 @@
 				</ul>
 			</nav>
 
-            <h2>rwd-object-hnav (no dropdown)</h2>
+            <h2>hnav (no dropdown)</h2>
             <nav class="rwd-object-hnav main-section no-dropdown">
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -241,7 +286,7 @@
             </nav>
 
 
-            <h2 id="rwd-object-columns">rwd-object-columns</h2>
+            <h2 id="rwd-object-columns">columns</h2>
 
             <div class="main-section">
                 <h3>2 equal columns (plus nested columns in second column)</h3>
@@ -354,7 +399,7 @@
             </div>
 
 
-            <h2>rwd-object-columns (switching positions of content within columns when columns are stacked on top of each other)</h2>
+            <h2>columns (switching positions of content within columns when columns are stacked on top of each other)</h2>
             <div class="rwd-object-columns-2-8-4 main-section" data-breakpoint="750">
                 <div class="column" >
                     <div data-move-to="2">
@@ -399,7 +444,7 @@
             </div>
 
 
-            <h2>rwd-object-columns (fixed width)</h2>
+            <h2>columns (fixed width)</h2>
             <h3>4 equal columns</h3>
             <div class="rwd-object-columns-4 sub-section fixed-width">
                 <div class="column" >
@@ -449,7 +494,7 @@
             </div>
 
 
-            <h2 id="rwd-object-slider">rwd-object-slider (default slide effect)</h2>
+            <h2 id="rwd-object-slider">slider (default slide effect)</h2>
             <div class="rwd-object-slider main-section autoplay">
                 <div class="slider-nav rwd-object-halign">
                     <div class="left">
@@ -485,7 +530,7 @@
             </div>
 
 
-            <h2>rwd-object-slider (no image scaling and right image alignment)</h2>
+            <h2>slider (no image scaling and right image alignment)</h2>
             <div class="rwd-object-slider no-image-scaling-align-right main-section">
                 <div class="slider-nav rwd-object-halign" style="position: absolute; right: 1rem; top: 1.5rem; z-index: 10;">
                     <div class="center rwd-object-hlist">
@@ -517,7 +562,7 @@
 
             <div class="rwd-object-slider main-section" id="slider-with-columns-demo">
                 <div class="slider-nav rwd-object-halign">
-                    <h2 class="left">rwd-object-slider (multiple columns per item)</h2>
+                    <h2 class="left">slider (multiple columns per item)</h2>
                     <div class="right">
                         <button class="prev-button">Previous</button>
                         <button class="next-button">Next</button>
@@ -581,7 +626,7 @@
                 </div>
             </div>
 
-            <div id="example-nested-columns-and-slider" class="rwd-object-columns-2-3-9" data-breakpoint="959">
+            <div id="example-nested-columns-and-slider" class="rwd-object-columns-2-3-9 main-section" data-breakpoint="959">
                 <div class="column">
                     <h2>Left column</h2>
                     <div class="content-element">
@@ -640,9 +685,9 @@
                 </div>
             </div>
 
-            <div class="rwd-object-slider fade main-section" data-start-item="1">
+            <div class="rwd-object-slider fade main-section" data-start-item="1" id="demo-slider-fade">
                 <div class="slider-nav rwd-object-hlist rwd-object-halign">
-                    <h2 class="left">rwd-object-slider (fade effect)</h2>
+                    <h2 class="left">slider (fade effect)</h2>
                     <ul class="progress-bar right">
                         <li><button class="progress">1</button></li>
                         <li><button class="progress">2</button></li>
@@ -670,7 +715,7 @@
 
         <section class="main-section">
             <div class="rwd-boilerplate-delimiter">
-                <h1 id="rwd-object-table">rwd-object-table</h1>
+                <h1 id="rwd-object-table">table</h1>
 
                 <table class="rwd-object-table">
                     <thead>
@@ -774,7 +819,7 @@
 
 		<section class="main-section">
 			<div class="rwd-boilerplate-delimiter">
-				<h1 id="rwd-object-flyout">rwd-object-flyout</h1>
+				<h1 id="rwd-object-flyout">flyout</h1>
 
 				<button data-trigger-flyout-id="1">Trigger Flyout 1</button>
 				<button data-trigger-flyout-id="2">Trigger Flyout 2</button>

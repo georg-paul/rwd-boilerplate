@@ -110,7 +110,7 @@
 		}
 	}
 	&.no-side-by-side {
-		.img, .video {
+		> .img, > .video {
 			float: none;
 			display: inline-block;
 			margin-left: 0 !important;
@@ -118,10 +118,10 @@
 			margin-bottom: 0.75rem;
 			max-width: 100% !important;
 		}
-		.bd {
+		> .bd {
 			min-width: 0 !important;
 		}
-		.video {
+		> .video {
 			width: 100%;
 			.rwd-video { min-width: 0; }
 		}

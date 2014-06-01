@@ -216,3 +216,7 @@ code {
 .rwd-object-media .bd {
 	&.eq-min-width-400 { font-size: 18px; }
 }
+
+#demo-media-bd-min-width {
+	min-width: 500px;
+}
