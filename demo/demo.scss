@@ -220,3 +220,12 @@ code {
 #demo-media-bd-min-width {
 	min-width: 500px;
 }
+
+#demo-slider-fade {
+	.container {
+		min-height: 437px;
+	}
+	&[data-state="loaded"] .container {
+		min-height: 0;
+	}
+}

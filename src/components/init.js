@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 	// iterates over all rwd-objects and run code
 	// after all contained images have been loaded
-	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider, .rwd-object-media'), function () {
+	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-media'), function () {
 		$('[class*="rwd-object-"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),

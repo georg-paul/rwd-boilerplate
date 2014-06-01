@@ -903,7 +903,10 @@ function RwdObjectSlider() {
 			$(this).find('li:nth-child(' + (self.startItemIndex + 1) + ')').addClass('active');
 		});
 
-		self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
+		waitForImagesToLoad(self.$slider, function () {
+			self.$slider.css('height', self.$slider.find('> .item:nth-child(' + (self.startItemIndex + 1) + ')').outerHeight());
+			self.$rwdObj.attr('data-state', 'loaded');
+		});
 	};
 
 	this.next = function (targetXPos, targetItemIndex) {
@@ -1221,7 +1224,7 @@ $(document).ready(function () {
 
 	// iterates over all rwd-objects and run code
 	// after all contained images have been loaded
-	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-slider, .rwd-object-media'), function () {
+	waitForImagesToLoad($('.rwd-object-halign, .rwd-object-media'), function () {
 		$('[class*="rwd-object-"]').each(function () {
 			var $rwdObj = $(this),
 				classNames = $rwdObj.attr('class').split(/\s+/),

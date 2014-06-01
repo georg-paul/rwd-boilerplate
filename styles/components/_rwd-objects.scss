@@ -313,11 +313,11 @@
 		}
 		.next-button, .prev-button { display: none; }
 	}
-	&[class*="no-image-scaling-"] {
-		> .container > .item img { max-width: none !important; }
+	&[class*="no-image-scaling"] {
+		> .container > .item .slider-image { max-width: none !important; }
 	}
 	&.no-image-scaling-align-right {
-		> .container > .item img { float: right; }
+		> .container > .item .slider-image { float: right; }
 	}
 }
 
