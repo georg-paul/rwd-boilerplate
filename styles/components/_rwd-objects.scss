@@ -86,12 +86,11 @@
 		img {
 			display: block;
 		}
-		> * {
-			display: none;
-		}
-		&[data-image-ready] {
-			> * {
-				display: block;
+		.media-figure {
+			display: table;
+			.media-caption {
+				display: table-caption;
+				caption-side: bottom;
 			}
 		}
 		&.right {

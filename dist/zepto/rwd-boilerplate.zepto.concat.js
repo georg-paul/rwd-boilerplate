@@ -592,24 +592,11 @@ function RwdObjectMedia() {
 	var self = this;
 
 	this.init = function ($rwdObj) {
-		var $media = ($rwdObj.find('.img').length) ? $rwdObj.find('.img') : $rwdObj.find('.video'),
-			mediaImage = new Image(),
-			mediaObjectIsHidden = false,
-			$bd = $rwdObj.children('.bd'),
-			mediaTextMinWidth = ($bd.css('min-width') !== undefined) ? parseInt($bd.css('min-width'), 10) : 0;
+		var containerWidth = $rwdObj.width(),
+			mediaTextMinWidth = parseInt($rwdObj.children('.bd').css('min-width'), 10);
 
-		if ($media.hasClass('img')) {
-			mediaImage.src =  ($media.find('img').length) ? $media.find('img').attr('src') : $media.attr('src');
-			mediaObjectIsHidden = ($rwdObj.width() <= 0);
-			if (!mediaObjectIsHidden && ($rwdObj.width() < mediaImage.width + parseInt($media.css('margin-left'), 10) + parseInt($media.css('margin-right'), 10) + mediaTextMinWidth)) {
-				$rwdObj.addClass('no-side-by-side');
-			}
-			$media.css('max-width', mediaImage.width);
-			$media.attr('data-image-ready', true);
-		} else {
-			if ($rwdObj.width() < $media.outerWidth(true) + mediaTextMinWidth) {
-				$rwdObj.addClass('no-side-by-side');
-			}
+		if ((containerWidth > 0) && (containerWidth < $rwdObj.find('> .img, > .video').outerWidth(true) + mediaTextMinWidth)) {
+			$rwdObj.addClass('no-side-by-side');
 		}
 	};
 }
