@@ -241,7 +241,8 @@ function waitForImagesToLoad($element, callback) {
 	'use strict';
 	var $images = $element.find('img'),
 		$image,
-		loaded;
+		loaded,
+		error404;
 
 	// IE 9/10 prevents the onload event from firing for cached images
 	// Work around this nasty behaviour
@@ -264,15 +265,19 @@ function waitForImagesToLoad($element, callback) {
 		callback();
 	} else {
 		loaded = 0;
+		error404 = 0;
+
 		$images.on('load', function () {
-			// callback if the last image has been loaded?
 			loaded += 1;
-			if (loaded === $images.length) {
+			if (loaded + error404 === $images.length) {
 				callback();
 			}
 		});
 		$images.on('error', function () {
-			callback();
+			error404 += 1;
+			if (loaded + error404 === $images.length) {
+				callback();
+			}
 		});
 	}
 }
